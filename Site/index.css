@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+}
+
+.nav-itens {
+    background: #191e29;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.conteudo-header {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-header {
+    width: 80px;
+    height: 60px;
+}
+
+.ul-itens li {
+    display: inline-flex;
+    list-style: none;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#linha {
+    text-decoration: none;
+    width: 100%;
+    height: 5px;
+    background: aqua;
+}
+
+.home-inicio {
+    height: auto;
+}
+
+.img-home-inicio {
+    width: 100%;
+    display: block;
+    margin: 0;
+}
+
+.home-informacoes-empresa {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    background: #696e79;
+}
+
+.home-informacoes-empresa H2{
+    font-size: 30pt;
+    margin-top: 80px;
+    color: aqua;
+}
+.home-informacoes-empresa p{
+    font-size: 25pt;
+    margin-top: 80px;
+    white-space: pre-line;
+}
+
+.home-informacoes-valores{
+    background: #696e79;
+    justify-content: center;
+}
+
+.info-valores{
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.valores{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
