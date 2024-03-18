@@ -1,13 +1,26 @@
+@font-face {
+    font-family: 'Inter';
+    src: url(./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url(./assets/fonts/Jura/Jura-VariableFont_wght.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     overflow-y: hidden;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
 
 }
 
 a {
     text-decoration: none;
+
 }
 
 header {
@@ -33,8 +46,8 @@ header {
 }
 
 .img-header {
-    width: 80px;
-    height: 60px;
+    width: 25%;
+    height: auto;
 
 }
 
@@ -48,15 +61,16 @@ header {
 .ul-itens li {
     display: inline-flex;
     list-style: none;
-    font-size: 30px;
+    font-size: 21px;
     padding: 10px;
 }
 
 #linha {
     text-decoration: none;
     width: 100%;
-    height: 5px;
+    height: 3px;
     background: aqua;
+    border: 0px;
 }
 
 .img-login {
@@ -106,7 +120,7 @@ header {
     width: 50%;
     height: 85%;
     border-radius: 20px;
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.296);
+    box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.296);
 }
 
 .form-login {
@@ -114,16 +128,15 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
+    padding-bottom: 30px;
     color: white;
-    
 }
 
 .form-login a{
 
     color: white;
-    font-size: 13px;
-    padding-top: 5px;
+    font-size: 12px;
+    padding-top: 12px;
 }
 
 .form-login label{
@@ -134,11 +147,12 @@ padding: 20px 0 10px 0 ;
 
 .form-login input{
 
+    color: LIGHTGRAY;
     width: 250px;
-    height: 30px;
-    padding-top: 30px ;
+    height: 45px;
+    padding-top: 0;
     border-radius: 10px;
-    background-color:#696e79 ;
+    background-color: #696e79;
     border: none;
 
 }
@@ -152,10 +166,12 @@ padding: 20px 0 10px 0 ;
 
 
 h2 {
+
+    font-weight: bold;
     text-align: center;
     color: #00ffff;
-    font-size: 40px;
-    padding-top: 20px;
+    font-size: 34px;
+    padding-top: 0px;
 }
 
 .input-group {
@@ -176,8 +192,9 @@ h2 {
 
 .criar-conta {
 
-    padding-top: 10px;
-    color: white;
+    font-size: 12px;
+    padding: 0px;
+    color: #858D9E;
 
 }
 
@@ -189,15 +206,19 @@ h2 {
 
 
 button {
-    width: 60%;
+    width: 35%;
+    height: 9%;
     padding: 10px;
+    margin: 14px;
     background-color: #00ffffb1;
-    color: #000000;
+    color: #1d2330;
     border: none;
-    border-radius: 4px;
+    border-radius: 9px;
     cursor: pointer;
     transition: background-color 0.9s;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 0px 7px 0px #00FFFF;
 }
 
 button:hover {
@@ -213,11 +234,11 @@ footer {
     flex-direction: column;
     justify-content: center;
     background-color: #191e29;
-    border-top: 4px #00ffff solid;
+    border-top: 3.7px #00ffff solid;
 }
 
 .ul-footer {
-    font-size: 25px;
+    font-size: 20px;
     list-style: none;
     display: inline-flex;
 }
