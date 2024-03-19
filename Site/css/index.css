@@ -60,10 +60,10 @@ header {
     display: flex;
 }
 
- .img-inicio-home{
+.img-inicio-home {
     width: 100%;
     height: 40rem;
-} 
+}
 
 .informacoes-home {
     width: 100%;
@@ -83,7 +83,8 @@ header {
     align-items: center;
 }
 
-.info-texto h1, .membros-home h2 {
+.info-texto h1,
+.membros-home h2 {
     font-size: 28pt;
     color: #00FFFF;
 }
@@ -129,7 +130,7 @@ header {
     width: 100%;
 }
 
-.valores-margin{
+.valores-margin {
     margin: 60px 0;
 }
 
@@ -167,7 +168,7 @@ header {
     align-items: center;
 }
 
-.membro-img-home{
+.membro-img-home {
     width: 245px;
     height: 247px;
     border-radius: 190px;
@@ -208,7 +209,7 @@ footer {
 
 @media screen and (max-width: 1020px) {
 
-    .header{
+    .header {
         position: fixed;
     }
 
@@ -247,6 +248,8 @@ footer {
     .info-funcao p {
         font-size: 15pt;
         color: white;
+        width: 100%;
+        margin: 14px 0 0 0;
     }
 
     .terceira-img-home {
@@ -258,13 +261,13 @@ footer {
         font-size: 11pt;
         color: white;
     }
-    
+
     .valores-texto p {
         font-size: 9pt;
         padding: 0;
         white-space: pre-line;
     }
-    
+
     .membros-home h2 {
         font-size: 30pt;
     }
@@ -273,10 +276,10 @@ footer {
         width: 100px;
         height: 100px;
     }
-    
+
     .ul-footer {
         font-size: 10pt;
     }
-    
+
 
 }
