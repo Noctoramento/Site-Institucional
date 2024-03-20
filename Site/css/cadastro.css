@@ -45,7 +45,7 @@ header {
 }
 
 .fundo-cadastro {
-    background-image: url(img/fundo_cadastro.jpg);
+    background-image: url("../assets/Imagens/fundo_cadastro.jpg");
     background-size: cover;
     height: 75vh;
     display: flex;
