@@ -71,7 +71,6 @@ header {
     background: #434957;
     display: flex;
     align-items: center;
-
     flex-direction: column;
 }
 

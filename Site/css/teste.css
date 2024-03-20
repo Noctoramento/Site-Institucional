@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    overflow-y: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+}
+
+.nav-itens {
+    background: #191e29;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.conteudo-header {
+    width: 80%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ul-itens li {
+    display: inline-flex;
+    font-size: 20pt;
+    padding: 0 15px;
+}
+
+.img-logo {
+    width: 25%;
+    height: auto;
+}
+
+#linha {
+    text-decoration: none;
+    width: 100%;
+    height: 5px;
+    border: none;
+    background: aqua;
+}
+
+.fundo-cadastro {
+    background-image: url(img/fundo_cadastro.jpg);
+    background-size: cover;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #434957;
+    width: 30%;
+    height: 85%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.296);
+}
+
+.cadastro p{
+    color: #a2acc2;
+}
+
+.cadastro a{
+    text-decoration: none;
+    color: white;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+    color: #00ffff;
+    font-size: 34px;
+    padding-top: 0px;
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-cadastro a {
+    color: white;
+    font-size: 12px;
+    padding-top: 12px;
+}
+
+.formulario-cadastro label {
+    padding: 20px 0 10px 0;
+    color: white;
+}
+
+.formulario-cadastro input {
+    color: LIGHTGRAY;
+    width: 400px;
+    height: 45px;
+    padding-top: 0;
+    border-radius: 10px;
+    background-color: #696e79;
+    text-align: center;
+    border: none;
+}
+
+button {
+    width: 20%;
+    height: 9%;
+    background-color: #00ffffb1;
+    margin: 35px 0 5px 0;
+    color: #1d2330;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color 0.9s;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 0px 7px 0px #00FFFF;
+}
+
+button:hover {
+    background-color: #00ffff;
+    
+}
+
+footer {
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #191e29;
+    border-top: 4px #00ffff solid;
+}
+
+.ul-footer {
+    font-size: 25px;
+    list-style: none;
+    display: inline-flex;
+}
+
+.ul-footer li {
+    padding: 10px;
+}
+
+.footer-creditos {
+    color: #696e79;
+}
