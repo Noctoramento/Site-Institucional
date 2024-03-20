@@ -35,7 +35,7 @@ header {
 
 .ul-itens li {
     display: inline-flex;
-    font-size: 20pt;
+    font-size: 20px;
     padding: 0 15px;
 }
 
@@ -84,12 +84,12 @@ header {
 
 .info-texto h1,
 .membros-home h2 {
-    font-size: 28pt;
+    font-size: 30px;
     color: #00FFFF;
 }
 
 .info-texto p {
-    font-size: 22pt;
+    font-size: 22px;
     margin-top: 50px;
     color: white;
 }
@@ -109,7 +109,7 @@ header {
 }
 
 .info-funcao p {
-    font-size: 22pt;
+    font-size: 22px;
     color: white;
     margin-left: 120px;
     width: 40%;
@@ -148,12 +148,12 @@ header {
 }
 
 .valores-texto h3 {
-    font-size: 30pt;
+    font-size: 30px;
     color: white;
 }
 
 .valores-texto p {
-    font-size: 20pt;
+    font-size: 22px;
     padding: 10px;
     color: white;
 }
