@@ -46,7 +46,7 @@ header {
 
 .ul-itens li {
     display: inline-flex;
-    font-size: 20pt;
+    font-size: 20px;
     padding: 0 15px;
 }
 
@@ -182,8 +182,10 @@ h2 {
 
 
 button {
-    width: 35%;
-    height: 9%;
+    /* width: 35%;
+    height: 9%; */
+    width: 165px;
+    height: 45px;
     padding: 10px;
     margin: 14px;
     background-color: #00ffffb1;
