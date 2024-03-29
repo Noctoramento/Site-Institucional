@@ -52,12 +52,27 @@ header {
     background: aqua;
 }
 
+#linha-sublinhado {
+    text-decoration: none;
+    width: 25%;
+    height: 4px;
+    border: none;
+    background: aqua;
+}
+
 .img-home {
     width: 100%;
 }
 
 .primeira-img-home {
+    width: 100%;
+    height: 40vw;
     display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-image: url("./assets/Imagens/img-inicio-home.jpg");
 }
 
 .img-inicio-home {
@@ -72,6 +87,12 @@ header {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.informacoes-home h1 {
+    padding-top: 40px;
+    font-size: 35px;
+    color: #00FFFF;
 }
 
 .info-texto {
@@ -89,43 +110,123 @@ header {
 }
 
 .info-texto p {
-    font-size: 22px;
+    color: black;
+    font-size: 40px;
     margin-top: 50px;
-    color: white;
+    font-weight: 40px;
+    margin-left: 100px;
 }
 
 .info-funcao {
     width: 80%;
-    padding: 80px 0;
-    align-items: center;
     display: flex;
+    padding: 80px 0;
     justify-content: space-between;
 }
 
+.info-funcao .solucao{
+    width: 55%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #191e29;
+    border: 4px solid #696e79;
+}
+
+.info-funcao .solucao .solucao-descricao{
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.info-funcao h3{
+    font-size: 25px;
+    color: #00FFFF;
+}
+
 .segunda-img-home {
-    width: 550px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     border-radius: 20px;
 }
 
 .info-funcao p {
-    font-size: 22px;
+    font-size: 20px;
+    margin-top: 25px;
     color: white;
-    margin-left: 120px;
-    width: 40%;
+}
+
+.recursos-home{
+    display: flex;
+    flex-direction: column;
+}
+
+.recursos-home .recursos-topico{
+    width: 100%;
+    height: 42vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.recursos-home .recursos{
+    width: 30%;
+    height: 80%;
+    display: flex;
+    border-radius: 10px;
+    flex-direction: column;
+    border: #00FFFF 4px solid;
+    background-color: #191e29;
+    justify-content: space-around;
+}
+
+.recursos-home .recursos p{
+    color: white;
+    font-size: 28px;
+}
+
+.recursos .recursos-descricao {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.recursos-home .recursos h2{
+    color: #00FFFF;
+    padding-top: 10px;
+}
+
+.recursos-home {
+    width: 100%;
+    height: auto;
+    background: #434957;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .info-valores {
-    width: 80%;
+    border: #00FFFF solid 5px;
+    border-radius: 10px;
+    background-color: #191e29;
+    width: 95%;
     padding: 80px 0;
-    align-items: center;
-    flex-direction: column;
+    margin-bottom: 30px;
+    flex-direction: row;
 }
 
 .valores {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    flex-direction: row;
     width: 100%;
 }
 
@@ -143,8 +244,13 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 50%;
+}
+
+.img-valores{
+    width: 450px;
+    height: 400px;
+    border-radius: 50px;
 }
 
 .valores-texto h3 {
@@ -161,10 +267,10 @@ header {
 .membros-home {
     width: 100%;
     padding: 80px 0;
-    background: #434957;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #191e29;
 }
 
 .membro-img-home {
@@ -174,15 +280,28 @@ header {
 }
 
 .membros {
-    width: 80%;
+    width: 70%;
     padding: 50px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+.membro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.membro p {
+    color: #00FFFF;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 20px;
+}
+
 footer {
-    height: 25vb;
+    height: 18vb;
     display: flex;
     align-items: center;
     flex-direction: column;
