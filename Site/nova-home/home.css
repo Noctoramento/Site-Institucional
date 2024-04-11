@@ -198,6 +198,10 @@ header>div {
 
 }
 
+.foto-integrante{
+    object-fit: cover;
+}
+
 /* footer */
 
 footer {
