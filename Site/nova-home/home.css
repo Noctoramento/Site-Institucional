@@ -38,6 +38,11 @@ header>div {
     cursor: pointer;
 }
 
+header>div>p>a{
+    text-decoration: none;
+    color: #ffff;
+}
+
 .ativo_menu {
     border-bottom: 1px solid aqua;
 }
