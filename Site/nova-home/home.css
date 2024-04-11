@@ -38,6 +38,11 @@ header>div {
     cursor: pointer;
 }
 
+header>div>p>a{
+    text-decoration: none;
+    color: #ffff;
+}
+
 .ativo_menu {
     border-bottom: 1px solid aqua;
 }
@@ -196,6 +201,10 @@ header>div {
     justify-content: center;
     gap: 30px;
 
+}
+
+.foto-integrante{
+    object-fit: cover;
 }
 
 /* footer */
