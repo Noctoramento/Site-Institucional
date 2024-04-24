@@ -10,7 +10,7 @@
     box-sizing: border-box;
     overflow-y: hidden;
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    /* font-weight: 300; */
 
 }
 
@@ -57,9 +57,9 @@ a {
     height: 3px;
     background: aqua;
     border: 0px;
-} */
+} header antigo */
 
-header {
+/* header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,9 +70,9 @@ header {
     background-color: #191e29;
     color: white;
     border-bottom: 3px solid aqua;
-}
+} */
 
-header>img {
+/* header>img {
     width: 150px;
     height: auto;
 }
@@ -82,9 +82,9 @@ header>div {
     align-items: center;
     gap: 10px;
     cursor: pointer;
-}
+} */
 
-.ativo_menu {
+/* .ativo_menu {
     border-bottom: 1px solid aqua;
 }
 
@@ -100,9 +100,9 @@ header>div {
 .img-login img {
     width: 100%;
     height: 100%;
-}
+} */
 
-.color-login {
+/* .color-login {
     background: #232937;
     width: 50%;
     display: flex;
@@ -119,9 +119,9 @@ header>div {
 .img-home-inicio {
     display: block;
     margin: 0;
-}
+} */
 
-.box-login {
+/* .box-login {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -145,9 +145,9 @@ header>div {
     color: white;
     font-size: 12px;
     padding-top: 12px;
-}
+} */
 
-.form-login label {
+/* .form-login label {
     padding: 20px 0 10px 0;
 }
 
@@ -169,10 +169,10 @@ header>div {
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
+} */
 
 
-h2 {
+/* h2 {
 
     font-weight: bold;
     text-align: center;
@@ -195,9 +195,9 @@ h2 {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
+} */
 
-.criar-conta {
+/* .criar-conta {
 
     font-size: 12px;
     padding: 0px;
@@ -207,13 +207,13 @@ h2 {
 
 .criar-conta a {
     color: white;
-}
+} */
 
 
-button {
-    /* width: 35%;
-    height: 9%; */
-    width: 165px;
+/* button { */
+/* width: 35%;
+    height: 9%;  já estava comentado antes*/
+/* width: 165px;
     height: 45px;
     padding: 10px;
     margin: 14px;
@@ -226,9 +226,9 @@ button {
     font-size: 18px;
     font-weight: 500;
     box-shadow: 0px 0px 7px 0px #00FFFF;
-}
+} */
 
-button:hover {
+/* button:hover {
     background-color: #00ffff;
 
 }
@@ -256,42 +256,263 @@ footer {
 
 .footer-creditos {
     color: #696e79;
+} */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100px;
+    padding: 0 50px;
+
+    background-color: #191e29;
+    color: white;
+    border-bottom: 3px solid aqua;
 }
 
-@media screen and (max-width: 768px){
-    header > img{
+header>img {
+    width: 150px;
+    height: auto;
+}
+
+header>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+header>div>p>a {
+    text-decoration: none;
+    color: #ffff;
+}
+
+
+.ativo_menu {
+    border-bottom: 1px solid aqua;
+}
+
+.menu:hover {
+    color: aqua;
+}
+
+section {
+    display: flex;
+    height: 81vh
+}
+
+section>div>img {
+    height: 100%;
+    width: 100%;
+}
+
+.container-imagem,
+.container-login {
+    width: 50%;
+    height: 100%;
+}
+
+.container-login {
+    background-color: #191e29;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login,
+.login,
+.container-botao {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-login {
+    background-color: #434957;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 460px;
+    height: 500px;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+    color: #00ffff;
+    font-size: 34px;
+}
+
+form>label {
+    padding: 20px 0 10px 0;
+    color: white;
+}
+
+.login {
+    gap: 15px;
+}
+
+.login input {
+    color: LIGHTGRAY;
+    width: 400px;
+    height: 45px;
+    padding-top: 0;
+    border-radius: 10px;
+    background-color: #696e79;
+    text-align: center;
+    border: none;
+}
+
+.container-botao {
+    align-items: center;
+}
+
+button {
+    width: 165px;
+    height: 45px;
+    background-color: #00ffffb1;
+    margin: 35px 0 5px 0;
+    color: #1d2330;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color 0.9s;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 0px 7px 0px #00FFFF;
+}
+
+button:hover {
+    background-color: #00ffff;
+    
+}
+
+.container-botao>p {
+    color: #a2acc2;
+}
+
+.container-botao>p>a {
+    color: white;
+}
+
+
+
+
+
+footer {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #191e29;
+    border-top: 1px #00ffff solid;
+    padding: 2px 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.ul-footer {
+    font-size: 18px;
+    list-style: none;
+    display: inline-flex;
+    color: #ffff;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+
+.footer-creditos {
+    color: #696e79;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        height: 88vh;
+    }
+
+    main {
+        height: 83%;
+    }
+
+    header>img {
         display: none;
-     }
-     header {
-         justify-content: center;
-         
-     }
+    }
 
-     section > div > img {
+    header {
+        justify-content: center;
+
+    }
+
+    section {
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    section>div>img {
         display: none;
-     }
 
-     .img-login{
-        width: 0px;
-     }
+    }
 
-     .color-login{
+
+
+    .container-imagem {
+        display: none;
+    }
+
+    .container-login {
         width: 100%;
-     }
+        height: 100%;
+    }
 
-     .box-login{
+
+    .card-login {
+        height: 420px;
+        width: 300px;
+    }
+
+    .img-login {
+        width: 0px;
+    }
+
+    .color-login {
+        width: 100%;
+    }
+
+    .box-login {
         width: 80%;
-     }
+    }
 
-     .form-login input, button{
+    .login>input {
+        width: 270px;
+        height: 40px;
+    }
+
+    /* .form-login input,
+    button {
         width: 230px;
         height: 35px;
-     }
+    } */
 
-     button {
-        width: 165px;
-        height: 35px;
-     }
-     
+    .container-botao {
+        font-size: 11px;
+    }
+
+    button {
+        width: 150px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .ul-footer{
+        font-size: 16px;
+    }
+
+    footer>p{
+        font-size: 12px;
+    }
 
 }
