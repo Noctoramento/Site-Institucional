@@ -9,51 +9,57 @@
     font-family: 'Inter', sans-serif;
 }
 
-a {
-    text-decoration: none;
+body {
+    height: 91vh;
+}
+
+main {
+    height: 80vh;
 }
 
 header {
-    width: 100%;
-}
-
-.nav-itens {
-    background: #191e29;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-}
-
-.conteudo-header {
-    width: 80%;
-    align-items: center;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    height: 100px;
+    padding: 0 50px;
+
+    background-color: #191e29;
+    color: white;
+    border-bottom: 3px solid aqua;
 }
 
-.ul-itens li {
-    display: inline-flex;
-    font-size: 20pt;
-    padding: 0 15px;
-}
-
-.img-logo {
-    width: 25%;
+header>img {
+    width: 150px;
     height: auto;
 }
 
-#linha {
+header>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+header>div>p>a {
     text-decoration: none;
-    width: 100%;
-    height: 5px;
-    border: none;
-    background: aqua;
+    color: #ffff;
+}
+
+
+.ativo_menu {
+    border-bottom: 1px solid aqua;
+}
+
+.menu:hover {
+    color: aqua;
 }
 
 .fundo-cadastro {
     background-image: url("../assets/Imagens/fundo_cadastro.jpg");
     background-size: cover;
-    height: 75vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,11 +78,11 @@ header {
     padding: 15px 0;
 }
 
-.cadastro p{
+.cadastro p {
     color: #a2acc2;
 }
 
-.cadastro a{
+.cadastro a {
     text-decoration: none;
     color: white;
 }
@@ -92,6 +98,7 @@ h2 {
 .formulario-cadastro {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .formulario-cadastro a {
@@ -101,7 +108,6 @@ h2 {
 }
 
 .formulario-cadastro label {
-    padding: 20px 0 10px 0;
     color: white;
 }
 
@@ -133,29 +139,98 @@ button {
 
 button:hover {
     background-color: #00ffff;
-    
+
 }
 
 footer {
-    height: 15vh;
+    height: 80px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     background-color: #191e29;
-    border-top: 4px #00ffff solid;
+    border-top: 1px #00ffff solid;
+    padding: 2px 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .ul-footer {
-    font-size: 25px;
+    font-size: 18px;
     list-style: none;
     display: inline-flex;
+    color: #ffff;
+    padding: 0px;
+    margin-bottom: 0px;
 }
 
-.ul-footer li {
-    padding: 10px;
-}
 
 .footer-creditos {
     color: #696e79;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        height: 88vh;
+    }
+
+    main {
+        height: 82%;
+    }
+
+    header>img {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+
+    }
+
+    section {
+        height: 72vh;
+    }
+
+    .possuiConta{
+        font-size: 12px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 14px;
+    }
+
+    form{
+        gap: 4px;
+    }
+
+    .cadastro {
+        width: 77%;
+        height: 85%;
+        gap: 2px;
+    }
+
+    section>div>.formulario-cadastro>input {
+        width: 215px;
+        height: 35px;
+    }
+
+    section>div>.formulario-cadastro>label{
+        font-size: 13px;
+    }
+
+    button {
+        width: 150px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .ul-footer {
+        font-size: 16px;
+    }
+
+    footer>p {
+        font-size: 12px;
+    }
 }
