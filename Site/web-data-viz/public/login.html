@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Noctoramento</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="icon" href="./assets/Logo Principal Verde água neon.png">
+    <Script src="./js/login.js"></Script>
+</head>
+
+<body>
+
+    <header>
+        <!-- <img src="./assets/Imagens/Logo.png" alt=""> -->
+        <div>
+            <p class="menu"><a href="./index.html">Home</a></p>
+            <p class="menu"><a href="./cadastro.html">Cadastro</a></p>
+            <p class="ativo_menu">Login</p>
+        </div>
+    </header>
+
+    <main>
+
+        <section>
+
+            <div class="container-imagem">
+                <img src="./assets/background-img-login.jpg" alt="">
+            </div>
+
+            <div class="container-login">
+
+                <div class="card-login">
+                    <div>
+                        <h2>Login</h2>
+                    </div>
+                    <div>
+                        <form class="login">
+
+                            <label for="useremail">Email:</label>
+                            <input type="email" name="useremail" placeholder="Digite seu email" id="input_email">
+
+                            <label for="password">Senha:</label>
+                            <input type="password" name="password" placeholder="Digite sua senha" id="input_senha">
+
+
+
+                        </form>
+                       
+                        <div class="container-botao">
+                            <button onclick="acessar()" type="submit">Entrar</button>
+                            <p>Não tem conta? <a href="./cadastro.html">Crie agora! </a></p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            <ul class="ul-footer">
+                <li>Política de privacidade</li>
+            </ul>
+            <p class="footer-creditos">© 2024 Noctoramento</p>
+        </footer>
+
+    </main>
+
+</body>
+
+</html>

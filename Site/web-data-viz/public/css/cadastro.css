@@ -1,0 +1,236 @@
+@font-face {
+    font-family: 'Inter';
+    src: url(./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
+
+* {
+    margin: 0;
+    overflow-y: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    height: 91vh;
+}
+
+main {
+    height: 80vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100px;
+    padding: 0 50px;
+
+    background-color: #191e29;
+    color: white;
+    border-bottom: 3px solid aqua;
+}
+
+header>img {
+    width: 150px;
+    height: auto;
+}
+
+header>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+header>div>p>a {
+    text-decoration: none;
+    color: #ffff;
+}
+
+
+.ativo_menu {
+    border-bottom: 1px solid aqua;
+}
+
+.menu:hover {
+    color: aqua;
+}
+
+.fundo-cadastro {
+    background-image: url("../assets/fundo_cadastro.jpg");
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #434957;
+    width: 30%;
+    height: 85%;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.296);
+    padding: 15px 0;
+}
+
+.cadastro p {
+    color: #a2acc2;
+}
+
+.cadastro a {
+    text-decoration: none;
+    color: white;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+    color: #00ffff;
+    font-size: 34px;
+    padding-top: 0px;
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario-cadastro a {
+    color: white;
+    font-size: 12px;
+    padding-top: 12px;
+}
+
+.formulario-cadastro label {
+    color: white;
+}
+
+.formulario-cadastro input {
+    color: LIGHTGRAY;
+    width: 400px;
+    height: 45px;
+    padding-top: 0;
+    border-radius: 10px;
+    background-color: #696e79;
+    text-align: center;
+    border: none;
+}
+
+button {
+    width: 165px;
+    height: 45px;
+    background-color: #00ffffb1;
+    margin: 35px 0 5px 0;
+    color: #1d2330;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color 0.9s;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 0px 7px 0px #00FFFF;
+}
+
+button:hover {
+    background-color: #00ffff;
+
+}
+
+footer {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #191e29;
+    border-top: 1px #00ffff solid;
+    padding: 2px 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.ul-footer {
+    font-size: 18px;
+    list-style: none;
+    display: inline-flex;
+    color: #ffff;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+
+.footer-creditos {
+    color: #696e79;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        height: 88vh;
+    }
+
+    main {
+        height: 82%;
+    }
+
+    header>img {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+
+    }
+
+    section {
+        height: 72vh;
+    }
+
+    .possuiConta{
+        font-size: 12px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-bottom: 14px;
+    }
+
+    form{
+        gap: 4px;
+    }
+
+    .cadastro {
+        width: 77%;
+        height: 85%;
+        gap: 2px;
+    }
+
+    section>div>.formulario-cadastro>input {
+        width: 215px;
+        height: 35px;
+    }
+
+    section>div>.formulario-cadastro>label{
+        font-size: 13px;
+    }
+
+    button {
+        width: 150px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .ul-footer {
+        font-size: 16px;
+    }
+
+    footer>p {
+        font-size: 12px;
+    }
+}
