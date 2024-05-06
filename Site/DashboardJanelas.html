@@ -5,15 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Noctoramento | Dashboard</title>
-    <link rel="stylesheet" href="css/Dashboard.css" />
+    <link rel="stylesheet" href="./css/Dashboard.css" />
     <link rel="icon" href="../assets/Imagens/Logo Principal Verde água neon.png" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body style="overflow-y: hidden;">
     <header>
         <div id="tituloDash" style="display: none">
-            <h1>Visão Janelas em Uso</h1>
+            <h1 style="margin-left: -2.5rem;">Janelas Visíveis em Uso</h1>
         </div>
 
         <div id="div_User" class="User">
@@ -76,7 +76,7 @@
                             <path
                                 d="M25.3332 29.3334C24.5968 29.3334 23.9998 28.7364 23.9998 28V25.3334H21.3332C20.5968 25.3334 19.9998 24.7364 19.9998 24C19.9998 23.2636 20.5968 22.6667 21.3332 22.6667H23.9998V20C23.9998 19.2636 24.5968 18.6667 25.3332 18.6667C26.0695 18.6667 26.6665 19.2636 26.6665 20V22.6667H29.3332C30.0695 22.6667 30.6665 23.2636 30.6665 24C30.6665 24.7364 30.0695 25.3334 29.3332 25.3334H26.6665V28C26.6665 28.7364 26.0695 29.3334 25.3332 29.3334Z" />
                         </svg>
-                        <a href="#"></a>
+                        <a href="./cadastroFuncionario.html"></a>
                         <!-- Linkar tela ADD USUÁRIO aqui!!!!!!! -->
                     </li>
 
@@ -88,7 +88,7 @@
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M2.88867 9.33329C2.88867 5.65139 5.87344 2.66663 9.55534 2.66663H22.8887C26.5706 2.66663 29.5553 5.65139 29.5553 9.33329V17.3333C29.5553 21.0152 26.5706 24 22.8887 24H9.55534C5.87344 24 2.88867 21.0152 2.88867 17.3333V9.33329ZM9.55534 5.33329C7.3462 5.33329 5.55534 7.12415 5.55534 9.33329V17.3333C5.55534 19.5424 7.3462 21.3333 9.55534 21.3333H22.8887C25.0978 21.3333 26.8887 19.5424 26.8887 17.3333V9.33329C26.8887 7.12415 25.0978 5.33329 22.8887 5.33329H9.55534ZM2.88867 28C2.88867 27.2636 3.48563 26.6666 4.22201 26.6666H28.222C28.9584 26.6666 29.5553 27.2636 29.5553 28C29.5553 28.7363 28.9584 29.3333 28.222 29.3333H4.22201C3.48563 29.3333 2.88867 28.7363 2.88867 28Z" />
                         </svg>
-                        <a href="#"></a>
+                        <a href="./cadastroMaquina.html"></a>
                         <!-- Linkar tela ADD MÁQUINA aqui!!!!!!! -->
                     </li>
 
@@ -100,7 +100,7 @@
                             <path
                                 d="M24.7809 17.3333L21.7237 20.3905C21.203 20.9112 21.203 21.7554 21.7237 22.2761C22.2444 22.7968 23.0886 22.7968 23.6093 22.2761L28.7541 17.1313C29.3789 16.5065 29.3789 15.4934 28.7541 14.8686L23.6093 9.72382C23.0886 9.20312 22.2444 9.20312 21.7237 9.72382C21.203 10.2445 21.203 11.0887 21.7237 11.6094L24.7809 14.6666L10.6665 14.6666V17.3333L24.7809 17.3333Z" />
                         </svg>
-                        <a href="#"></a>
+                        <a href="./home.html"></a>
                         <!-- Linkar HOME aqui!!!!!!! -->
                     </li>
                 </ul>
@@ -116,6 +116,10 @@
                     </select>
                 </div>
             </div>
+
+            <div id="atualizacao" style="display: none;">
+                <h6>Última atualização: 07/05/2024 09:45:52</h6>
+              </div>
 
             <div class="bem-vindo">
                 <div class="bemVindo">
@@ -136,20 +140,21 @@
                             <p id="text-kpi2">marcioSantana@ubuntu</p>
                         </div>
 
-                        <div class="kpi" style="display: block;">
-                            <p id="text-kpi" style=" margin-left: 2.6rem; margin-top: 0.6rem;">Qtd. Programas em</p>
-                            <p id="text-kpi" style=" margin-left: 5rem; margin-top: 0.2rem;">Execução</p>
-                            <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.5rem;">4</p>
+                        <div class="kpi" style="display: block; width: 16rem;">
+                            <p id="text-kpi" style="  margin-top: 0.6rem; margin-left: 2.2rem;"><span style="color: aqua;">Média </span>de Janelas Visíveis </p>
+                            <p id="text-kpi" style=" margin-top: 0.1rem; margin-left: 6.3rem;">por <span style="color: aqua;">Mês</span></p>
+                            <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.5rem;">8</p>
                         </div>
 
-                        <div class="kpi" style="display: block;">
-                            <p id="text-kpi" style="margin-top: 1rem; margin-left: 2rem;">Memoria RAM em Uso</p>
-                            <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.9rem;">68%</p>
+ 
+                        <div class="kpi" style="display: block;  box-shadow: 0px 0px 15px 3px #1d203a;">
+                            <!-- <p id="text-kpi" style="margin-top: 1rem; margin-left: 2rem;">Memoria RAM em Uso</p> -->
+                            <!-- <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.9rem;">68%</p> -->
                         </div>
 
-                        <div class="kpi" style="display: block;">
-                            <p id="text-kpi" style="margin-top: 1rem; margin-left: 2rem;">Capacidade do Disco</p>
-                            <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.9rem;">500GB</p>
+                        <div class="kpi" style="display: block; box-shadow: 0px 0px 15px 3px #1d203a;">
+                            <!-- <p id="text-kpi" style="margin-top: 1rem; margin-left: 2rem;">Capacidade do Disco</p> -->
+                            <!-- <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.9rem;">500GB</p> -->
                         </div>
                     </div>
                 </div>
@@ -159,15 +164,15 @@
                     <div>
                         <div>
                             <p
-                                style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 15rem; margin-bottom: 1rem;">
-                                Tempo de Janela Ativa por Expediente</p>
+                                style="color: rgb(255, 255, 255); font-size: 18px; font-weight: 600; margin-left: 26.2rem; margin-bottom: 1.5rem;">
+                                Quantidade de Janelas Visíveis em Uso Durante o Expediente</p>
                         </div>
-                        <div class="grafico mb-3" style="height: 30rem;">
-                            <canvas id="janelaAtiva"></canvas>
+                        <div class="grafico mb-3" style="height: 30rem; width: 81.5rem; margin-left: 1.8rem;">
+                            <canvas style="padding: 1.5rem;" id="janelaAtiva"></canvas>
                         </div>
                     </div>
 
-                    <div>
+                    <!-- <div>
                         <div class="graficos2">
                             <div>
                                 <div>
@@ -211,18 +216,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <script>
                     const ctx = document.getElementById('janelaAtiva').getContext('2d');
                     const data = {
-                        labels: ['Visual Studio Code', 'Power BI Desktop', 'Google Chrome'],
+                        labels: ['08:00h',
+                '09:00h',
+                '10:00h',
+                '11:00h',
+                '12:00h',
+                '13:00h',
+                '14:00h',
+                '15:00h',
+                '16:00h',
+                '17:00h',
+                '18:00h',],
                         datasets: [
                             {
-                                label: 'Tempo de Janela Ativa (minutos)',
-                                data: [290, 180, 90],
-                                backgroundColor: 'rgb(186,85,211)',
+                                label: 'Qtd. de Janelas Visíveis',
+                                data: [10, 7, 12, 8, 5, 3, 4, 3, 7, 5, 1],
+                                backgroundColor: 'rgb(186,85,211,0.25)',
+                                borderColor: 'rgb(186,85,211)',
+                                fill: true
                             },
                         ],
                     };
@@ -234,12 +251,12 @@
                             y: {
                                 beginAtZero: true,
                                 min: 0,
-                                max: 480,
-                                stepSize: 60,
-                                title: {
-                                    display: true,
-                                    text: '8h em minutos',
-                                },
+                                max: 45,
+                                stepSize: 1,
+                                // title: {
+                                //     display: true,
+                                //     text: '8h em minutos',
+                                // },
                             },
                         },
                         // plugins: {
@@ -254,7 +271,7 @@
                     };
 
                     const janelaAtivaChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: data,
                         options: options,
                     });
@@ -274,6 +291,7 @@
         .addEventListener('change', function () {
             let notebookValue = document.getElementById('selectNotebook').value;
             let tituloDash = document.getElementById('tituloDash');
+    //   let atualizacao = document.getElementById('atualizacao');
             let divDashs = document.getElementsByClassName('divDashs')[0];
             let bemVindo = divDashs.querySelector('.bemVindo');
             let kpisContainer = document.getElementById('kpisContainer');
@@ -281,11 +299,13 @@
 
             if (notebookValue === '0') {
                 tituloDash.style.display = 'none';
+        // atualizacao.style.display = 'none';
                 kpisContainer.style.display = 'none';
                 graficosContainer.style.display = 'none';
                 bemVindo.style.display = '';
             } else {
                 tituloDash.style.display = 'block';
+        // atualizacao.style.display = 'block';
                 kpisContainer.style.display = '';
                 graficosContainer.style.display = '';
                 bemVindo.style.display = 'none';

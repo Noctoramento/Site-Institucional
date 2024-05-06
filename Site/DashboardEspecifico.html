@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noctoramento | Dashboard</title>
-  <link rel="stylesheet" href="css/Dashboard.css" />
+  <link rel="stylesheet" href="./css/Dashboard.css" />
   <link rel="icon" href="../assets/icons_img/Logo Verde água escuro.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -36,7 +36,7 @@
   <div class="container">
     <div class="nav">
       <nav class="navbar">
-        <img class="img_navbar" src="./assets/icons_img/Logo Verde água escuro.png" alt="" />
+        <img class="img_navbar" src="../assets/Imagens/Logo Verde água neon.png" alt="" />
 
         <ul class="icons_navbar">
           <li onclick="trocarTela('DashboardGeral')">
@@ -55,17 +55,7 @@
             </svg>
           </li>
 
-          <li onclick="trocarTela('DashboardJanelas')">
-            <svg class="pieChart" width="43" height="43" fill="none" viewBox="0 0 50 35" stroke="white" stroke-width="2"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M17.5 32.0834C25.5541 32.0834 32.0833 25.5542 32.0833 17.5001C32.0833 9.44593 25.5541 2.91675 17.5 2.91675C9.44581 2.91675 2.91663 9.44593 2.91663 17.5001C2.91663 25.5542 9.44581 32.0834 17.5 32.0834Z" />
-              <path d="M17.5 2.91675V17.5001M17.5 32.0834V17.5001M17.5 17.5001H32.0833" />
-            </svg>
-            <a href="./DashboardJanelas.html"></a>
-          </li>
-
-          <li onclick="trocarTela('AddUser')">
+          <li onclick="trocarTela('cadastroFuncionario')">
             <svg class="icons_azul" width="30" height="30" viewBox="0 0 30 25" fill="white"
               xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -75,11 +65,10 @@
               <path
                 d="M25.3332 29.3334C24.5968 29.3334 23.9998 28.7364 23.9998 28V25.3334H21.3332C20.5968 25.3334 19.9998 24.7364 19.9998 24C19.9998 23.2636 20.5968 22.6667 21.3332 22.6667H23.9998V20C23.9998 19.2636 24.5968 18.6667 25.3332 18.6667C26.0695 18.6667 26.6665 19.2636 26.6665 20V22.6667H29.3332C30.0695 22.6667 30.6665 23.2636 30.6665 24C30.6665 24.7364 30.0695 25.3334 29.3332 25.3334H26.6665V28C26.6665 28.7364 26.0695 29.3334 25.3332 29.3334Z" />
             </svg>
-            <a href="#"></a>
-            <!-- Linkar tela ADD USUÁRIO aqui!!!!!!! -->
+            <a href="cadastroFuncionario.html"></a>
           </li>
 
-          <li onclick="trocarTela('AddNotebook')">
+          <li onclick="trocarTela('cadastroMaquina')">
             <svg class="icons_azul" width="35" height="35" viewBox="0 0 42 32" fill="white"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -87,8 +76,7 @@
               <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M2.88867 9.33329C2.88867 5.65139 5.87344 2.66663 9.55534 2.66663H22.8887C26.5706 2.66663 29.5553 5.65139 29.5553 9.33329V17.3333C29.5553 21.0152 26.5706 24 22.8887 24H9.55534C5.87344 24 2.88867 21.0152 2.88867 17.3333V9.33329ZM9.55534 5.33329C7.3462 5.33329 5.55534 7.12415 5.55534 9.33329V17.3333C5.55534 19.5424 7.3462 21.3333 9.55534 21.3333H22.8887C25.0978 21.3333 26.8887 19.5424 26.8887 17.3333V9.33329C26.8887 7.12415 25.0978 5.33329 22.8887 5.33329H9.55534ZM2.88867 28C2.88867 27.2636 3.48563 26.6666 4.22201 26.6666H28.222C28.9584 26.6666 29.5553 27.2636 29.5553 28C29.5553 28.7363 28.9584 29.3333 28.222 29.3333H4.22201C3.48563 29.3333 2.88867 28.7363 2.88867 28Z" />
             </svg>
-            <a href="#"></a>
-            <!-- Linkar tela ADD MÁQUINA aqui!!!!!!! -->
+            <a href="cadastroMaquina.html"></a>
           </li>
 
           <li id="logout" onclick="trocarTela('home')">
@@ -100,7 +88,6 @@
                 d="M24.7809 17.3333L21.7237 20.3905C21.203 20.9112 21.203 21.7554 21.7237 22.2761C22.2444 22.7968 23.0886 22.7968 23.6093 22.2761L28.7541 17.1313C29.3789 16.5065 29.3789 15.4934 28.7541 14.8686L23.6093 9.72382C23.0886 9.20312 22.2444 9.20312 21.7237 9.72382C21.203 10.2445 21.203 11.0887 21.7237 11.6094L24.7809 14.6666L10.6665 14.6666V17.3333L24.7809 17.3333Z" />
             </svg>
             <a href="home.html"></a>
-            <!-- Linkar HOME aqui!!!!!!! -->
           </li>
         </ul>
       </nav>
@@ -116,8 +103,8 @@
         </div>
       </div>
 
-      <div id="atualizacao" style="display: none;">
-        <h6>Última atualização: 07/05/2024 09:45:52</h6>
+      <div id="atualizacao">
+        <h6></h6>
       </div>
 
       <div class="bem-vindo">
@@ -144,17 +131,19 @@
               <p id="text-kpi" style=" margin-left: 2rem; margin-top: 1rem;">Condição da máquina</p>
               <p id="text-kpi4" style="color: rgba(255,255,0);">Alerta</p>
             </div>
-
+            
             <div class="kpi" style="display: block;">
-              <p id="text-kpi" style="margin-top: 1rem;">Tempo de Atividade</p>
-              <p id="text-kpi2">13d:20h:06m:42s</p>
+              <p id="text-kpi" style="margin-top: 0.5rem;">Tempo de Atividade</p>
+              <p id="text-kpi" style="margin-top: 0.3rem; margin-left: 5rem;">do Disco</p>
+              <p id="text-kpi2" style="margin-top: 0.6rem;">13d:20h:06m:42s</p>
             </div>
 
-            <div class="kpi" style="display: block;">
-              <p id="text-kpiSO" style="margin-top: 0.4rem;">Sistema Operacional</p>
-              <img id="text-kpi3" class="imgWindows" src="../assets/icons_img/ubuntu.png"
-                alt="Logo Ubuntu">
-            </div>
+            <div class="kpi" style="display: block; width: 15rem;">
+              <p id="text-kpi" style="  margin-top: 0.6rem; margin-left: 1.7rem;">Média de Janelas Visíveis </p>
+              <p id="text-kpi" style=" margin-top: 0.1rem; margin-left: 5.5rem;">por Mês</p>
+              <p id="text-kpi4" style="color: rgb(123, 133, 161); margin-top: 0.5rem; font-weight: normal;">8</p>
+          </div>
+
           </div>
         </div>
 
@@ -163,8 +152,8 @@
             <div>
               <div>
                 <p
-                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 9.5rem; margin-bottom: 1rem;">
-                  Média de Uso do Disco por Mês em GB <span style="color: #00ffff;">VS</span> Total de Capacidade</p>
+                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 14.5rem; margin-bottom: 1rem;">
+                  Uso do Disco (GB) Durante o Expediente</p>
               </div>
               <div class="grafico mb-3">
                 <canvas id="armazenamento">
@@ -172,8 +161,8 @@
               </div>
               <div>
                 <p
-                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 11rem; margin-bottom: 1rem;">
-                  Média de Uso da Memória RAM Durante o Expediente em %</p>
+                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 13rem; margin-bottom: 1rem;">
+                  Uso da Memória RAM (%) Durante o Expediente</p>
               </div>
               <div class="grafico mb-3">
                 <canvas id="ram"></canvas>
@@ -187,19 +176,19 @@
             <div class="graficos2">
               <div>
                 <p
-                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 12rem; margin-bottom: 1rem;">
-                  Média de Uso da CPU Durante o Expediente em %</p>
+                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 15rem; margin-bottom: 1rem;">
+                  Uso da CPU (%) Durante o Expediente</p>
               </div>
               <div class="grafico mb-3">
                 <canvas id="cpu"></canvas>
               </div>
               <div>
                 <p
-                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 6.2rem; margin-bottom: 1rem;">
-                  Comparação de Uso da Memória entre Programas Durante o Expediente em %</p>
+                  style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 14rem; margin-bottom: 1rem;">
+                  Quantidade de Janelas Visíveis em Uso</p>
               </div>
               <div class="grafico mb-3">
-                <canvas id="ram2"></canvas>
+                <canvas id="janelaAtiva"></canvas>
               </div>
             </div>
 
@@ -213,8 +202,6 @@
           const data = {
             cpu: [29, 46, 31, 34, 95, 54, 89, 62, 51, 38, 25],
             ram: [24, 47, 55, 49, 99, 65, 79, 75, 67, 58, 25],
-            ram2: [20, 15, 33, 40, 69, 45, 58, 55, 42, 22, 10],
-            ram3: [15, 25, 39, 32, 89, 55, 60, 43, 32, 18, 12],
             storageUsage: [144, 187, 155, 347, 489, 102, 199, 100, 499, 399, 345, 120],
           };
 
@@ -248,11 +235,11 @@
                   backgroundColor: 'rgba(0,206,209, 0.25)',
                   // fill: true
                 },
-                {
-                  label: ' • Modelo do Processador: Intel Core i5-12450H',
-                  borderColor: '#1d203a',
-                  backgroundColor: '#1d203a',
-                }
+                // {
+                //   label: ' • Modelo do Processador: Intel Core i5-12450H',
+                //   borderColor: '#1d203a',
+                //   backgroundColor: '#1d203a',
+                // }
               ],
             },
             options: {
@@ -292,60 +279,11 @@
                   backgroundColor: 'rgba(255, 105, 180, 0.25)',
                   // fill: true
                 },
-                {
-                  label: ' • Modelo de Memória: RAM DDR4',
-                  borderColor: '#1d203a',
-                  backgroundColor: '#1d203a',
-                }
-              ],
-            },
-            options: {
-              ...options,
-              scales: {
-                y: {
-                  min: 0,
-                  max: 100,
-                  stepSize: 10,
-                },
-              },
-            },
-          });
-
-          //RAM aplicativos que mais demandam
-          new Chart(document.getElementById('ram2').getContext('2d'), {
-            type: 'line',
-            data: {
-              labels: [
-                '08:00h',
-                '09:00h',
-                '10:00h',
-                '11:00h',
-                '12:00h',
-                '13:00h',
-                '14:00h',
-                '15:00h',
-                '16:00h',
-                '17:00h',
-                '18:00h',
-              ],
-              datasets: [
-                {
-                  label: 'Visual Studio Code',
-                  data: data.ram2,
-                  borderColor: ' rgb(131,111,255)',
-                  backgroundColor: ' rgba(131,111,255,0.25)',
-                },
-                {
-                  label: 'Power BI Desktop',
-                  data: data.ram3,
-                  borderColor: 'rgb( 226, 159, 255)',
-                  backgroundColor: 'rgba(226, 159, 255, 0.25)',
-                },
-                {
-                  label: ' • Modelo de Memória: RAM DDR4',
-                  borderColor: '#1d203a',
-                  backgroundColor: '#1d203a',
-                }
+                // {
+                //   label: ' • Modelo de Memória: RAM DDR4',
+                //   borderColor: '#1d203a',
+                //   backgroundColor: '#1d203a',
+                // }
               ],
             },
             options: {
@@ -364,7 +302,17 @@
           new Chart(document.getElementById("armazenamento").getContext("2d"), {
             type: "line",
             data: {
-              labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+              labels: [          '08:00h',
+                '09:00h',
+                '10:00h',
+                '11:00h',
+                '12:00h',
+                '13:00h',
+                '14:00h',
+                '15:00h',
+                '16:00h',
+                '17:00h',
+                '18:00h',],
               datasets: [
                 {
                   label: "Disco em Uso (GB)",
@@ -374,11 +322,11 @@
                   // fill: true
 
                 },
-                {
-                  label: ' • Capacidade Total do Disco: 500GB',
-                  borderColor: '#1d203a',
-                  backgroundColor: '#1d203a',
-                }
+                // {
+                //   label: ' • Capacidade Total do Disco: 500GB',
+                //   borderColor: '#1d203a',
+                //   backgroundColor: '#1d203a',
+                // }
               ],
             },
             options: {
@@ -392,6 +340,62 @@
               },
             },
           });
+          const ctx = document.getElementById('janelaAtiva').getContext('2d');
+                    const data2 = {
+                        labels: ['08:00h',
+                '09:00h',
+                '10:00h',
+                '11:00h',
+                '12:00h',
+                '13:00h',
+                '14:00h',
+                '15:00h',
+                '16:00h',
+                '17:00h',
+                '18:00h',],
+                        datasets: [
+                            {
+                                label: 'Qtd. de Janelas Visíveis',
+                                data: [10, 7, 12, 8, 5, 3, 4, 3, 7, 5, 1],
+                                backgroundColor: 'rgb(186,85,211,0.25)',
+                                borderColor: 'rgb(186,85,211)',
+                                fill: true
+                            },
+                        ],
+                    };
+
+                    const options2 = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                min: 0,
+                                max: 45,
+                                stepSize: 1,
+                                // title: {
+                                //     display: true,
+                                //     text: '8h em minutos',
+                                // },
+                            },
+                        },
+                        // plugins: {
+                        //     title: {
+                        //         display: true,
+                        //         text: 'tituluzin vai aqui',
+                        //         font: {
+                        //             size: 16,
+                        //         },
+                        //     },
+                        // },
+                    };
+
+                    const janelaAtivaChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data2,
+                        options: options2,
+                    });
+
         });
       </script>
     </div>
