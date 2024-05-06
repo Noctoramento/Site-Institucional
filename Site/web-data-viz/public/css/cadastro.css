@@ -59,7 +59,7 @@ header>div>p>a {
 .fundo-cadastro {
     background-image: url("../assets/fundo_cadastro.jpg");
     background-size: cover;
-    height: 100%;
+    height: 93%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,6 +203,10 @@ footer {
 
     form{
         gap: 4px;
+    }
+
+    .fundo-cadastro{
+        height: 100%;
     }
 
     .cadastro {

@@ -3,7 +3,7 @@ function acessar() {
     var email = input_email.value;
     var senha = input_senha.value;
   
-    if (email.indexOf('@') >= 0 && (email.indexOf('.com') >= 0 || email.indexOf('.br') >= 0) && senha.length > 1 ) {
+    if (email.indexOf('@') >= 0 && (email.indexOf('.com') >= 0 || email.indexOf('.br') >= 0) && senha.length >= 8 ) {
    //PARA LOGAR NO SISTEMA
    fetch("/usuarios/autenticar", {
     method: "POST",
