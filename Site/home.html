@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="./home.css">
-    <link rel="icon" href="../assets/Imagens/Logo Principal Verde água neon.png">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" href="./assets/Imagens/Logo Principal Verde água neon.png">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -22,17 +22,17 @@
 
 <body>
     <header>
-        <img src="../assets/Imagens/Logo.png" alt="">
+        <img src="./assets/Imagens/Logo.png" alt="">
         <div>
             <p class="ativo_menu">Home</p>
-            <p class="menu"><a href="../cadastro.html">Cadastro</a></p>
-            <p class="menu"><a href="../login.html">Login</a></p>
+            <p class="menu"><a href="./cadastro.html">Cadastro</a></p>
+            <p class="menu"><a href="./login.html">Login</a></p>
         </div>
     </header>
     <main>
 
         <section class="principal">
-            <img src="../assets/Imagens/grafico_home_principal.png" alt="">
+            <img src="./assets/Imagens/grafico_home_principal.png" alt="">
             <div>
                 <h1>
                     Noctoramento
@@ -61,8 +61,7 @@
             <div class="row row-cols-1 -md-2 g-4">
                 <div class="col-3">
                     <div class="card">
-                        <img src="../assets/Imagens/dados-grafico.jpg" class="card-img-top"
-                            alt="...">
+                        <img src="./assets/Imagens/dados-grafico.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Exibição de dados em gráficos</h5>
                             <p class="card-text">Acesse gráficos em tempo real. Obtenha uma visão instantânea do
@@ -72,7 +71,7 @@
                 </div>
                 <div class="col-3">
                     <div class="card">
-                        <img src="../assets/Imagens/alerta-notificacao.jpg" class="card-img-top" alt="...">
+                        <img src="./assets/Imagens/alerta-notificacao.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Alertas e notificações</h5>
                             <p class="card-text">Fique informado sobre qualquer problema ou métrica incomum com alertas
@@ -83,7 +82,7 @@
                 </div>
                 <div class="col-3">
                     <div class="card">
-                        <img src="../assets/Imagens/monitore-grafico.jpg" class="card-img-top" alt="...">
+                        <img src="./assets/Imagens/monitore-grafico.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Monitore de onde você quiser</h5>
                             <p class="card-text">Desfrute da nossa interface web no seu celular, permitindo que você
@@ -125,7 +124,7 @@
 
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-nathalia.jpeg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-nathalia.jpeg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -136,7 +135,7 @@
                             </div>
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-gabriela.jpeg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-gabriela.jpeg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -147,7 +146,7 @@
                             </div>
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-luiz.jpeg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-luiz.jpeg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -163,7 +162,7 @@
 
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-sarabando.jpeg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-sarabando.jpeg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -174,7 +173,7 @@
                             </div>
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-pedro.jpeg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-pedro.jpeg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -185,7 +184,7 @@
                             </div>
                             <div class="integrante">
                                 <div class="perfil">
-                                    <img class="foto-integrante" src="../assets/Imagens/img-yuri.jpg" alt="...">
+                                    <img class="foto-integrante" src="./assets/Imagens/img-yuri.jpg" alt="...">
                                 </div>
                                 <div class="descricao">
                                     <p>
@@ -216,6 +215,20 @@
             </ul>
             <p class="footer-creditos">© 2024 Noctoramento</p>
         </footer>
+
+
+        <script>
+            const myCarouselElement = document.querySelector('#carouselExampleAutoplaying')
+
+            const carousel = new bootstrap.Carousel(myCarouselElement, {
+                interval: 100,
+                touch: false
+            })
+            carousel.addEventListener('slide.bs.carousel', event => {
+                console.log('oi')
+            })
+        </script>
+
     </main>
 </body>
 
