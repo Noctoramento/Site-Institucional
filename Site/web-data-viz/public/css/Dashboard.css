@@ -25,7 +25,7 @@ header {
   align-items: center;
   position: absolute;
   width: 95vw;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   right: 0px;
 }
 
@@ -35,7 +35,7 @@ header {
   align-items: center;
   background-color: #13172b;
   box-shadow: 0px 0px 13px 2px #13172b;
-  width: 7vw;
+  width: 5.5vw;
   height: 100vh;
   position: fixed;
 }
@@ -45,7 +45,7 @@ header {
 }
 
 .img_navbar {
-  width: 50px;
+  width: 45px;
   height: 40px;
   margin-top: 4rem;
 }
@@ -58,14 +58,15 @@ li {
 }
 
 #logout {
-  margin-top: 20vh;
+  margin-top: 15vh;
+  margin-left: 1.8rem;
 }
 
 .icons_azul:hover {
   fill: #00ffff;
 }
 
-.pieChart:hover {
+.macbook:hover {
   stroke: #00ffff;
 }
 
@@ -128,14 +129,14 @@ li {
 }
 
 .txt-bom-vindo {
-  font-size: 120px;
+  font-size: 80px;
   font-weight: 700;
 }
 
 .txt-por-favor {
   display: flex;
   font-weight: 50;
-  font-size: 30px;
+  font-size: 25px;
   color: rgb(255, 255, 255);
   justify-content: center;
 }
@@ -152,13 +153,27 @@ li {
 .kpi {
   display: flex;
   width: 14rem;
-  height: 5.5rem;
-  margin-bottom: 2rem;
+  height: 5rem;
+  margin-bottom: 0.5rem;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   box-shadow: 0px 0px 15px 3px #13172b;
   margin-top: 4.5rem;
+}
+
+.kpigeral {
+  display: flex;
+  width: 11rem;
+  height: 5rem;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 3px #13172b;
+  margin-top: 4.5rem;
+  font-size: 12px;
+  margin-right: 2rem;
 }
 
 .GRAFICOS {
@@ -264,16 +279,7 @@ li {
 
 #text-kpiNumb {
   display: flex;
-  font-size: 20px;
-  font-weight: 600;
-  color: rgb(123, 133, 161);
-  margin-top: 1rem;
-  justify-content: center;
-}
-
-#text-kpiNumb {
-  display: flex;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: rgb(123, 133, 161);
   margin-top: 0.5rem;
