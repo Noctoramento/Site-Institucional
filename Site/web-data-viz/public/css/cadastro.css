@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Inter';
-    src: url(./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+    src: url(../assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
 }
 
 * {
@@ -57,9 +57,9 @@ header>div>p>a {
 }
 
 .fundo-cadastro {
-    background-image: url("../assets/fundo_cadastro.jpg");
+    background-image: url("../assets/Imagens/fundo_cadastro.jpg");
     background-size: cover;
-    height: 93%;
+    height: 95%;
     display: flex;
     justify-content: center;
     align-items: center;

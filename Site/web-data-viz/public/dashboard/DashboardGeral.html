@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noctoramento | Dashboard</title>
+    <link rel="stylesheet" href="../css/Dashboard.css" />
+    <link rel="icon" href="../assets/Imagens/Logo Principal Verde água neon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="tituloDash" style="display: none">
+            <h1 style="font-weight: 700;">Análise Geral</h1>
+        </div>
+
+        <div id="div_User" class="User">
+            <svg width="32" height="32" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M26.6663 24.6667C26.6663 27.244 21.8907 28 15.9997 28C10.1086 28 5.33301 27.244 5.33301 24.6667C5.33301 22.0893 10.1086 18.6667 15.9997 18.6667C21.8907 18.6667 26.6663 22.0893 26.6663 24.6667Z"
+                    stroke="#F7F9FC" stroke-width="3" />
+                <path
+                    d="M21.333 9.33333C21.333 12.2789 18.9452 14.6667 15.9997 14.6667C13.0542 14.6667 10.6663 12.2789 10.6663 9.33333C10.6663 6.38781 13.0542 4 15.9997 4C18.9452 4 21.333 6.38781 21.333 9.33333Z"
+                    stroke="#F7F9FC" stroke-width="3" />
+            </svg>
+
+            <p>
+                Fernanda Caramico<br />
+                <span style="color: rgb(18, 201, 18)">Administrador</span>
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav">
+            <nav class="navbar">
+                <img class="img_navbar" src="../assets/icons_img/Logo Verde água escuro.png" alt="" />
+
+                <ul class="icons_navbar">
+                    <li>
+                        <svg width="29" height="29" viewBox="0 0 30 25" fill="#00ffff"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M3.4737 0.0560913C1.7378 0.0560913 0.330566 1.46993 0.330566 3.21399V20.8982C0.330566 22.6423 1.63302 24.0561 3.36893 24.0561H26.5233C28.2592 24.0561 29.6665 22.6423 29.6665 20.8982V3.21399C29.6665 1.46993 28.2592 0.0560913 26.5233 0.0560913H3.4737ZM3.26416 3.21399C3.26416 3.09772 3.35797 3.00346 3.4737 3.00346H9.13134V21.1087H3.4737C3.35797 21.1087 3.26416 21.0145 3.26416 20.8982V3.21399ZM12.0649 21.1087H17.9321V13.5298H12.0649V21.1087ZM12.0649 10.5824V3.00346H26.5233C26.6391 3.00346 26.7329 3.09772 26.7329 3.21399V10.5824L12.0649 10.5824ZM26.7329 13.5298H20.8657V21.1087H26.5233C26.6391 21.1087 26.7329 21.0145 26.7329 20.8982V13.5298Z" />
+                        </svg>
+                    </li>
+
+                    <li onclick="trocarTela('DashboardEspecifico')">
+                        <svg class="icons_azul" width="29" height="29" viewBox="0 0 30 25" fill="white"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 29.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
+                        </svg>
+                        <a href="./DashboardEspecifico.html"></a>
+                    </li>
+
+                    <!-- <li onclick="trocarTela('DashboardJanelas')">
+                        <svg class="pieChart" width="43" height="43" fill="none" viewBox="0 0 50 35" stroke="white"
+                            stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M17.5 32.0834C25.5541 32.0834 32.0833 25.5542 32.0833 17.5001C32.0833 9.44593 25.5541 2.91675 17.5 2.91675C9.44581 2.91675 2.91663 9.44593 2.91663 17.5001C2.91663 25.5542 9.44581 32.0834 17.5 32.0834Z" />
+                            <path d="M17.5 2.91675V17.5001M17.5 32.0834V17.5001M17.5 17.5001H32.0833" />
+                        </svg>
+                        <a href="./DashboardJanelas.html"></a>
+                    </li> -->
+
+                    <li onclick="trocarTela('cadastroFuncionario')">
+                        <svg class="icons_azul" width="30" height="30" viewBox="0 0 30 25" fill="white"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M15.9998 13.3334C18.9454 13.3334 21.3332 10.9455 21.3332 8.00002C21.3332 5.0545 18.9454 2.66669 15.9998 2.66669C13.0543 2.66669 10.6665 5.0545 10.6665 8.00002C10.6665 10.9455 13.0543 13.3334 15.9998 13.3334ZM15.9998 10.6667C17.4726 10.6667 18.6665 9.47278 18.6665 8.00002C18.6665 6.52726 17.4726 5.33335 15.9998 5.33335C14.5271 5.33335 13.3332 6.52726 13.3332 8.00002C13.3332 9.47278 14.5271 10.6667 15.9998 10.6667Z" />
+                            <path
+                                d="M5.80042 20.5798C7.60684 17.9427 10.8276 16 16.0004 16C17.6354 16 19.0819 16.1931 20.3568 16.5477C21.0663 16.745 21.4815 17.4801 21.2842 18.1895C21.0868 18.899 20.3518 19.3141 19.6423 19.1168C18.6291 18.835 17.426 18.6667 16.0004 18.6667C11.5733 18.6667 9.23845 20.2795 8.00043 22.0869C7.00336 23.5424 6.63049 25.2527 6.60028 26.6667H18.6662C19.4026 26.6667 19.9996 27.2636 19.9996 28C19.9996 28.7364 19.4026 29.3334 18.6662 29.3334H5.33376C4.66132 29.3334 4.09412 28.8326 4.01072 28.1654C3.75911 26.1525 4.04942 23.136 5.80042 20.5798Z" />
+                            <path
+                                d="M25.3332 29.3334C24.5968 29.3334 23.9998 28.7364 23.9998 28V25.3334H21.3332C20.5968 25.3334 19.9998 24.7364 19.9998 24C19.9998 23.2636 20.5968 22.6667 21.3332 22.6667H23.9998V20C23.9998 19.2636 24.5968 18.6667 25.3332 18.6667C26.0695 18.6667 26.6665 19.2636 26.6665 20V22.6667H29.3332C30.0695 22.6667 30.6665 23.2636 30.6665 24C30.6665 24.7364 30.0695 25.3334 29.3332 25.3334H26.6665V28C26.6665 28.7364 26.0695 29.3334 25.3332 29.3334Z" />
+                        </svg>
+                        <a href="./cadastroFuncionario.html"></a>
+                        <!-- Linkar tela ADD USUÁRIO aqui!!!!!!! -->
+                    </li>
+
+                    <li onclick="trocarTela('cadastroMaquina')">
+                        <svg class="icons_azul" width="35" height="35" viewBox="0 0 42 32" fill="white"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M35.3333 29.3333C34.597 29.3333 34 28.7363 34 28V25.3333H31.3333C30.597 25.3333 30 24.7363 30 24C30 23.2636 30.597 22.6666 31.3333 22.6666H34V20C34 19.2636 34.597 18.6666 35.3333 18.6666C36.0697 18.6666 36.6667 19.2636 36.6667 20V22.6666H39.3333C40.0697 22.6666 40.6667 23.2636 40.6667 24C40.6667 24.7363 40.0697 25.3333 39.3333 25.3333H36.6667V28C36.6667 28.7363 36.0697 29.3333 35.3333 29.3333Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2.88867 9.33329C2.88867 5.65139 5.87344 2.66663 9.55534 2.66663H22.8887C26.5706 2.66663 29.5553 5.65139 29.5553 9.33329V17.3333C29.5553 21.0152 26.5706 24 22.8887 24H9.55534C5.87344 24 2.88867 21.0152 2.88867 17.3333V9.33329ZM9.55534 5.33329C7.3462 5.33329 5.55534 7.12415 5.55534 9.33329V17.3333C5.55534 19.5424 7.3462 21.3333 9.55534 21.3333H22.8887C25.0978 21.3333 26.8887 19.5424 26.8887 17.3333V9.33329C26.8887 7.12415 25.0978 5.33329 22.8887 5.33329H9.55534ZM2.88867 28C2.88867 27.2636 3.48563 26.6666 4.22201 26.6666H28.222C28.9584 26.6666 29.5553 27.2636 29.5553 28C29.5553 28.7363 28.9584 29.3333 28.222 29.3333H4.22201C3.48563 29.3333 2.88867 28.7363 2.88867 28Z" />
+                        </svg>
+                        <a href="./cadastroMaquina.html"></a>
+                        <!-- Linkar tela ADD MÁQUINA aqui!!!!!!! -->
+                    </li>
+
+                    <li id="logout" onclick="trocarTela('../index')">
+                        <svg class="icons_azul" width="30" height="30" viewBox="0 0 30 25" fill="white"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.6665 5.33329C2.6665 3.86053 3.86041 2.66663 5.33317 2.66663H14.6665C16.1393 2.66663 17.3332 3.86053 17.3332 5.33329V7.99996C17.3332 8.73634 16.7362 9.33329 15.9998 9.33329C15.2635 9.33329 14.6665 8.73634 14.6665 7.99996V5.33329L5.33317 5.33329V26.6666H14.6665V24C14.6665 23.2636 15.2635 22.6666 15.9998 22.6666C16.7362 22.6666 17.3332 23.2636 17.3332 24V26.6666C17.3332 28.1394 16.1393 29.3333 14.6665 29.3333H5.33317C3.86041 29.3333 2.6665 28.1394 2.6665 26.6666V5.33329Z" />
+                            <path
+                                d="M24.7809 17.3333L21.7237 20.3905C21.203 20.9112 21.203 21.7554 21.7237 22.2761C22.2444 22.7968 23.0886 22.7968 23.6093 22.2761L28.7541 17.1313C29.3789 16.5065 29.3789 15.4934 28.7541 14.8686L23.6093 9.72382C23.0886 9.20312 22.2444 9.20312 21.7237 9.72382C21.203 10.2445 21.203 11.0887 21.7237 11.6094L24.7809 14.6666L10.6665 14.6666V17.3333L24.7809 17.3333Z" />
+                        </svg>
+                        <a href="../index.html"></a>
+                        <!-- Linkar HOME aqui!!!!!!! -->
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="divDashs">
+            <div class="select-notebook">
+                <div class="select">
+                    <select id="selectNotebook">
+                        <option value="0">Selecione um Notebook</option>
+                        <option value="1">CND1234567</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="atualizacao" style="display: none; margin-left: 81rem;">
+                <h6>Última atualização: 07/05/2024 09:45:52</h6>
+            </div>
+
+            <div class="bem-vindo">
+                <div class="bemVindo">
+                    <div class="textoGradiente">
+                        <p class="txt-bom-vindo">Seja bem-vindo!</p>
+                    </div>
+
+                    <span class="txt-por-favor">Por favor, selecione um Notebook.</span>
+                </div>
+            </div>
+
+            <div class="charts">
+                <div class="quadradinhos">
+                    <div id="kpisContainer"
+                        style="display: none; justify-content: space-between; margin-left: 10.2rem; margin-right: 8.5rem;"
+                        class="KPIS">
+
+                        <div class="kpi" style="display: block;">
+                            <p id="text-kpi" style="margin-top: 1rem;   margin-left: 1.8rem;">Qtd. Total de Notebooks
+                            </p>
+                            <p id="text-kpiNumb">125</p>
+                        </div>
+
+                        <div class="kpi" style="display: block;">
+                            <p id="text-kpi" style="margin-top: 1rem; margin-left: 1.8rem;">Qtd. Notebooks em Uso</p>
+                            <p id="text-kpiNumb">03</p>
+                        </div>
+
+                        <div class="kpi" style="display: block;">
+                            <p id="text-kpi" style="margin-top: 0.4rem; margin-left: 1.8rem;">Qtd. Chamados Abertos</p>
+                            <p id="text-kpiSub"> nos Útilmos 30 dias</p>
+                            <p id="text-kpiNumb">12</p>
+                        </div>
+
+                        <div class="kpi" style="display: block; box-shadow: none;">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="graficosContainer" style="display: none; margin-left: 5vw;" class="GRAFICOS">
+                    <div style="display: flex">
+                        <div>
+                            <div>
+                                <p
+                                    style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 14.7rem; margin-bottom: 1rem;">
+                                    Média de Uso da CPU por Mês em %</p>
+                            </div>
+                            <div>
+                                <div class="grafico mb-3">
+                                    <canvas id="cpu"></canvas>
+                                </div>
+                                <div>
+                                    <p
+                                        style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 13.8rem; margin-bottom: 1rem;">
+                                        Média de Uso da Memória RAM por Mês em %</p>
+                                </div>
+                                <div class="grafico mb-3">
+                                    <canvas id="ram"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="graficos2" style="margin-bottom: 1rem;">
+                            <div>
+                                <p
+                                    style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-left: 5.4rem; margin-bottom: 1rem;">
+                                    Total de Notebooks <span style="color: aqua;">VS</span> Notebooks em Condições de
+                                    Alerta <span style="color: aqua;">VS</span> Condições Críticas</p>
+                            </div>
+                            <div class="grafico mb-3" style="height: 20rem; width: 39rem;">
+                                <canvas id="estadoNtbk"></canvas>
+                            </div>
+                            <div>
+                                <p
+                                    style="color: rgb(255, 255, 255); font-size: 14px; font-weight: 600; margin-top: 1rem; margin-bottom: 1rem; margin-left: 13rem;">
+                                    Classificação das Condições dos Notebooks
+                                </p>
+                            </div>
+                            <div class="grafico mb-3"
+                                style="height: 10rem; width: 39rem; display: flex; flex-direction: column;">
+                                <div style="display: flex; flex-direction: row">
+                                    <div
+                                        style="background-color: green; width: 160px; height: 90px; border-radius: 8px; margin: 1rem;">
+                                        <p
+                                            style="color: rgb(255, 255, 255); font-size: 12px; margin-left: 3.3rem; margin-top: 0.4rem;  font-weight:750 ;">
+                                            ESTÁVEL
+                                        </p>
+                                        <p
+                                            style="color: rgb(20, 20, 20); font-size: 12px; margin-left: 0.5rem; margin-top: 0.5rem; font-weight:600">
+                                            • Uso CPU: +27%<br>
+                                            • Uso RAM: +65%<br>
+                                            • Uso Disco: até 70%
+                                        </p>
+                                    </div>
+                                    <div
+                                        style="background-color: rgb(255,255,0); width: 160px; height: 90px; border-radius: 8px; margin: 1rem;">
+                                        <p
+                                            style="color: #13172b; font-size: 12px; margin-left: 2.2rem; margin-top: 0.4rem; font-weight:750 ;">
+                                            PREOCUPANTE
+                                        </p>
+                                        <p
+                                            style="color:rgb(20, 20, 20); font-size: 12px; margin-left: 0.5rem; margin-top: 0.5rem; font-weight:600">
+                                            • Uso CPU: +27%<br>
+                                            • Uso RAM: +65%<br>
+                                            • Uso Disco: até 70%
+                                        </p>
+                                    </div>
+                                    <div
+                                        style="background-color: rgb(209, 14, 14); width: 160px; height: 90px; border-radius: 8px; margin: 1rem;">
+                                        <p
+                                            style="color: #ffffff; font-size: 12px; margin-left: 3.3rem; margin-top: 0.4rem;  font-weight:750 ;">
+                                            CRÍTICO
+                                        </p>
+                                        <p
+                                            style="color: rgb(20, 20, 20); font-size: 12px; margin-left: 0.5rem; margin-top: 0.5rem; font-weight:600 ">
+                                            • Uso CPU: +27%<br>
+                                            • Uso RAM: +65%<br>
+                                            • Uso Disco: até 70%
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const data = {
+                        cpu: [29, 49, 65, 84, 95, 64, 56, 42, 61, 40, 38, 29],
+                        ram: [19, 35, 85, 94, 98, 77, 68, 52, 71, 50, 44, 32],
+                    };
+
+                    const options = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    };
+
+                    // CPU
+                    new Chart(document.getElementById('cpu').getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: [
+                                'Janeiro',
+                                'Fevereiro',
+                                'Março',
+                                'Abril',
+                                'Maio',
+                                'Junho',
+                                'Julho',
+                                'Agosto',
+                                'Setembro',
+                                'Outubro',
+                                'Novembro',
+                                'Dezembro'
+                            ],
+                            datasets: [
+                                {
+                                    label: 'Média de Uso Mensal da CPU (%)',
+                                    data: data.cpu,
+                                    borderColor: 'rgb(0,206,209)',
+                                    backgroundColor: 'rgba(0,206,209,0.25)',
+                                    fill: true
+                                },
+                            ],
+                        },
+                        options: {
+                            ...options,
+                            scales: {
+                                y: {
+                                    min: 0,
+                                    max: 100,
+                                    stepSize: 10,
+                                },
+                            },
+                        },
+                    });
+
+                    //RAM
+                    new Chart(document.getElementById('ram').getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: [
+                                'Janeiro',
+                                'Fevereiro',
+                                'Março',
+                                'Abril',
+                                'Maio',
+                                'Junho',
+                                'Julho',
+                                'Agosto',
+                                'Setembro',
+                                'Outubro',
+                                'Novembro',
+                                'Dezembro'
+                            ],
+                            datasets: [
+                                {
+                                    label: 'Média de Uso Mensal da RAM (%)',
+                                    data: data.ram,
+                                    borderColor: 'rgb(255, 105, 180)',
+                                    backgroundColor: 'rgba(255, 105, 180, 0.2)',
+                                    fill: true
+                                },
+                            ],
+                        },
+                        options: {
+                            ...options,
+                            scales: {
+                                y: {
+                                    min: 0,
+                                    max: 100,
+                                    stepSize: 10,
+                                },
+                            },
+                        },
+                    });
+                });
+
+
+                const ctx = document.getElementById('estadoNtbk').getContext('2d');
+
+                const mixedChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Total de Notebooks',
+                                data: [30, 44, 50, 60, 66, 74, 80, 82, 88, 105, 110, 125],
+                                borderColor: 'rgba(125, 190, 255, 1)',
+                                fill: false, // Sem preenchimento abaixo da linha
+                                tension: 0.4, // Suavidade da curva
+                                yAxisID: 'y', // Eixo Y compartilhado
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Notebooks em Alerta',
+                                data: [1, 4, 6, 3, 10, 7, 5, 4, 3, 2, 2, 1],
+                                backgroundColor: 'rgb(255,255,0)',
+                                yAxisID: 'y',
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Notebooks Críticos',
+                                data: [0, 5, 4, 3, 8, 4, 3, 2, 0, 1, 1, 0],
+                                backgroundColor: 'rgb(209, 14, 14)',
+                                yAxisID: 'y',
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                min: 0,
+                                max: 125,
+                                stepSize: 10,
+                                beginAtZero: true, // Iniciar o eixo Y do zero
+                                title: {
+                                    display: true, // Exibir o título do eixo Y
+                                    text: 'Número de Notebooks', // Título do eixo Y
+                                },
+                            },
+                        },
+                    },
+                });
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function trocarTela(tela) {
+        window.location.href = `${tela}.html`;
+    }
+
+    document
+        .getElementById('selectNotebook')
+        .addEventListener('change', function () {
+            let notebookValue = document.getElementById('selectNotebook').value;
+            let tituloDash = document.getElementById('tituloDash');
+            let atualizacao = document.getElementById('atualizacao');
+            let divDashs = document.getElementsByClassName('divDashs')[0];
+            let bemVindo = divDashs.querySelector('.bemVindo');
+            let kpisContainer = document.getElementById('kpisContainer');
+            let graficosContainer = document.getElementById('graficosContainer');
+
+            if (notebookValue === '0') {
+                tituloDash.style.display = 'none';
+                atualizacao.style.display = 'none';
+                kpisContainer.style.display = 'none';
+                graficosContainer.style.display = 'none';
+                bemVindo.style.display = '';
+            } else {
+                tituloDash.style.display = 'block';
+                atualizacao.style.display = 'block';
+                kpisContainer.style.display = '';
+                graficosContainer.style.display = '';
+                bemVindo.style.display = 'none';
+            }
+        });
+</script>
