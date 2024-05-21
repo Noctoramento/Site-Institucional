@@ -106,9 +106,9 @@
       <h2>CADASTRO FUNCIONÁRIO</h2>
       <div class="container">
         <div class="btn-inp">
-          <button class="cadastrarFuncionario" onclick="cadastrar()" >Cadastrar Funcionários</button>
+          <button class="cadastrarFuncionario" onclick="cadastrar()">Cadastrar Funcionários</button>
           <div class="pesquisar">
-            <input type="text" placeholder="Pesquisar..."/>
+            <input class="pesquisar-btn" type="text" placeholder="Pesquisar..." />
             <div id="lupa" onclick="alert('ok :')"></div>
           </div>
         </div>
@@ -187,24 +187,26 @@
       </div>
       <div id="form-funcionario">
         <div class="cadastro-funcionario">
-        <h2>CADASTRO DE FUNCIONÁRIO</h2>
-        <label for="">Nome:</label>
-        <input type="text">
-        <label for="">Email:</label>
-        <input type="text">
-        <label for="">Cargo:</label>
-        <select name="" id="">
-          <option value="">Administrador</option>
-          <option value="">Suporte</option>
-          <option value="">Funcionário</option>
-        </select>
-        <label for="">Senha:</label>
-        <input type="password">
-        <div class="cadastro-btn">
-          <button class="funcionario-btn"  >Cadastrar Funcionário</button>
-          <button class="cancelar-btn" onclick="cancelar()" >Cancelar</button>
+          <h2>Cadastro de funcionário</h2>
+          <div class="cadastro-input" >
+            <label for="">Nome:</label>
+            <input type="text">
+            <label for="">Email:</label>
+            <input type="text">
+            <label for="">Cargo:</label>
+            <select name="" id="">
+              <option value="">Administrador</option>
+              <option value="">Suporte</option>
+              <option value="">Funcionário</option>
+            </select>
+            <label for="">Senha:</label>
+            <input type="password">
+          </div>
+          <div class="cadastro-btn">
+            <button class="funcionario-btn">Cadastrar Funcionário</button>
+            <button class="cancelar-btn" onclick="cancelar()">Cancelar</button>
+          </div>
         </div>
-      </div>
     </section>
   </main>
 
@@ -213,12 +215,12 @@
 </html>
 
 <script>
-  
-  function cadastrar(){
+
+  function cadastrar() {
     document.getElementById("form-funcionario").style.display = "block";
   }
 
-  function cancelar(){
+  function cancelar() {
     document.getElementById("form-funcionario").style.display = "none";
   }
 
