@@ -104,7 +104,7 @@ li {
     border-radius: 5%;
 }
 
-.btn-inp{
+.btn-inp {
     width: 90%;
     padding: 40px;
     display: flex;
@@ -127,7 +127,9 @@ li {
     border-color: #00977d;
 } */
 
-.pesquisar {
+input {
+    border: #ddd solid 1px;
+    float: left;
     background-color: #fafafa;
     border: 2px solid #000000;
     border-radius: 20px;
@@ -135,6 +137,18 @@ li {
     padding: 10px 20px;
     font-size: 16px;
     transition: background-color 0.3s, border-color 0.3s;
+}
+
+#lupa {
+    float: left;
+    margin: 9px 0px 0px -30px;
+    cursor: pointer
+}
+
+#lupa:after {
+    font-family: FontAwesome;
+    font-size: 20px;
+    content: "\f002"
 }
 
 .tabela {
