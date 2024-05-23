@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body onload="listarCargos()" >
   <header>
     <div id="tituloDash" style="display: none; ">
       <h1 style="font-weight: 700;">Cadastrar funcionario</h1>
@@ -106,7 +106,7 @@
       <h2>CADASTRO FUNCIONÁRIO</h2>
       <div class="container">
         <div class="btn-inp">
-          <button class="cadastrarFuncionario" onclick="cadastrar()">Cadastrar Funcionários</button>
+          <button class="cadastrarFuncionario" onclick="cadastrarFuncionario()">Cadastrar Funcionários</button>
           <div class="pesquisar">
             <input class="pesquisar-btn" type="text" placeholder="Pesquisar..." />
             <div id="lupa" onclick="alert('ok :')"></div>
@@ -188,22 +188,17 @@
       <div id="form-funcionario">
         <div class="cadastro-funcionario">
           <h2>Cadastro de funcionário</h2>
-          <div class="cadastro-input" >
+          <div class="cadastro-input">
             <label for="">Nome:</label>
-            <input type="text">
+            <input type="text" id="input_nome">
             <label for="">Email:</label>
-            <input type="text">
+            <input type="text" id="input_email">
             <label for="">Cargo:</label>
-            <select name="" id="">
-              <option value="">Administrador</option>
-              <option value="">Suporte</option>
-              <option value="">Funcionário</option>
+            <select name="cargos" id="select_cargos" selected>
             </select>
-            <label for="">Senha:</label>
-            <input type="password">
           </div>
           <div class="cadastro-btn">
-            <button class="funcionario-btn">Cadastrar Funcionário</button>
+            <button class="funcionario-btn" onclick="cadastrar()">Cadastrar Funcionário</button>
             <button class="cancelar-btn" onclick="cancelar()">Cancelar</button>
           </div>
         </div>
@@ -213,10 +208,59 @@
 </body>
 
 </html>
-
 <script>
 
+
+  function listarCargos() {
+
+    fetch("/empresas/listarCargos", {
+      method: "GET"
+    })
+      .then(function (resposta) {
+        resposta.json().then((cargos) => {
+          cargos.forEach((cargo) => {
+            select_cargos.innerHTML += `<option value='${cargo.idCargo}'>${cargo.nomeCargo}</option>`
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`ERRO: ${resposta}`)
+      })
+  }
+
   function cadastrar() {
+
+    var nome = input_nome.value
+    var email = input_email.value
+    var cargo = select_cargos.value
+
+    if (nome != "" && email != "") {
+      fetch("/usuarios/cadastrarFuncionario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nomeServer: nome,
+          emailFuncServer: email,
+          cargoServer: cargo,
+          empresaServer: sessionStorage.ID_EMPRESA
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
+
+
+
+  function cadastrarFuncionario() {
     document.getElementById("form-funcionario").style.display = "block";
   }
 
