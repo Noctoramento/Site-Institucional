@@ -14,7 +14,7 @@ function cadastrar(cnpjVar, razaoSocialVar, emailVar, senhaVar) {
     
  
     var instrucaoSql = `
-        INSERT INTO EMPRESA (CNPJ, RAZAOSOCIAL, EMAIL, SENHA) VALUES ('${cnpjVar}', '${razaoSocialVar}', '${emailVar}', '${senhaVar}');
+        INSERT INTO EMPRESA (CNPJEMPRESA, RAZAOSOCIAL, EMAIL, SENHA) VALUES ('${cnpjVar}', '${razaoSocialVar}', '${emailVar}', '${senhaVar}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
