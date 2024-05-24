@@ -105,7 +105,7 @@
       <h2>CADASTRO MÁQUINAS</h2>
       <div class="container">
         <div class="btn-inp">
-          <button id="cadastrarMaquina" onclick="cadastrar()">Cadastrar Máquinas</button>
+          <button id="cadastrarMaquina" onclick="cadastrarMaquina()">Cadastrar Máquinas</button>
           <div class="pesquisar">
             <input type="text" placeholder="Pesquisar..." />
             <div id="lupa" onclick="alert('ok :')"></div>
@@ -197,22 +197,22 @@
       </div>
       <div id="form-maquina">
         <div class="cadastro-maquina">
-          <h2>Cadastro de funcionário</h2>
+          <h2>Cadastro de máquina</h2>
           <div class="cadastro-input">
             <label for="">NumeroSérie:</label>
-            <input type="text">
+            <input type="text" id="input_numero">
             <label for="">Fabricante:</label>
-            <input type="text">
+            <input type="text" id="input_fabricante">
             <label for="">Modelo</label>
-            <input type="text">
+            <input type="text" id="input_modelo">
             <label for="">Sistema Operacional:</label>
-            <select name="" id="">
-              <option value="">Windows</option>
-              <option value="">Linux</option>
+            <select name="" id="maquinas">
+              <option value="Windows" selected>Windows</option>
+              <option value="linux" selected>Linux</option>
             </select>
           </div>
           <div class="cadastro-btn">
-            <button class="maquina-btn">Cadastrar máquina</button>
+            <button class="maquina-btn" onclick="cadastrar()">Cadastrar máquina</button>
             <button class="cancelar-btn" onclick="cancelar()">Cancelar</button>
           </div>
         </div>
@@ -225,6 +225,40 @@
 <script>
 
   function cadastrar() {
+
+    var numeroSerie = Number(input_numero.value)
+    var fabricante = input_fabricante.value
+    var modelo = input_modelo.value
+    var select = document.getElementById("maquinas");
+    var SoEscolhido = select.options[select.selectedIndex].value;
+    console.log(SoEscolhido);
+
+    if (numeroSerie != "" && fabricante != "" && modelo != "" && SoEscolhido != "" ) {
+      fetch("/usuarios/cadastrarMaquina", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          numeroServer: numeroSerie,
+          fabricanteServer: fabricante,
+          modeloServer: modelo,
+          SoEscolhidoServer: SoEscolhido,
+          empresaServer: sessionStorage.ID_EMPRESA
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
+
+  function cadastrarMaquina() {
     document.getElementById("form-maquina").style.display = "block";
   }
 
