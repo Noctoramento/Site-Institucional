@@ -109,7 +109,6 @@ function cadastrarMaquina(req, res) {
     var numeroVar = req.body.numeroServer;
     var fabricanteVar = req.body.fabricanteServer;
     var modeloVar = req.body.modeloServer
-    var SoVar = req.body.SoEscolhidoServer;
     var idEmpresa = req.body.empresaServer;
 
     if (numeroVar == undefined) {
@@ -118,14 +117,12 @@ function cadastrarMaquina(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (modeloVar == undefined) {
         res.status(400).send("Seu cargo está undefined!");
-    } else if (SoVar == undefined) {
-        res.status(400).send("Seu idEmpresa está undefined!");
     } else if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
     else {
 
-        usuarioModel.cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, SoVar, idEmpresa)
+        usuarioModel.cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, idEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);

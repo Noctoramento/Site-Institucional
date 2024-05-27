@@ -205,11 +205,6 @@
             <input type="text" id="input_fabricante">
             <label for="">Modelo</label>
             <input type="text" id="input_modelo">
-            <label for="">Sistema Operacional:</label>
-            <select name="" id="maquinas">
-              <option value="Windows" selected>Windows</option>
-              <option value="linux" selected>Linux</option>
-            </select>
           </div>
           <div class="cadastro-btn">
             <button class="maquina-btn" onclick="cadastrar()">Cadastrar máquina</button>
@@ -229,11 +224,8 @@
     var numeroSerie = Number(input_numero.value)
     var fabricante = input_fabricante.value
     var modelo = input_modelo.value
-    var select = document.getElementById("maquinas");
-    var SoEscolhido = select.options[select.selectedIndex].value;
-    console.log(SoEscolhido);
 
-    if (numeroSerie != "" && fabricante != "" && modelo != "" && SoEscolhido != "" ) {
+    if (numeroSerie != "" && fabricante != "" && modelo != "" ) {
       fetch("/usuarios/cadastrarMaquina", {
         method: "POST",
         headers: {
@@ -243,7 +235,6 @@
           numeroServer: numeroSerie,
           fabricanteServer: fabricante,
           modeloServer: modelo,
-          SoEscolhidoServer: SoEscolhido,
           empresaServer: sessionStorage.ID_EMPRESA
         }),
       })
@@ -259,7 +250,7 @@
 
 
   function cadastrarMaquina() {
-    document.getElementById("form-maquina").style.display = "block";
+    document.getElementById("form-maquina").style.display = "flex";
   }
 
   function cancelar() {

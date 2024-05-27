@@ -27,24 +27,17 @@ function cadastrarFuncionario(nomeVar, emailFuncVar, idEmpresa, cargoVar) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, SoVar, idEmpresa) {
+function cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, idEmpresa) {
 
     var instrucaoSql = `
 
-    INSERT INTO Notebook (numeroSerie, marca, fkEmpresa) VALUES ('${numeroVar}', '${fabricanteVar}', '${idEmpresa}');
-
-    `
-
-    var instrucaoSql2 =  `
-
-    INSERT INTO InfoNotebook (fabricante, modelo, sistemaOperacional, fkEmpresa, fkNotebook) VALUES ('${fabricanteVar}', '${modeloVar}', '${SoVar}' , '${idEmpresa}', '2');
-    `
-;
+    INSERT INTO Notebook (numeroSerie, fabricante, modelo, fkEmpresa) VALUES ('${numeroVar}', '${fabricanteVar}', '${modeloVar}' ,'${idEmpresa}');
+    `;
 
     console.log("Executando a instrução SQL: /n" + instrucaoSql)
-    console.log("Executando a instrução SQL: /n" + instrucaoSql2)
-
     return database.executar(instrucaoSql)
+
+    
 
 }
 
