@@ -21,4 +21,8 @@ router.get("/listarCargos", function (req, res) {
   empresaController.listarCargos(req, res);
 });
 
+router.get("/listarFuncionarios", function (req, res) {
+  empresaController.listarFuncionarios(req, res);
+});
+
 module.exports = router;

@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="listarCargos()" >
+<body onload="buscarCargo()">
   <header>
     <div id="tituloDash" style="display: none; ">
       <h1 style="font-weight: 700;">Cadastrar funcionario</h1>
@@ -112,78 +112,20 @@
             <div id="lupa" onclick="alert('ok :')"></div>
           </div>
         </div>
-        <table class="tabela">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nome</th>
-              <th>Cargo</th>
-              <th>E-mail</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrapper">
+          <table class="tabela" id="tabelaFuncionarios">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>E-mail</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div id="form-funcionario">
         <div class="cadastro-funcionario">
@@ -210,22 +152,65 @@
 </html>
 <script>
 
+  document.addEventListener('DOMContentLoaded', (event) => {
+    listarCargos();
+    listarFuncionarios();
+  });
+
+  let cargosArmazenados = {};
 
   function listarCargos() {
-
-    fetch("/empresas/listarCargos", {
+    return fetch("/empresas/listarCargos", {
       method: "GET"
     })
       .then(function (resposta) {
-        resposta.json().then((cargos) => {
-          cargos.forEach((cargo) => {
-            select_cargos.innerHTML += `<option value='${cargo.idCargo}'>${cargo.nomeCargo}</option>`
-          });
+        return resposta.json();
+      })
+      .then(function (cargos) {
+        cargos.forEach((cargo) => {
+          cargosArmazenados[cargo.idCargo] = cargo.nomeCargo;
+        });
+        const selectCargos = document.getElementById('select_cargos');
+        for (const idCargo in cargosArmazenados) {
+          selectCargos.innerHTML += `<option value='${idCargo}'>${cargosArmazenados[idCargo]}</option>`;
+        }
+      })
+      .catch(function (erro) {
+        console.log(`ERRO: ${erro}`);
+      });
+  }
+
+  function listarFuncionarios() {
+    fetch("/empresas/listarFuncionarios", {
+      method: "GET"
+    })
+      .then(function (resposta) {
+        return resposta.json();
+      })
+      .then(function (funcionarios) {
+        const tabelaFuncionarios = document.getElementById('tabelaFuncionarios').getElementsByTagName('tbody')[0];
+        tabelaFuncionarios.innerHTML = '';
+        funcionarios.forEach((funcionario, index) => {
+          const nomeCargo = cargosArmazenados[funcionario.fkCargo] || 'Cargo não encontrado';
+          tabelaFuncionarios.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${funcionario.nomeUsuario}</td>
+                    <td>${nomeCargo}</td>
+                    <td>${funcionario.emailUsuario}</td>
+                </tr>`;
         });
       })
-      .catch(function (resposta) {
-        console.log(`ERRO: ${resposta}`)
-      })
+      .catch(function (erro) {
+        console.log(`ERRO: ${erro}`);
+      });
+  }
+
+  // Função para inicializar a página
+  function init() {
+    listarCargos().then(() => {
+      listarFuncionarios();
+    });
   }
 
   function cadastrar() {
@@ -243,8 +228,8 @@
         body: JSON.stringify({
           nomeServer: nome,
           emailFuncServer: email,
-          cargoServer: cargo,
-          empresaServer: sessionStorage.ID_EMPRESA
+          empresaServer: sessionStorage.ID_EMPRESA,
+          cargoServer: cargo
         }),
       })
         .then(response => response.json())
@@ -271,6 +256,9 @@
   function trocarTela(tela) {
     window.location.href = `${tela}.html`;
   }
+
+  window.onload = init;
+
 </script>
 <!-- <div class="form-popup" id="myForm">
   <div class="form-container" for="email">

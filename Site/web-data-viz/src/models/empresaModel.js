@@ -12,6 +12,16 @@ function listarCargos() {
   return database.executar(instrucaoSql);
 }
 
+
+function listarFuncionarios() {
+  var instrucaoSql = `SELECT nomeUsuario, emailUsuario, fkCargo
+  FROM Usuario;`;
+
+  return database.executar(instrucaoSql);
+}
+
+
+
 function buscarPorCnpj(cnpj) {
   var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}'`;
 
@@ -24,4 +34,4 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos };
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios };

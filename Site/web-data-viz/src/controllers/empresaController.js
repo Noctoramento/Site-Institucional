@@ -14,6 +14,13 @@ function listarCargos(req, res) {
   });
 }
 
+function listarFuncionarios(req, res) {
+  empresaModel.listarFuncionarios().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
+
 function buscarPorId(req, res) {
   var id = req.params.id;
 
@@ -43,5 +50,6 @@ module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
-  listarCargos
+  listarCargos,
+  listarFuncionarios
 };

@@ -87,7 +87,7 @@ function cadastrarFuncionario(req, res) {
     }
     else {
 
-        usuarioModel.cadastrarFuncionario(nomeVar, emailFuncVar, cargoVar, idEmpresa)
+        usuarioModel.cadastrarFuncionario(nomeVar, emailFuncVar, idEmpresa, cargoVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
