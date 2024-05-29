@@ -20,6 +20,12 @@ function listarFuncionarios(req, res) {
   });
 }
 
+function listarMaquinas(req, res) {
+  empresaModel.listarMaquinas().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 
 function buscarPorId(req, res) {
   var id = req.params.id;
@@ -51,5 +57,6 @@ module.exports = {
   buscarPorId,
   cadastrar,
   listarCargos,
-  listarFuncionarios
+  listarFuncionarios,
+  listarMaquinas
 };

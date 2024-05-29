@@ -198,6 +198,31 @@ li {
     height: 800px;
 }
 
+#form-editar {
+    display:none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgb(115, 116, 146);
+    z-index: 9;
+    background-color: #282E47;
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    width: 800px;
+    height: 800px;
+}
+
+.img-btn{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background: none;
+}
+
 .cadastro-funcionario {
     display: flex;
     flex-direction: column;
@@ -253,7 +278,7 @@ li {
 
 .funcionario-btn {
     background-color: #00ffff;
-    border: 2px solid #000000;
+    border: 2px solid #0000008c;
     border-radius: 10px;
     color: black;
     padding: 10px 20px;
@@ -262,9 +287,20 @@ li {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
+.remover-btn {
+    background-color: #e21818;
+    border: 2px solid #0000008c;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
 .cancelar-btn {
     background-color: #ffffff;
-    border: 2px solid #000000;
+    border: 2px solid #0000008c;
     border-radius: 10px;
     color: black;
     padding: 10px 20px;

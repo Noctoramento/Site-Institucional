@@ -20,6 +20,13 @@ function listarFuncionarios() {
   return database.executar(instrucaoSql);
 }
 
+function listarMaquinas() {
+  var instrucaoSql = `SELECT numeroSerie, fabricante, modelo
+  FROM Notebook;`;
+
+  return database.executar(instrucaoSql);
+}
+
 
 
 function buscarPorCnpj(cnpj) {
@@ -34,4 +41,4 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios };
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas };

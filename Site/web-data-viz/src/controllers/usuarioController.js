@@ -49,9 +49,6 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     }
     else {
-
-
-        /*enviar para o select*/
         usuarioModel.cadastrar(razaoSocialVar, cnpjVar, emailVar, senhaVar)
             .then(
                 function (resultado) {
@@ -86,7 +83,6 @@ function cadastrarFuncionario(req, res) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
     else {
-
         usuarioModel.cadastrarFuncionario(nomeVar, emailFuncVar, idEmpresa, cargoVar)
             .then(
                 function (resultado) {

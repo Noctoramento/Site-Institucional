@@ -25,4 +25,8 @@ router.get("/listarFuncionarios", function (req, res) {
   empresaController.listarFuncionarios(req, res);
 });
 
+router.get("/listarMaquinas", function (req, res) {
+  empresaController.listarMaquinas(req, res);
+});
+
 module.exports = router;

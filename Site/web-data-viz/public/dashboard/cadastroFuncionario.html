@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="buscarCargo()">
+<body>
   <header>
     <div id="tituloDash" style="display: none; ">
       <h1 style="font-weight: 700;">Cadastrar funcionario</h1>
@@ -120,6 +120,7 @@
                 <th>Nome</th>
                 <th>Cargo</th>
                 <th>E-mail</th>
+                <th>editar</th>
               </tr>
             </thead>
             <tbody>
@@ -145,6 +146,24 @@
           </div>
         </div>
     </section>
+    <div id="form-editar">
+      <div class="cadastro-funcionario">
+        <h2>Deseja editar um funcionário?</h2>
+        <!-- <div class="cadastro-input">
+          <label for="">Nome:</label>
+          <input type="text" id="input_nome">
+          <label for="">Email:</label>
+          <input type="text" id="input_email">
+          <label for="">Cargo:</label>
+          <select name="cargos" id="select_cargos" selected>
+          </select>
+        </div> -->
+        <div class="cadastro-btn">
+          <button class="funcionario-btn" onclick="salvar()">Salvar</button>
+          <button class="cancelar-btn" onclick="fechar()">Cancelar</button>
+          <button class="remover-btn" onclick="remover()">Remover</button>
+        </div>
+      </div>
   </main>
 
 </body>
@@ -153,7 +172,6 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', (event) => {
-    listarCargos();
     listarFuncionarios();
   });
 
@@ -198,6 +216,7 @@
                     <td>${funcionario.nomeUsuario}</td>
                     <td>${nomeCargo}</td>
                     <td>${funcionario.emailUsuario}</td>
+                    <td><button onclick="editar()"><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
         });
       })
@@ -234,12 +253,19 @@
       })
         .then(response => response.json())
         .then(data => {
+          alert("Funcionário cadastrado com sucesso")
           console.log('Success:', data);
         })
         .catch((error) => {
+          alert("Erro ao cadastrar o funcionário")
           console.error('Error:', error);
         });
+    } else {
+      alert("Insira todos os campos")
     }
+
+    cancelar()
+
   }
 
 
@@ -251,6 +277,14 @@
 
   function cancelar() {
     document.getElementById("form-funcionario").style.display = "none";
+  }
+
+  function editar() {
+    document.getElementById("form-editar").style.display = "flex";
+  }
+
+  function fechar() {
+    document.getElementById("form-editar").style.display = "none";
   }
 
   function trocarTela(tela) {

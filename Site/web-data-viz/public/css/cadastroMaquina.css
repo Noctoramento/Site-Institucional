@@ -104,7 +104,7 @@ li {
     border-radius: 5%;
 }
 
-.btn-inp{
+.btn-inp {
     width: 90%;
     padding: 40px;
     display: flex;
@@ -151,22 +151,39 @@ input {
     content: "\f002"
 }
 
+.table-wrapper {
+    max-height: 700px;
+    width: 80%;
+    overflow-y: auto;
+}
+
 .tabela {
-    width: 90%;
-    height: 70%;
+    width: 100%;
     border-collapse: collapse;
-    border-radius: 5%;
+    background-color: #f5f0f0;
 }
 
-th,
-td {
-    border: 1px solid #ddd;
+.tabela th,
+.tabela td {
+    border: 1px solid #5c5c5c;
     padding: 8px;
-    color: white;
 }
 
-th {
+.tabela th {
+    background-color: #f2f2f2;
     text-align: left;
+}
+
+
+.tabela tr:hover {
+    background-color: #ddd;
+}
+
+.img-btn{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background: none;
 }
 
 #form-maquina {
