@@ -267,9 +267,42 @@
     } else {
       alert("Insira todos os campos")
     }
-
     cancelar()
+  }
 
+
+  function salvar() {
+
+    var novoNome = novo_nome.value
+    var novoEmail = novoEmail.value
+    var novoCargo = novo_cargos.value
+
+    if (nome != "" && email != "") {
+      fetch("/usuarios/atualizarFuncionario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          novoNomeServer: nome,
+          novoEmailFuncServer: email,
+          empresaServer: sessionStorage.ID_EMPRESA,
+          novoCargoServer: novoCargo
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert("Funcionário atualizado com sucesso")
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          alert("Erro ao atualizar o funcionário")
+          console.error('Error:', error);
+        });
+    } else {
+      alert("Insira todos os campos")
+    }
+    cancelar()
   }
 
 
