@@ -130,7 +130,7 @@
       </div>
       <div id="form-funcionario">
         <div class="cadastro-funcionario">
-          <h2>Cadastro de funcionário</h2>
+          <h2>CADASTRAR FUNCIONÁRIO:</h2>
           <div class="cadastro-input">
             <label for="">Nome:</label>
             <input type="text" id="input_nome">
@@ -147,17 +147,17 @@
         </div>
     </section>
     <div id="form-editar">
-      <div class="cadastro-funcionario">
-        <h2>Deseja editar um funcionário?</h2>
-        <!-- <div class="cadastro-input">
+      <div class="editar-funcionario">
+        <h2>EDITAR FUNCIONÁRIO</h2>
+        <div class="cadastro-input">
           <label for="">Nome:</label>
-          <input type="text" id="input_nome">
+          <input type="text" id="novo_nome">
           <label for="">Email:</label>
-          <input type="text" id="input_email">
+          <input type="text" id="novo_email">
           <label for="">Cargo:</label>
-          <select name="cargos" id="select_cargos" selected>
+          <select name="cargos" id="novo_cargos" selected>
           </select>
-        </div> -->
+        </div>
         <div class="cadastro-btn">
           <button class="funcionario-btn" onclick="salvar()">Salvar</button>
           <button class="cancelar-btn" onclick="fechar()">Cancelar</button>
@@ -175,7 +175,7 @@
     listarFuncionarios();
   });
 
-  let cargosArmazenados = {};
+  const cargosArmazenados = {};
 
   function listarCargos() {
     return fetch("/empresas/listarCargos", {
@@ -191,6 +191,10 @@
         const selectCargos = document.getElementById('select_cargos');
         for (const idCargo in cargosArmazenados) {
           selectCargos.innerHTML += `<option value='${idCargo}'>${cargosArmazenados[idCargo]}</option>`;
+        }
+        const newCargo = document.getElementById('novo_cargos');
+        for (const idCargo in cargosArmazenados) {
+          newCargo.innerHTML += `<option value='${idCargo}'>${cargosArmazenados[idCargo]}</option>`;
         }
       })
       .catch(function (erro) {

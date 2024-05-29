@@ -37,7 +37,7 @@ function cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, idEmpresa) {
     console.log("Executando a instrução SQL: /n" + instrucaoSql)
     return database.executar(instrucaoSql)
 
-    
+
 
 }
 
