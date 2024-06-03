@@ -41,9 +41,36 @@ function cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, idEmpresa) {
 
 }
 
+function atualizarFuncionario(nomeVar, emailVar, cargoVar, idVar) {
+
+    var instrucaoSql = `
+
+    UPDATE Usuario SET nomeUsuario = '${nomeVar}', emailUsuario = '${emailVar}', fkCargo = '${cargoVar}'
+     WHERE idUsuario = ${idVar};
+
+    `;
+
+    console.log("Executando a instrução SQL: /n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+function apagarFuncionario(idVar) {
+
+    var instrucaoSql = `
+    DELETE FROM Usuario WHERE idUsuario = '${idVar}';
+    `;
+
+    console.log("Executando a instrução SQL: /n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
+
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
-    cadastrarMaquina
+    cadastrarMaquina,
+    atualizarFuncionario,
+    apagarFuncionario
 }

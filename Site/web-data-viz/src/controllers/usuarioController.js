@@ -136,9 +136,75 @@ function cadastrarMaquina(req, res) {
     }
 }
 
+function atualizarFuncionario(req, res) {
+    var nomeVar = req.body.novoNomeServer;
+    var emailVar = req.body.novoEmailFuncServer;
+    var cargoVar = req.body.novoCargoServer
+    var idVar = req.body.idServer
+
+    if (nomeVar == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (emailVar == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (cargoVar == undefined) {
+        res.status(400).send("Seu cargo está undefined!");
+    } else if (idVar == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }
+    else {
+
+        usuarioModel.atualizarFuncionario(nomeVar, emailVar, cargoVar, idVar)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function apagarFuncionario(req, res) {
+
+    var idVar = req.body.idServer
+
+    if (idVar == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }
+    else {
+
+        usuarioModel.apagarFuncionario(idVar)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao apagar o funcionário! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
-    cadastrarMaquina
+    cadastrarMaquina,
+    atualizarFuncionario,
+    apagarFuncionario
 }

@@ -144,6 +144,24 @@
           </div>
         </div>
     </section>
+    <div id="form-editar">
+      <div class="editar-funcionario">
+        <h2>EDITAR FUNCIONÁRIO</h2>
+        <div class="cadastro-input">
+          <label for="">Nome:</label>
+          <input type="text" id="novo_nome">
+          <label for="">Email:</label>
+          <input type="text" id="novo_email">
+          <label for="">Cargo:</label>
+          <select name="cargos" id="novo_cargos" selected>
+          </select>
+        </div>
+        <div class="cadastro-btn">
+          <button class="funcionario-btn" onclick="salvar()">Salvar</button>
+          <button class="cancelar-btn" onclick="fechar()">Cancelar</button>
+          <button class="remover-btn" onclick="remover()">Remover</button>
+        </div>
+      </div>
   </main>
 </body>
 
@@ -154,6 +172,9 @@
   document.addEventListener('DOMContentLoaded', (event) => {
     listarMaquinas();
   });
+
+  let idMaquinaSelecionada;
+
 
   function listarMaquinas() {
     fetch("/empresas/listarMaquinas", {
@@ -172,7 +193,7 @@
                     <td>${maquina.numeroSerie}</td>
                     <td>${maquina.fabricante}</td>
                     <td>${maquina.modelo}</td>
-                    <td><button onclick="editar()" ><img  class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                    <td><button onclick="editar(${maquina.idNotebook})" ><img  class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
         });
       })
@@ -222,9 +243,21 @@
     document.getElementById("form-maquina").style.display = "none";
   }
 
+  function editar(idNotebook) {
+    document.getElementById("form-editar").style.display = "flex";
+    idMaquinaSelecionada = idNotebook;
+  }
+
+  function fechar() {
+    document.getElementById("form-editar").style.display = "none";
+  }
+
   function trocarTela(tela) {
     window.location.href = `${tela}.html`;
   }
+
+  window.onload = init;
+
 </script>
 
 <!-- <script>

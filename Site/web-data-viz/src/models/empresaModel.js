@@ -14,14 +14,14 @@ function listarCargos() {
 
 
 function listarFuncionarios() {
-  var instrucaoSql = `SELECT nomeUsuario, emailUsuario, fkCargo
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkCargo
   FROM Usuario;`;
 
   return database.executar(instrucaoSql);
 }
 
 function listarMaquinas() {
-  var instrucaoSql = `SELECT numeroSerie, fabricante, modelo
+  var instrucaoSql = `SELECT idNotebook, numeroSerie, fabricante, modelo
   FROM Notebook;`;
 
   return database.executar(instrucaoSql);

@@ -175,7 +175,9 @@
     listarFuncionarios();
   });
 
-  const cargosArmazenados = {};
+  let cargosArmazenados = {};
+
+  let idFuncionarioSelecionado;
 
   function listarCargos() {
     return fetch("/empresas/listarCargos", {
@@ -220,8 +222,9 @@
                     <td>${funcionario.nomeUsuario}</td>
                     <td>${nomeCargo}</td>
                     <td>${funcionario.emailUsuario}</td>
-                    <td><button onclick="editar()"><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                    <td><button onclick="editar(${funcionario.idUsuario})"><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
+
         });
       })
       .catch(function (erro) {
@@ -273,20 +276,25 @@
 
   function salvar() {
 
-    var novoNome = novo_nome.value
-    var novoEmail = novoEmail.value
-    var novoCargo = novo_cargos.value
 
-    if (nome != "" && email != "") {
+    var novoNome = novo_nome.value
+    var novoEmail = novo_email.value
+    var novoCargo = novo_cargos.value
+    var id = idFuncionarioSelecionado
+
+    console.log(id);
+
+
+    if (novoNome != "" && novoEmail != "") {
       fetch("/usuarios/atualizarFuncionario", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          novoNomeServer: nome,
-          novoEmailFuncServer: email,
-          empresaServer: sessionStorage.ID_EMPRESA,
+          idServer: id,
+          novoNomeServer: novoNome,
+          novoEmailFuncServer: novoEmail,
           novoCargoServer: novoCargo
         }),
       })
@@ -302,10 +310,35 @@
     } else {
       alert("Insira todos os campos")
     }
-    cancelar()
+    fechar()
   }
 
 
+  function remover() {
+
+    var id = idFuncionarioSelecionado
+
+
+    fetch("/usuarios/apagarFuncionario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idServer: id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("Funcionário excluido com sucesso");
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        alert("Erro ao excluir o funcionário")
+        console.error('Error:', error);
+      });
+      fechar()
+  }
 
 
   function cadastrarFuncionario() {
@@ -316,8 +349,9 @@
     document.getElementById("form-funcionario").style.display = "none";
   }
 
-  function editar() {
+  function editar(idUsuario) {
     document.getElementById("form-editar").style.display = "flex";
+    idFuncionarioSelecionado = idUsuario;
   }
 
   function fechar() {
