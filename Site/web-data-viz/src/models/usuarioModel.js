@@ -64,6 +64,18 @@ function apagarFuncionario(idVar) {
     return database.executar(instrucaoSql)
 }
 
+function atualizarMaquina(numeroVar, fabricanteVar, modeloVar, idVar) {
+
+    var instrucaoSql = `
+
+    UPDATE Notebook SET numeroSerie = '${numeroVar}', fabricante = '${fabricanteVar}', modelo = '${modeloVar}'
+     WHERE idNotebook = ${idVar};
+
+    `;
+
+    console.log("Executando a instrução SQL: /n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
 
 
 module.exports = {
@@ -72,5 +84,6 @@ module.exports = {
     cadastrarFuncionario,
     cadastrarMaquina,
     atualizarFuncionario,
-    apagarFuncionario
+    apagarFuncionario,
+    atualizarMaquina
 }

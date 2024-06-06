@@ -337,7 +337,7 @@
         alert("Erro ao excluir o funcionário")
         console.error('Error:', error);
       });
-      fechar()
+    fechar()
   }
 
 
@@ -352,6 +352,7 @@
   function editar(idUsuario) {
     document.getElementById("form-editar").style.display = "flex";
     idFuncionarioSelecionado = idUsuario;
+    console.log(idFuncionarioSelecionado.nomeUsuario)
   }
 
   function fechar() {

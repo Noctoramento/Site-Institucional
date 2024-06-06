@@ -29,4 +29,8 @@ router.post("/apagarFuncionario", function (req, res) {
     usuarioController.apagarFuncionario(req, res);
 });
 
+router.post("/atualizarMaquina", function (req, res) {
+    usuarioController.atualizarMaquina(req, res);
+});
+
 module.exports = router;

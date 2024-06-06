@@ -162,7 +162,7 @@ function atualizarFuncionario(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        "\nHouve um erro ao realizar ao atualizar! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -171,16 +171,52 @@ function atualizarFuncionario(req, res) {
     }
 }
 
+
 function apagarFuncionario(req, res) {
-
+    
     var idVar = req.body.idServer
-
+    
     if (idVar == undefined) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
     else {
-
+        
         usuarioModel.apagarFuncionario(idVar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao apagar o funcionário! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+    }
+}
+
+function atualizarMaquina(req, res) {
+    var numeroVar = req.body.novoNumeroServer;
+    var fabricanteVar = req.body.novoFabricanteServer;
+    var modeloVar = req.body.novoModeloServer;
+    var idVar = req.body.idServer;
+
+    if (numeroVar == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (fabricanteVar == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (modeloVar == undefined) {
+        res.status(400).send("Seu cargo está undefined!");
+    } else if (idVar == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }
+    else {
+
+        usuarioModel.atualizarMaquina(numeroVar, fabricanteVar, modeloVar, idVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -189,7 +225,7 @@ function apagarFuncionario(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao apagar o funcionário! Erro: ",
+                        "\nHouve um erro ao realizar ao atualizar! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -198,13 +234,13 @@ function apagarFuncionario(req, res) {
     }
 }
 
-
-
 module.exports = {
     autenticar,
     cadastrar,
     cadastrarFuncionario,
     cadastrarMaquina,
     atualizarFuncionario,
-    apagarFuncionario
+    apagarFuncionario,
+    atualizarMaquina
+
 }
