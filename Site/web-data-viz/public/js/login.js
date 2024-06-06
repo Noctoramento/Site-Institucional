@@ -25,7 +25,7 @@ function acessar() {
             sessionStorage.EMAIL_EMPRESA = json[0].EMAIL;
             sessionStorage.NOME_EMPRESA = json[0].RAZAOSOCIAL;
             sessionStorage.ID_EMPRESA = json[0].IDEMPRESA; 
-             window.location.href = "../dashboard/DashboardGeral.html";
+             window.location.href = "../dashboard/dashGeral.html";
             // apenas para exibir o loading
             console.log("Passoou");
         });

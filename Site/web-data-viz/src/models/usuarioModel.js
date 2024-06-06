@@ -77,6 +77,15 @@ function atualizarMaquina(numeroVar, fabricanteVar, modeloVar, idVar) {
     return database.executar(instrucaoSql)
 }
 
+function apagarMaquina(idVar) {
+
+    var instrucaoSql = `
+    DELETE FROM Notebook WHERE idNotebook = '${idVar}';
+    `;
+
+    console.log("Executando a instrução SQL: /n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
 
 module.exports = {
     autenticar,
@@ -85,5 +94,6 @@ module.exports = {
     cadastrarMaquina,
     atualizarFuncionario,
     apagarFuncionario,
-    atualizarMaquina
+    atualizarMaquina,
+    apagarMaquina
 }

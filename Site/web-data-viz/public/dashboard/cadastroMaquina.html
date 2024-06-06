@@ -237,41 +237,67 @@
   function salvar() {
 
 
-var novoNumero = Number(novo_numero.value)
-var novoFabricante = novo_fabricante.value
-var novoModelo = novo_modelo.value
-var id = idMaquinaSelecionada
+    var novoNumero = Number(novo_numero.value)
+    var novoFabricante = novo_fabricante.value
+    var novoModelo = novo_modelo.value
+    var id = idMaquinaSelecionada
 
-console.log(id);
+    console.log(id);
 
 
-if (novoNumero != "" && novoFabricante != "" && novoModelo != "" ) {
-  fetch("/usuarios/atualizarMaquina", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      idServer: id,
-      novoNumeroServer: novoNumero,
-      novoFabricanteServer: novoFabricante,
-      novoModeloServer: novoModelo
-    }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      alert("Máquina atualizado com sucesso")
-      console.log('Success:', data);
+    if (novoNumero != "" && novoFabricante != "" && novoModelo != "") {
+      fetch("/usuarios/atualizarMaquina", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idServer: id,
+          novoNumeroServer: novoNumero,
+          novoFabricanteServer: novoFabricante,
+          novoModeloServer: novoModelo
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert("Máquina atualizado com sucesso")
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          alert("Erro ao atualizar o máquina")
+          console.error('Error:', error);
+        });
+    } else {
+      alert("Insira todos os campos")
+    }
+    fechar()
+  }
+
+  function remover() {
+
+    var id = idMaquinaSelecionada
+
+
+    fetch("/usuarios/apagarMaquina", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idServer: id,
+      }),
     })
-    .catch((error) => {
-      alert("Erro ao atualizar o máquina")
-      console.error('Error:', error);
-    });
-} else {
-  alert("Insira todos os campos")
-}
-fechar()
-}
+      .then(response => response.json())
+      .then(data => {
+        alert("Máaquina excluida com sucesso");
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        alert("Erro ao excluir o máquina")
+        console.error('Error:', error);
+      });
+    fechar()
+  }
 
 
   function cadastrarMaquina() {

@@ -234,6 +234,34 @@ function atualizarMaquina(req, res) {
     }
 }
 
+function apagarMaquina(req, res) {
+    
+    var idVar = req.body.idServer
+    
+    if (idVar == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }
+    else {
+        
+        usuarioModel.apagarMaquina(idVar)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao apagar o funcionário! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+    }
+}
+
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -241,6 +269,7 @@ module.exports = {
     cadastrarMaquina,
     atualizarFuncionario,
     apagarFuncionario,
-    atualizarMaquina
+    atualizarMaquina,
+    apagarMaquina
 
 }

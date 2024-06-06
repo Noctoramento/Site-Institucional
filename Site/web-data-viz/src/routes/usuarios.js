@@ -33,4 +33,8 @@ router.post("/atualizarMaquina", function (req, res) {
     usuarioController.atualizarMaquina(req, res);
 });
 
+router.post("/apagarMaquina", function (req, res) {
+    usuarioController.apagarMaquina(req, res);
+});
+
 module.exports = router;
