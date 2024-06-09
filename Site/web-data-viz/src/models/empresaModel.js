@@ -54,15 +54,16 @@ function listarAlocadas() {
     c.nomeCargo, 
     n.numeroSerie, 
     n.modelo, 
-    a.dataUsoInicio
+    a.dataUsoInicio,
+    a.fkNotebook,
+    a.fkEmpresaNotebook,
+    a.fkUsuario,
+    a.fkEmpresaUsuario
 FROM 
     Alocacao a
-JOIN 
-    Usuario u ON a.fkUsuario = u.idUsuario AND a.fkEmpresaUsuario = u.fkEmpresa
-JOIN 
-    Cargo c ON u.fkCargo = c.idCargo
-JOIN 
-    Notebook n ON a.fkNotebook = n.idNotebook AND a.fkEmpresaNotebook = n.fkEmpresa;`;
+    JOIN Usuario u ON a.fkUsuario = u.idUsuario AND a.fkEmpresaUsuario = u.fkEmpresa
+    JOIN Cargo c ON u.fkCargo = c.idCargo
+    JOIN Notebook n ON a.fkNotebook = n.idNotebook AND a.fkEmpresaNotebook = n.fkEmpresa;`;
 
   return database.executar(instrucaoSql);
 }

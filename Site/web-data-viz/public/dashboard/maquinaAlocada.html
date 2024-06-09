@@ -376,8 +376,32 @@
     document.getElementById("form-editar").style.display = "none";
   }
 
-  function excluir(){
+  function excluir(fkNotebook, fkEmpresaNotebook, fkUsuario, fkEmpresaUsuario) {
 
+    console.log(fkNotebook)
+
+    fetch("/usuarios/apagarAlocacao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fkNotebook: fkNotebook,
+        fkEmpresaNotebook: fkEmpresaNotebook,
+        fkUsuario: fkUsuario,
+        fkEmpresaUsuario: fkEmpresaUsuario
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("Alocacao excluido com sucesso");
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        alert("Erro ao excluir a alocacao")
+        console.error('Error:', error);
+      });
+    fechar()
   }
 
 

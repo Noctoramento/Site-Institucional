@@ -107,6 +107,19 @@ function alocarFuncionario(idVar, funcionarioVar, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function apagarAlocacao(fkNotebook, fkEmpresaNotebook, fkUsuario, fkEmpresaUsuario) {
+
+    var instrucaoSql = `
+     DELETE FROM Alocacao 
+            WHERE fkNotebook = ${fkNotebook} 
+              AND fkEmpresaNotebook = ${fkEmpresaNotebook} 
+              AND fkUsuario = ${fkUsuario} 
+              AND fkEmpresaUsuario = ${fkEmpresaUsuario}`;
+
+    console.log("Executando a instrução SQL: /n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -117,4 +130,5 @@ module.exports = {
     atualizarMaquina,
     apagarMaquina,
     alocarFuncionario,
+    apagarAlocacao
 }

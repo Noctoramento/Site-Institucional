@@ -108,11 +108,11 @@ function cadastrarMaquina(req, res) {
     var idEmpresa = req.body.empresaServer;
 
     if (numeroVar == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send("Seu numeroVar está undefined!");
     } else if (fabricanteVar == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send("Seu fabricanteVar está undefined!");
     } else if (modeloVar == undefined) {
-        res.status(400).send("Seu cargo está undefined!");
+        res.status(400).send("Seu modeloVar está undefined!");
     } else if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
@@ -177,7 +177,7 @@ function apagarFuncionario(req, res) {
     var idVar = req.body.idServer
     
     if (idVar == undefined) {
-        res.status(400).send("Seu idEmpresa está undefined!");
+        res.status(400).send("Seu idVar está undefined!");
     }
     else {
         
@@ -206,13 +206,13 @@ function atualizarMaquina(req, res) {
     var idVar = req.body.idServer;
 
     if (numeroVar == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send("Seu numeroVar está undefined!");
     } else if (fabricanteVar == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send("Seu fabricanteVar está undefined!");
     } else if (modeloVar == undefined) {
-        res.status(400).send("Seu cargo está undefined!");
+        res.status(400).send("Seu modeloVar está undefined!");
     } else if (idVar == undefined) {
-        res.status(400).send("Seu idEmpresa está undefined!");
+        res.status(400).send("Seu idVar está undefined!");
     }
     else {
 
@@ -239,7 +239,7 @@ function apagarMaquina(req, res) {
     var idVar = req.body.idServer
     
     if (idVar == undefined) {
-        res.status(400).send("Seu idEmpresa está undefined!");
+        res.status(400).send("Seu idVar está undefined!");
     }
     else {
         
@@ -267,9 +267,9 @@ function alocarFuncionario(req, res) {
     var idEmpresa = req.body.empresaServer;
 
     if (idVar == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send("Seu idVar está undefined!");
     } else if (funcionarioVar == undefined) {
-        res.status(400).send("Seu cargo está undefined!");
+        res.status(400).send("Seu funcionarioVar está undefined!");
     } else if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
@@ -293,6 +293,41 @@ function alocarFuncionario(req, res) {
     }
 }
   
+function apagarAlocacao(req, res) {
+    
+    var fkNotebook = req.body.fkNotebook
+    var fkEmpresaNotebook = req.body.fkEmpresaNotebook
+    var fkUsuario = req.body.fkUsuario
+    var fkEmpresaUsuario = req.body.fkEmpresaUsuario
+    
+    if (fkNotebook == undefined) {
+        res.status(400).send("Seu fkNotebook está undefined!");
+    } else if (fkEmpresaNotebook == undefined) {
+        res.status(400).send("Seu fkEmpresaNotebook está undefined!");
+    } else if (fkUsuario == undefined) {
+        res.status(400).send("Seu fkUsuario está undefined!");
+    }else if (fkEmpresaUsuario == undefined) {
+        res.status(400).send("Seu fkEmpresaUsuario está undefined!");
+    }
+    else {
+        
+        usuarioModel.apagarAlocacao(fkNotebook, fkEmpresaNotebook, fkUsuario, fkEmpresaUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao apagar o funcionário! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+    }
+}
 
 module.exports = {
     autenticar,
@@ -303,5 +338,6 @@ module.exports = {
     apagarFuncionario,
     atualizarMaquina,
     apagarMaquina,
-    alocarFuncionario
+    alocarFuncionario,
+    apagarAlocacao
 }
