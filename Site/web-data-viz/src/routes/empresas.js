@@ -29,4 +29,8 @@ router.get("/listarMaquinas", function (req, res) {
   empresaController.listarMaquinas(req, res);
 });
 
+router.get("/listarAlocadas", function (req, res) {
+  empresaController.listarAlocadas(req, res);
+});
+
 module.exports = router;

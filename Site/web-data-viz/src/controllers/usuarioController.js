@@ -292,6 +292,7 @@ function alocarFuncionario(req, res) {
             );
     }
 }
+  
 
 module.exports = {
     autenticar,
@@ -303,5 +304,4 @@ module.exports = {
     atualizarMaquina,
     apagarMaquina,
     alocarFuncionario
-
 }

@@ -107,9 +107,6 @@ function alocarFuncionario(idVar, funcionarioVar, idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-
-
-
 module.exports = {
     autenticar,
     cadastrar,
@@ -119,5 +116,5 @@ module.exports = {
     apagarFuncionario,
     atualizarMaquina,
     apagarMaquina,
-    alocarFuncionario
+    alocarFuncionario,
 }

@@ -27,6 +27,13 @@ function listarMaquinas() {
   return database.executar(instrucaoSql);
 }
 
+function listarAlocadas() {
+  var instrucaoSql = `SELECT dataUsoInicio, fkNotebook, fkUsuario, fkEmpresaUsuario
+  FROM Alocacao;`;
+
+  return database.executar(instrucaoSql);
+}
+
 
 
 function buscarPorCnpj(cnpj) {
@@ -41,4 +48,24 @@ function cadastrar(razaoSocial, cnpj) {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas };
+function listarAlocadas() {
+  var instrucaoSql = `SELECT 
+    u.nomeUsuario, 
+    c.nomeCargo, 
+    n.numeroSerie, 
+    n.modelo, 
+    a.dataUsoInicio
+FROM 
+    Alocacao a
+JOIN 
+    Usuario u ON a.fkUsuario = u.idUsuario AND a.fkEmpresaUsuario = u.fkEmpresa
+JOIN 
+    Cargo c ON u.fkCargo = c.idCargo
+JOIN 
+    Notebook n ON a.fkNotebook = n.idNotebook AND a.fkEmpresaNotebook = n.fkEmpresa;`;
+
+  return database.executar(instrucaoSql);
+}
+
+
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas };

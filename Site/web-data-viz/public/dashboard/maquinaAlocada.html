@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body onload="listarAlocadas()">
   <header>
     <div id="tituloDash" style="display: none; ">
       <h1 style="font-weight: 700;">Cadastrar funcionario</h1>
@@ -107,8 +107,8 @@
         <div class="btn-inp">
           <button id="alocarMaquina" onclick="cadastrar()">Alocar máquina</button>
           <div class="pesquisar">
-            <input class="pesquisar-btn" type="text" placeholder="Pesquisar..." />
-            <div id="lupa" onclick="alert('ok :')"></div>
+            <input class="pesquisar-btn" type="text" placeholder="Pesquisar..." id="pesquisar" onkeyup="pesquisar()">
+            <div id="lupa"></div>
           </div>
         </div>
         <div class="table-wrapper">
@@ -121,6 +121,7 @@
                 <th>NumeroSerie</th>
                 <th>Modelo</th>
                 <th>Data de ínicio</th>
+                <th>Remover</th>
               </tr>
             </thead>
             <tbody>
@@ -173,8 +174,33 @@
 
 <script>
 
+  function pesquisar() {
+
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("pesquisar");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tabelaAlocada");
+    tr = table.getElementsByTagName("tr");
+
+
+    for (i = 1; i < tr.length; i++) {
+      tr[i].style.display = "none";
+      td = tr[i].getElementsByTagName("td");
+      for (j = 0; j < td.length; j++) {
+        if (td[j]) {
+          txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            break;
+          }
+        }
+      }
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', (event) => {
     listarMaquinas();
+    listarAlocadas();
   });
 
   function cadastrar() {
@@ -311,24 +337,31 @@
       .then(function (resposta) {
         return resposta.json();
       })
-      .then(function (maquinas) {
+      .then(function (alocada) {
         const tabelaAlocada = document.getElementById('tabelaAlocada').getElementsByTagName('tbody')[0];
         tabelaAlocada.innerHTML = '';
-        alocadas.forEach((alocacao, index) => {
+        alocada.forEach((alocacao, index) => {
+          const dataFormatada = formatarData(alocacao.dataUsoInicio);
           tabelaAlocada.innerHTML += `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${alocacao.fkUsuario}</td>
-                    <td>${alocacao.fkNotebook}</td>
-                    <td>${alocacao.fkNotebook}</td>
-                    <td>${alocacao.fkNotebook}</td>
-                    <td><button onclick="alocar(${alocacao.idNotebook})" ><img  class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                    <td>${alocacao.nomeUsuario}</td>
+                    <td>${alocacao.nomeCargo}</td>
+                    <td>${alocacao.numeroSerie}</td>
+                    <td>${alocacao.modelo}</td>
+                    <td>${dataFormatada}</td>
+                    <td><button onclick="alocar()" ><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
         });
       })
       .catch(function (erro) {
         console.log(`ERRO: ${erro}`);
       });
+  }
+
+  function formatarData(data) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(data).toLocaleDateString('pt-BR', options);
   }
 
 

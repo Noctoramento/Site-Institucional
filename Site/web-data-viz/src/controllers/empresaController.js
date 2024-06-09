@@ -26,6 +26,12 @@ function listarMaquinas(req, res) {
   });
 }
 
+function listarAlocadas(req, res) {
+  empresaModel.listarAlocadas().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 
 function buscarPorId(req, res) {
   var id = req.params.id;
@@ -58,5 +64,6 @@ module.exports = {
   cadastrar,
   listarCargos,
   listarFuncionarios,
-  listarMaquinas
+  listarMaquinas,
+  listarAlocadas
 };

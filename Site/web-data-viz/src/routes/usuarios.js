@@ -41,5 +41,4 @@ router.post("/alocarFuncionario", function (req, res) {
     usuarioController.alocarFuncionario(req, res);
 });
 
-
 module.exports = router;
