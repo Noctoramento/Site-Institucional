@@ -156,9 +156,8 @@ input {
 .container-tabela {
     display: flex;
     width: 100%;
-    height: 63vh;
+    height: 59vh;
     justify-content: center;
-    margin: 10px;
 }
 
 .table-wrapper {
@@ -177,11 +176,13 @@ input {
 .tabela td {
     border: 1px solid #5c5c5c;
     padding: 8px;
+    text-align: center;
 }
 
 .tabela th {
     background-color: #f2f2f2;
     text-align: left;
+    text-align: center;
 }
 
 
@@ -199,11 +200,13 @@ input {
 .tabelaMaquina td {
     border: 1px solid #5c5c5c;
     padding: 8px;
+    text-align: center;
 }
 
 .tabelaMaquina th {
     background-color: #f2f2f2;
     text-align: left;
+    text-align: center;
 }
 
 

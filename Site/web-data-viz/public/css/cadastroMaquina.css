@@ -167,11 +167,13 @@ input {
 .tabela td {
     border: 1px solid #5c5c5c;
     padding: 8px;
+    text-align: center;
 }
 
 .tabela th {
     background-color: #f2f2f2;
     text-align: left;
+    text-align: center;
 }
 
 
@@ -197,7 +199,7 @@ input {
     transform: translate(-50%, -50%);
     border: 3px solid rgb(115, 116, 146);
     z-index: 9;
-    background-color: #282E47;
+    background-color: #161b30;
     backdrop-filter: blur(10px);
     padding: 15px;
     width: 800px;

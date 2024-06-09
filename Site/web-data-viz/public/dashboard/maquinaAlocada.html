@@ -350,7 +350,7 @@
                     <td>${alocacao.numeroSerie}</td>
                     <td>${alocacao.modelo}</td>
                     <td>${dataFormatada}</td>
-                    <td><button onclick="alocar()" ><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                    <td><button onclick="excluir(${alocacao.fkNotebook}, ${alocacao.fkEmpresaNotebook}, ${alocacao.fkUsuario}, ${alocacao.fkEmpresaUsuario})"><img class="img-btn" src="../assets/icons_img/delete.png" alt=""></button></td>
                 </tr>`;
         });
       })
@@ -374,6 +374,10 @@
 
   function fechar() {
     document.getElementById("form-editar").style.display = "none";
+  }
+
+  function excluir(){
+
   }
 
 
