@@ -261,6 +261,37 @@ function apagarMaquina(req, res) {
     }
 }
 
+function alocarFuncionario(req, res) {
+    var idVar = req.body.idServer;
+    var funcionarioVar = req.body.funcionarioServer
+    var idEmpresa = req.body.empresaServer;
+
+    if (idVar == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else if (funcionarioVar == undefined) {
+        res.status(400).send("Seu cargo está undefined!");
+    } else if (idEmpresa == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
+    }
+    else {
+
+        usuarioModel.alocarFuncionario(idVar, funcionarioVar, idEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar ao alocar! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
 
 module.exports = {
     autenticar,
@@ -270,6 +301,7 @@ module.exports = {
     atualizarFuncionario,
     apagarFuncionario,
     atualizarMaquina,
-    apagarMaquina
+    apagarMaquina,
+    alocarFuncionario
 
 }

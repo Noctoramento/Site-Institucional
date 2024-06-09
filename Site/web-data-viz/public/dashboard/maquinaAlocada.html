@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noctoramento | Cadastro Funcionario</title>
-  <link rel="stylesheet" href="../css/cadastroFuncionario.css">
+  <title>Noctoramento | Alocação máquina</title>
+  <link rel="stylesheet" href="../css/maquinaAlocada.css">
   <link rel="icon" href="../assets/Imagens/Logo Verde água neon.png">
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
     type='text/css'>
@@ -105,37 +105,66 @@
       <h2>ALOCAÇÃO</h2>
       <div class="container">
         <div class="btn-inp">
-          <button class="cadastrarFuncionario" onclick="cadastrar()">Alocar máquina</button>
+          <button id="alocarMaquina" onclick="cadastrar()">Alocar máquina</button>
           <div class="pesquisar">
             <input class="pesquisar-btn" type="text" placeholder="Pesquisar..." />
             <div id="lupa" onclick="alert('ok :')"></div>
           </div>
         </div>
+        <div class="table-wrapper">
+          <table class="tabela" id="tabelaAlocada">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>NumeroSerie</th>
+                <th>Modelo</th>
+                <th>Data de ínicio</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div id="form-funcionario">
+      <div id="form-alocada">
         <div class="cadastro-funcionario">
-          <h2>Cadastro de funcionário</h2>
-          <div class="cadastro-input">
-            <label for="">Nome:</label>
-            <input type="text">
-            <label for="">Email:</label>
-            <input type="text">
-            <label for="">Cargo:</label>
-            <select name="" id="">
-              <option value="">Administrador</option>
-              <option value="">Suporte</option>
-              <option value="">Funcionário</option>
-            </select>
-            <label for="">Senha:</label>
-            <input type="password">
+          <h2>Alocar máquina</h2>
+          <div class="container-tabela">
+            <div class="table-pop">
+              <table class="tabelaMaquina" id="tabelaMaquinas">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>NumeroSérie</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="cadastro-btn">
             <button class="funcionario-btn">Cadastrar Funcionário</button>
             <button class="cancelar-btn" onclick="cancelar()">Cancelar</button>
           </div>
         </div>
-        
     </section>
+    <div id="form-editar">
+      <div class="editar-funcionario">
+        <h2>Deseja adicionar um responsável </h2>
+        <div class="cadastro-input">
+          <select name="funcionarios" id="select_funcionarios" selected></select>
+        </div>
+        <div class="cadastro-btn">
+          <button class="funcionario-btn" onclick="salvar()">Alocar</button>
+          <button class="cancelar-btn" onclick="fechar()">Cancelar</button>
+        </div>
+      </div>
   </main>
 
 </body>
@@ -144,122 +173,175 @@
 
 <script>
 
+  document.addEventListener('DOMContentLoaded', (event) => {
+    listarMaquinas();
+  });
+
   function cadastrar() {
-    document.getElementById("form-funcionario").style.display = "block";
+    document.getElementById("form-alocada").style.display = "block";
   }
 
   function cancelar() {
-    document.getElementById("form-funcionario").style.display = "none";
+    document.getElementById("form-alocada").style.display = "none";
   }
 
   function trocarTela(tela) {
     window.location.href = `${tela}.html`;
   }
+
+  function listarMaquinas() {
+    fetch("/empresas/listarMaquinas", {
+      method: "GET"
+    })
+      .then(function (resposta) {
+        return resposta.json();
+      })
+      .then(function (maquinas) {
+        const tabelaMaquinas = document.getElementById('tabelaMaquinas').getElementsByTagName('tbody')[0];
+        tabelaMaquinas.innerHTML = '';
+        maquinas.forEach((maquina, index) => {
+          tabelaMaquinas.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${maquina.numeroSerie}</td>
+                    <td>${maquina.fabricante}</td>
+                    <td>${maquina.modelo}</td>
+                    <td><button onclick="alocar(${maquina.idNotebook})" ><img  class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                </tr>`;
+        });
+      })
+      .catch(function (erro) {
+        console.log(`ERRO: ${erro}`);
+      });
+  }
+
+  function listarFuncionarios() {
+    let cargosArmazenados;
+    listarCargos().then((cargos) => {
+      cargosArmazenados = cargos;
+      fetch("/empresas/listarFuncionarios", {
+        method: "GET"
+      })
+        .then(function (resposta) {
+          return resposta.json();
+        })
+        .then(function (funcionarios) {
+          const selectFun = document.getElementById('select_funcionarios');
+
+          funcionarios.forEach(funcionario => {
+
+            selectFun.innerHTML += `<option value='${funcionario.idUsuario}'>${funcionario.nomeUsuario} - ${cargosArmazenados[funcionario.fkCargo]}</option>`;
+
+          });
+        })
+        .catch(function (erro) {
+          console.log(`ERRO: ${erro}`);
+        });
+    });
+  }
+
+  function listarCargos() {
+    return fetch("/empresas/listarCargos", {
+      method: "GET"
+    })
+      .then(function (resposta) {
+        return resposta.json();
+      })
+      .then(function (cargos) {
+        cargos.forEach((cargo) => {
+          cargosArmazenados[cargo.idCargo] = cargo.nomeCargo;
+        });
+        return cargosArmazenados;
+      })
+      .catch(function (erro) {
+        console.log(`ERRO: ${erro}`);
+      });
+  }
+
+  let idMaquinaSelecionada;
+
+  let cargosArmazenados = {};
+
+  function init() {
+    listarCargos().then(() => {
+      listarFuncionarios();
+    });
+  }
+
+  window.onload = init;
+
+  function salvar() {
+
+    var id = idMaquinaSelecionada;
+    var funcionario = select_funcionarios.value;
+
+    if (funcionario != "") {
+      fetch("/usuarios/alocarFuncionario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idServer: id,
+          funcionarioServer: funcionario,
+          empresaServer: sessionStorage.ID_EMPRESA
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert("Funcionário alocado com sucesso");
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          alert("Erro ao alocar o funcionário");
+          console.error('Error:', error);
+        });
+    } else {
+      alert("Insira todos os campos")
+    }
+    fechar()
+  }
+
+
+
+  function listarAlocadas() {
+    fetch("/empresas/listarAlocadas", {
+      method: "GET"
+    })
+      .then(function (resposta) {
+        return resposta.json();
+      })
+      .then(function (maquinas) {
+        const tabelaAlocada = document.getElementById('tabelaAlocada').getElementsByTagName('tbody')[0];
+        tabelaAlocada.innerHTML = '';
+        alocadas.forEach((alocacao, index) => {
+          tabelaAlocada.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${alocacao.fkUsuario}</td>
+                    <td>${alocacao.fkNotebook}</td>
+                    <td>${alocacao.fkNotebook}</td>
+                    <td>${alocacao.fkNotebook}</td>
+                    <td><button onclick="alocar(${alocacao.idNotebook})" ><img  class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
+                </tr>`;
+        });
+      })
+      .catch(function (erro) {
+        console.log(`ERRO: ${erro}`);
+      });
+  }
+
+
+  function alocar(idNotebook) {
+    document.getElementById("form-editar").style.display = "flex";
+    idMaquinaSelecionada = idNotebook;
+
+    console.log(idMaquinaSelecionada)
+  }
+
+  function fechar() {
+    document.getElementById("form-editar").style.display = "none";
+  }
+
+
 </script>
-<!-- //   let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-
-//   console.log(MaquinasCadastradas)
-
-//   let listaDisponiveis = document.getElementById('lista-disponiveis');
-//   let listaNaoDisponiveis = document.getElementById('lista-nao-disponiveis');
-
-//   listaDisponiveis.innerHTML = '';
-//   listaNaoDisponiveis.innerHTML = '';
-
-//   MaquinasCadastradas.forEach((maquina, index) => {
-//     let div = document.createElement('div');
-//     div.classList.add('card-info');
-//     div.innerHTML = `
-//     <span><b>Número de Série:</b> ${maquina.numeroSerie}</span><br>
-//     <span><b>Fabricante:</b> ${maquina.fabricante}</span><br>
-//     <span><b>Modelo:</b> ${maquina.modelo}</span><br>
-//     <span><b>Sistema Operacional:</b> ${maquina.sistemaOperacional}</span><br>
-//     <span><b>Data de Aquisição:</b> ${maquina.dtAquisicao}</span><br>
-//     <span><b>Responsavel:<b> ${maquina.funcionarioResponsavel}</span>
-//     <div class="botoesAlterar">
-//     <button class="botaoEditar" onclick="editar(${index})">editar</button>
-//     <button class="botaoRemover" onclick="excluir(${index})">excluir</button>
-//     </div>
-
-// `;
-
-
-//     if (maquina.funcionarioResponsavel != '') {
-//       console.log('Adicionando à lista de máquinas disponíveis:', div);
-//       listaDisponiveis.appendChild(div);
-//     } else {
-//       console.log('Adicionando à lista de máquinas não disponíveis:', div);
-//       listaNaoDisponiveis.appendChild(div);
-//     }
-//   });
-
-//   function editar(index) {
-
-//     edicoes = index;
-
-//     abrirEdicao();
-//   }
-
-//   function excluir(index) {
-//     let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-//     let maquina = MaquinasCadastradas[index];
-
-
-//     maquina.funcionarioResponsavel = '';
-
-//     localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-
-//     location.reload();
-//   }
-
-//   function abrirEdicao() {
-//     document.getElementById("myForm").style.display = "block";
-
-
-//     let FuncionariosCadastrados = JSON.parse(localStorage.getItem('FuncionariosCadastrados')) || [];
-//     let dateSet = new Set();
-//     FuncionariosCadastrados.forEach(funcionario => dateSet.add(funcionario.nome))
-
-//     const listaNome = document.getElementById('funcionarioDisponiveis')
-//     listaNome.innerHTML = '';
-
-//     let dateArray = Array.from(dateSet).sort();
-
-//     dateArray.forEach(nome => {
-//       let opcao = document.createElement('option');
-//       opcao.value = nome;
-//       opcao.textContent = nome;
-//       listaNome.appendChild(opcao);
-//     });
-
-//     listaNome.addEventListener('change', function () {
-//       let novoResponsavel = this.value;
-//       let index = edicoes;
-
-//       let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-//       let maquina = MaquinasCadastradas[index];
-//       maquina.funcionarioResponsavel = novoResponsavel;
-
-//       localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-//     });
-
-
-//   }
-
-//   function salvarEdicao() {
-
-//     let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-//     let maquina = MaquinasCadastradas[edicoes];
-//     maquina.funcionarioResponsavel = document.getElementById('funcionarioDisponiveis').value;
-
-//     localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-
-//     cancelarEdicao();
-//     location.reload();
-
-//   }
-
-
-//   function cancelarEdicao() {
-//     document.getElementById("myForm").style.display = "none";
-//   } -->
