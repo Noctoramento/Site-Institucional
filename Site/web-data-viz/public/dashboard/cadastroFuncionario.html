@@ -229,7 +229,14 @@
   }
 
   function listarFuncionarios() {
-    fetch("/empresas/listarFuncionarios", {
+    const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
+    fetch(`/empresas/listarFuncionarios/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {
@@ -248,13 +255,13 @@
                     <td>${funcionario.emailUsuario}</td>
                     <td><button onclick="editar(${funcionario.idUsuario})"><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
-
         });
       })
       .catch(function (erro) {
         console.log(`ERRO: ${erro}`);
       });
   }
+
 
   // Função para inicializar a página
   function init() {

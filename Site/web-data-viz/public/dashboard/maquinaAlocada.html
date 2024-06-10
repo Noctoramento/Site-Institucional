@@ -331,7 +331,16 @@
 
 
   function listarAlocadas() {
-    fetch("/empresas/listarAlocadas", {
+
+    const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
+
+    fetch(`/empresas/listarAlocadas/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {

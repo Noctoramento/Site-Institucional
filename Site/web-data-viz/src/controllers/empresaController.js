@@ -15,20 +15,36 @@ function listarCargos(req, res) {
 }
 
 function listarFuncionarios(req, res) {
-  empresaModel.listarFuncionarios().then((resultado) => {
-    res.status(200).json(resultado);
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarFuncionarios(idEmpresa).then((resultado) => {
+      res.status(200).json(resultado);
+  }).catch((erro) => {
+      console.error(`Erro ao listar funcionários: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar funcionários" });
   });
 }
 
+
 function listarMaquinas(req, res) {
-  empresaModel.listarMaquinas().then((resultado) => {
-    res.status(200).json(resultado);
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarMaquinas(idEmpresa).then((resultado) => {
+      res.status(200).json(resultado);
+  }).catch((erro) => {
+      console.error(`Erro ao listar máquinas: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar máquinas" });
   });
 }
 
 function listarAlocadas(req, res) {
-  empresaModel.listarAlocadas().then((resultado) => {
-    res.status(200).json(resultado);
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarAlocadas(idEmpresa).then((resultado) => {
+      res.status(200).json(resultado);
+  }).catch((erro) => {
+      console.error(`Erro ao listar máquinas: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar máquinas" });
   });
 }
 

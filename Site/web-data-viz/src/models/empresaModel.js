@@ -13,23 +13,23 @@ function listarCargos() {
 }
 
 
-function listarFuncionarios() {
-  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkCargo
-  FROM Usuario;`;
+function listarFuncionarios(idEmpresa) {
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkCargo FROM Usuario WHERE fkEmpresa = ${idEmpresa}`;
 
   return database.executar(instrucaoSql);
 }
 
-function listarMaquinas() {
+
+function listarMaquinas(idEmpresa) {
   var instrucaoSql = `SELECT idNotebook, numeroSerie, fabricante, modelo
-  FROM Notebook;`;
+  FROM Notebook WHERE fkEmpresa = ${idEmpresa};`;
 
   return database.executar(instrucaoSql);
 }
 
-function listarAlocadas() {
+function listarAlocadas(idEmpresa) {
   var instrucaoSql = `SELECT dataUsoInicio, fkNotebook, fkUsuario, fkEmpresaUsuario
-  FROM Alocacao;`;
+  FROM Alocacao WHERE fkEmpresa = ${idEmpresa};`;
 
   return database.executar(instrucaoSql);
 }
