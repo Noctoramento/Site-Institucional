@@ -261,6 +261,7 @@
           console.log('Success:', data);
         })
         .catch((error) => {
+          swal ( "Opa" ,  "Erro ao cadastrar!" ,  "error");
           console.error('Error:', error);
         });
     }
@@ -298,7 +299,7 @@
           console.log('Success:', data);
         })
         .catch((error) => {
-          swal ( "Opa" ,  "Erro ao atualziar a máquina!" ,  "error");
+          swal ( "Opa" ,  "Erro ao atualizar a máquina!" ,  "error");
           //alert("Erro ao atualizar o máquina")
           console.error('Error:', error);
         });
