@@ -98,7 +98,7 @@ h2 {
 .formulario-cadastro {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
 }
 
 .formulario-cadastro a {

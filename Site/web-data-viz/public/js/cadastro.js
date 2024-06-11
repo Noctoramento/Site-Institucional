@@ -48,7 +48,8 @@ function cadastrar(){
           }
           }
           else{
-            alert("Algum dos campos cadastrados foi preenchido errado")
+            swal ( "Opa" ,  "Algo deu errado!" ,  "erro");
+            //alert("Algum dos campos cadastrados foi preenchido errado")
             // div_nomeErrado.innerHTML = `O nome deve ter mais de dois digitos`;
             // div_emailErrado.innerHTML = `O email deve conter "@.com" ou "@.br"`;
             // div_senhaErrada.innerHTML = `A senha deve ter ao menos 7 digitos <br> e um caracter especial`;
