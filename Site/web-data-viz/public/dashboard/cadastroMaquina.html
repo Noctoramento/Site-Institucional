@@ -256,12 +256,11 @@
           empresaServer: sessionStorage.ID_EMPRESA
         }),
       })
-        .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
         })
         .catch((error) => {
-          swal ( "Opa" ,  "Erro ao cadastrar!" ,  "error");
+          swal ( "Opa" ,  "Cadastrado com sucesso!" ,  "sucess");
           console.error('Error:', error);
         });
     }
