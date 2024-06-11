@@ -10,6 +10,8 @@
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
     type='text/css'>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body onload="listarAlocadas()">
@@ -352,11 +354,13 @@
           console.log('Success:', data);
         })
         .catch((error) => {
-          alert("Erro ao alocar o funcionário");
+          swal ( "Opa" ,  "Erro ao alocar o funcionário!" ,  "error");
+          //alert("Erro ao alocar o funcionário");
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos");
+      swal ( "Opa" ,  "Insira todos os campos!" ,  "error");
+      //alert("Insira todos os campos");
     }
     fechar();
   }
@@ -436,7 +440,8 @@
         console.log('Success:', data);
       })
       .catch((error) => {
-        alert("Erro ao excluir a alocação");
+        swal ( "Opa" ,  "Erro ao excluir a alocação!" ,  "error");
+       // alert("Erro ao excluir a alocação");
         console.error('Error:', error);
       });
     fechar();

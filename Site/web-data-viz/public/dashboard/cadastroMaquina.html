@@ -9,6 +9,8 @@
   <link rel="icon" href="../assets/Imagens/Logo Verde água neon.png">
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -296,11 +298,13 @@
           console.log('Success:', data);
         })
         .catch((error) => {
-          alert("Erro ao atualizar o máquina")
+          swal ( "Opa" ,  "Erro ao atualziar a máquina!" ,  "error");
+          //alert("Erro ao atualizar o máquina")
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      swal ( "Opa" ,  "Insira todos os campos!" ,  "error");
+     // alert("Insira todos os campos")
     }
     fechar()
   }
@@ -325,7 +329,8 @@
         console.log('Success:', data);
       })
       .catch((error) => {
-        alert("Erro ao excluir o máquina")
+        swal ( "Opa" ,  "Erro ao excluir a máquina!" ,  "error");
+        //alert("Erro ao excluir o máquina")
         console.error('Error:', error);
       });
     fechar()
