@@ -46,8 +46,7 @@ function cadastrar(){
             if(permiteCadastro){
               window.location.href = `../login.html`
           }
-          }
-          else{
+          }else{
             swal ( "Opa" ,  "Algo deu errado!" ,  "erro");
             //alert("Algum dos campos cadastrados foi preenchido errado")
             // div_nomeErrado.innerHTML = `O nome deve ter mais de dois digitos`;
