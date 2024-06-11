@@ -305,12 +305,16 @@
 
   function cadastrar() {
 
+    
     var nome = input_nome.value
     var email = input_email.value
     var senha = input_senha.value
     var cargo = select_cargos.value
+    
+    var validacaoSenha = senha.length >= 8 && (senha.indexOf('#') >= 0 || senha.indexOf('!') >= 0 || senha.indexOf('@') >= 0 || senha.indexOf('$') >= 0 || senha.indexOf('%') >= 0 || senha.indexOf('&') >= 0 || senha.indexOf('*') >= 0);
 
-    if (nome != "" && email != "") {
+
+    if (nome != "" && email != "" && validacaoSenha == true) {
       fetch("/usuarios/cadastrarFuncionario", {
         method: "POST",
         headers: {
@@ -334,7 +338,7 @@
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      alert("Insira todos os campos corretamente")
     }
     cancelar()
   }
