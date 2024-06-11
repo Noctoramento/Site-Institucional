@@ -25,11 +25,35 @@ function listarFuncionarios(req, res) {
   });
 }
 
+function listarFuncionariosNaoAlocados(req, res) {
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarFuncionariosNaoAlocados(idEmpresa).then((resultado) => {
+      res.status(200).json(resultado);
+  }).catch((erro) => {
+      console.error(`Erro ao listar funcionários: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar funcionários" });
+  });
+}
+
 
 function listarMaquinas(req, res) {
+
   var idEmpresa = req.params.idEmpresa;
 
   empresaModel.listarMaquinas(idEmpresa).then((resultado) => {
+      res.status(200).json(resultado);
+  }).catch((erro) => {
+      console.error(`Erro ao listar máquinas: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar máquinas" });
+  });
+}
+
+function listarMaquinasNaoAlocadas(req, res) {
+
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarMaquinasNaoAlocadas(idEmpresa).then((resultado) => {
       res.status(200).json(resultado);
   }).catch((erro) => {
       console.error(`Erro ao listar máquinas: ${erro}`);
@@ -43,8 +67,8 @@ function listarAlocadas(req, res) {
   empresaModel.listarAlocadas(idEmpresa).then((resultado) => {
       res.status(200).json(resultado);
   }).catch((erro) => {
-      console.error(`Erro ao listar máquinas: ${erro}`);
-      res.status(500).json({ mensagem: "Erro ao listar máquinas" });
+      console.error(`Erro ao listar alocadas: ${erro}`);
+      res.status(500).json({ mensagem: "Erro ao listar alocadas" });
   });
 }
 
@@ -80,6 +104,8 @@ module.exports = {
   cadastrar,
   listarCargos,
   listarFuncionarios,
+  listarFuncionariosNaoAlocados,
   listarMaquinas,
+  listarMaquinasNaoAlocadas,
   listarAlocadas
 };

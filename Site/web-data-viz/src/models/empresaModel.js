@@ -14,7 +14,20 @@ function listarCargos() {
 
 
 function listarFuncionarios(idEmpresa) {
-  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkCargo FROM Usuario WHERE fkEmpresa = ${idEmpresa}`;
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkEmpresa , fkCargo FROM Usuario WHERE fkEmpresa = ${idEmpresa}`;
+
+  return database.executar(instrucaoSql);
+}
+
+function listarFuncionariosNaoAlocados(idEmpresa) {
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkEmpresa, fkCargo 
+  FROM Usuario
+  WHERE fkEmpresa = ${idEmpresa}
+  AND idUsuario NOT IN (
+  SELECT fkUsuario
+  FROM Alocacao
+  WHERE fkEmpresaUsuario = ${idEmpresa}
+);`;
 
   return database.executar(instrucaoSql);
 }
@@ -27,9 +40,22 @@ function listarMaquinas(idEmpresa) {
   return database.executar(instrucaoSql);
 }
 
+function listarMaquinasNaoAlocadas(idEmpresa) {
+  var instrucaoSql = `SELECT idNotebook, numeroSerie, fabricante, modelo
+  FROM Notebook
+   WHERE fkEmpresa = ${idEmpresa}
+   AND idNotebook NOT IN (
+   SELECT fkNotebook
+   FROM Alocacao
+   WHERE fkEmpresaNotebook = ${idEmpresa}
+);`;
+
+  return database.executar(instrucaoSql);
+}
+
 function listarAlocadas(idEmpresa) {
   var instrucaoSql = `SELECT dataUsoInicio, fkNotebook, fkUsuario, fkEmpresaUsuario
-  FROM Alocacao WHERE fkEmpresa = ${idEmpresa};`;
+  FROM Alocacao WHERE fkEmpresaUsuario = ${idEmpresa};`;
 
   return database.executar(instrucaoSql);
 }
@@ -69,4 +95,4 @@ FROM
 }
 
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas };
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados, listarMaquinas, listarMaquinasNaoAlocadas, listarAlocadas };

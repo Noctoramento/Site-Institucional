@@ -150,14 +150,13 @@
             </div>
           </div>
           <div class="cadastro-btn">
-            <button class="funcionario-btn">Cadastrar Funcionário</button>
             <button class="cancelar-btn" onclick="cancelar()">Cancelar</button>
           </div>
         </div>
     </section>
     <div id="form-editar">
       <div class="editar-funcionario">
-        <h2>Deseja adicionar um responsável </h2>
+        <h2>Deseja adicionar um responsável? </h2>
         <div class="cadastro-input">
           <select name="funcionarios" id="select_funcionarios" selected></select>
         </div>
@@ -199,9 +198,10 @@
   }
 
   document.addEventListener('DOMContentLoaded', (event) => {
-    listarMaquinas();
+    listarMaquinasNaoAlocadas();
     listarAlocadas();
   });
+
 
   function cadastrar() {
     document.getElementById("form-alocada").style.display = "block";
@@ -215,14 +215,29 @@
     window.location.href = `${tela}.html`;
   }
 
-  function listarMaquinas() {
-    fetch("/empresas/listarMaquinas", {
+
+  function listarMaquinasNaoAlocadas() {
+    const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
+    fetch(`/empresas/listarMaquinasNaoAlocadas/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {
+        if (!resposta.ok) {
+          throw new Error('Erro na resposta da API');
+        }
         return resposta.json();
       })
       .then(function (maquinas) {
+        if (!Array.isArray(maquinas)) {
+          throw new Error('Resposta da API não é um array');
+        }
+
         const tabelaMaquinas = document.getElementById('tabelaMaquinas').getElementsByTagName('tbody')[0];
         tabelaMaquinas.innerHTML = '';
         maquinas.forEach((maquina, index) => {
@@ -241,23 +256,38 @@
       });
   }
 
-  function listarFuncionarios() {
+  function listarFuncionariosNaoAlocados() {
+    
+    const idEmpresa = parseInt(sessionStorage.getItem('ID_EMPRESA'));
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
     let cargosArmazenados;
     listarCargos().then((cargos) => {
       cargosArmazenados = cargos;
-      fetch("/empresas/listarFuncionarios", {
+      fetch(`/empresas/listarFuncionariosNaoAlocados/${idEmpresa}`, {
         method: "GET"
       })
         .then(function (resposta) {
+          if (!resposta.ok) {
+            throw new Error('Erro na resposta da API');
+          }
           return resposta.json();
         })
         .then(function (funcionarios) {
+          if (!Array.isArray(funcionarios)) {
+            throw new Error('Resposta da API não é um array');
+          }
+
           const selectFun = document.getElementById('select_funcionarios');
-
           funcionarios.forEach(funcionario => {
-
-            selectFun.innerHTML += `<option value='${funcionario.idUsuario}'>${funcionario.nomeUsuario} - ${cargosArmazenados[funcionario.fkCargo]}</option>`;
-
+            if (parseInt(funcionario.fkEmpresa) === idEmpresa) {
+              const cargo = cargosArmazenados[funcionario.fkCargo] || 'Cargo desconhecido';
+              selectFun.innerHTML += `<option value='${funcionario.idUsuario}'>${funcionario.nomeUsuario} - ${cargo}</option>`;
+            }
           });
         })
         .catch(function (erro) {
@@ -266,14 +296,19 @@
     });
   }
 
+
   function listarCargos() {
     return fetch("/empresas/listarCargos", {
       method: "GET"
     })
       .then(function (resposta) {
+        if (!resposta.ok) {
+          throw new Error('Erro na resposta da API');
+        }
         return resposta.json();
       })
       .then(function (cargos) {
+        const cargosArmazenados = {};
         cargos.forEach((cargo) => {
           cargosArmazenados[cargo.idCargo] = cargo.nomeCargo;
         });
@@ -285,23 +320,21 @@
   }
 
   let idMaquinaSelecionada;
-
   let cargosArmazenados = {};
 
   function init() {
     listarCargos().then(() => {
-      listarFuncionarios();
+      listarFuncionariosNaoAlocados();
     });
   }
 
   window.onload = init;
 
   function salvar() {
-
     var id = idMaquinaSelecionada;
-    var funcionario = select_funcionarios.value;
+    var funcionario = document.getElementById('select_funcionarios').value;
 
-    if (funcionario != "") {
+    if (funcionario !== "") {
       fetch("/usuarios/alocarFuncionario", {
         method: "POST",
         headers: {
@@ -323,15 +356,12 @@
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      alert("Insira todos os campos");
     }
-    fechar()
+    fechar();
   }
 
-
-
   function listarAlocadas() {
-
     const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
 
     if (!idEmpresa) {
@@ -339,11 +369,13 @@
       return;
     }
 
-
     fetch(`/empresas/listarAlocadas/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {
+        if (!resposta.ok) {
+          throw new Error('Erro na resposta da API');
+        }
         return resposta.json();
       })
       .then(function (alocada) {
@@ -352,15 +384,15 @@
         alocada.forEach((alocacao, index) => {
           const dataFormatada = formatarData(alocacao.dataUsoInicio);
           tabelaAlocada.innerHTML += `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${alocacao.nomeUsuario}</td>
-                    <td>${alocacao.nomeCargo}</td>
-                    <td>${alocacao.numeroSerie}</td>
-                    <td>${alocacao.modelo}</td>
-                    <td>${dataFormatada}</td>
-                    <td><button onclick="excluir(${alocacao.fkNotebook}, ${alocacao.fkEmpresaNotebook}, ${alocacao.fkUsuario}, ${alocacao.fkEmpresaUsuario})"><img class="img-btn" src="../assets/icons_img/delete.png" alt=""></button></td>
-                </tr>`;
+          <tr>
+            <td>${index + 1}</td>
+            <td>${alocacao.nomeUsuario}</td>
+            <td>${alocacao.nomeCargo}</td>
+            <td>${alocacao.numeroSerie}</td>
+            <td>${alocacao.modelo}</td>
+            <td>${dataFormatada}</td>
+            <td><button onclick="excluir(${alocacao.fkNotebook}, ${alocacao.fkEmpresaNotebook}, ${alocacao.fkUsuario}, ${alocacao.fkEmpresaUsuario})"><img class="img-btn" src="../assets/icons_img/delete.png" alt=""></button></td>
+          </tr>`;
         });
       })
       .catch(function (erro) {
@@ -373,12 +405,10 @@
     return new Date(data).toLocaleDateString('pt-BR', options);
   }
 
-
   function alocar(idNotebook) {
     document.getElementById("form-editar").style.display = "flex";
     idMaquinaSelecionada = idNotebook;
-
-    console.log(idMaquinaSelecionada)
+    console.log(idMaquinaSelecionada);
   }
 
   function fechar() {
@@ -386,8 +416,7 @@
   }
 
   function excluir(fkNotebook, fkEmpresaNotebook, fkUsuario, fkEmpresaUsuario) {
-
-    console.log(fkNotebook)
+    console.log(fkNotebook);
 
     fetch("/usuarios/apagarAlocacao", {
       method: "POST",
@@ -403,14 +432,14 @@
     })
       .then(response => response.json())
       .then(data => {
-        alert("Alocacao excluido com sucesso");
+        alert("Alocação excluída com sucesso");
         console.log('Success:', data);
       })
       .catch((error) => {
-        alert("Erro ao excluir a alocacao")
+        alert("Erro ao excluir a alocação");
         console.error('Error:', error);
       });
-    fechar()
+    fechar();
   }
 
 
