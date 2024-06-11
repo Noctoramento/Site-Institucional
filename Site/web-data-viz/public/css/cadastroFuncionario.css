@@ -41,7 +41,10 @@ header {
 }
 
 .icons_navbar {
-    margin: 18vh;
+    margin: 10vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .img_navbar {
