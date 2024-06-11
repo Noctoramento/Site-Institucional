@@ -352,11 +352,13 @@
     var novaSenha = nova_senha.value
     var novoCargo = novo_cargos.value
     var id = idFuncionarioSelecionado
+    
+    var validacaoSenha = novaSenha.length >= 8 && (novaSenha.indexOf('#') >= 0 || novaSenha.indexOf('!') >= 0 || novaSenha.indexOf('@') >= 0 || novaSenha.indexOf('$') >= 0 || novaSenha.indexOf('%') >= 0 || novaSenha.indexOf('&') >= 0 || novaSenha.indexOf('*') >= 0);
 
     console.log(id);
 
 
-    if (novoNome != "" && novoEmail != "") {
+    if (novoNome != "" && novoEmail != "" && validacaoSenha == true) {
       fetch("/usuarios/atualizarFuncionario", {
         method: "POST",
         headers: {
@@ -380,7 +382,7 @@
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      alert("Insira todos os campos corretamente")
     }
     fechar()
   }
