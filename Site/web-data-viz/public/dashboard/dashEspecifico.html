@@ -18,20 +18,20 @@
         <img class="imgNavbar" src="../assets/icons_img/Logo Verde água escuro.png" alt="" />
         <ul class="iconsNavbar">
             <li onclick="trocarTela('dashGeral')">
-                <svg class="icons_azul" width="24" height="24" viewBox="0 0 30 25" fill="#ffffff"
+                <svg class="icons_azul" width="24" height="24" viewBox="0 0 30 25" fill="#00ffff"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M3.4737 0.0560913C1.7378 0.0560913 0.330566 1.46993 0.330566 3.21399V20.8982C0.330566 22.6423 1.63302 24.0561 3.36893 24.0561H26.5233C28.2592 24.0561 29.6665 22.6423 29.6665 20.8982V3.21399C29.6665 1.46993 28.2592 0.0560913 26.5233 0.0560913H3.4737ZM3.26416 3.21399C3.26416 3.09772 3.35797 3.00346 3.4737 3.00346H9.13134V21.1087H3.4737C3.35797 21.1087 3.26416 21.0145 3.26416 20.8982V3.21399ZM12.0649 21.1087H17.9321V13.5298H12.0649V21.1087ZM12.0649 10.5824V3.00346H26.5233C26.6391 3.00346 26.7329 3.09772 26.7329 3.21399V10.5824L12.0649 10.5824ZM26.7329 13.5298H20.8657V21.1087H26.5233C26.6391 21.1087 26.7329 21.0145 26.7329 20.8982V13.5298Z" />
                 </svg>
                 <a href="./dashGeral.html"></a>
             </li>
-
+<!-- 
             <li>
                 <svg width="24" height="26" viewBox="0 0 30 25" fill="#00ffff" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 27.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
                 </svg>
-            </li>
+            </li> -->
 
             <li onclick="trocarTela('cadastroFuncionario')">
                 <svg class="icons_azul" width="24" height="28" viewBox="0 0 30 25" fill="white"
@@ -84,69 +84,40 @@
         <div class="containerComPadding">
             <header class="header">
                 <div class="tituloDash">
-                    <h1>Visão Específica</h1>
-                </div>
-
-                <div class="user">
-                    <svg width="32" height="32" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M26.6663 24.6667C26.6663 27.244 21.8907 28 15.9997 28C10.1086 28 5.33301 27.244 5.33301 24.6667C5.33301 22.0893 10.1086 18.6667 15.9997 18.6667C21.8907 18.6667 26.6663 22.0893 26.6663 24.6667Z"
-                            stroke="#F7F9FC" stroke-width="3" />
-                        <path
-                            d="M21.333 9.33333C21.333 12.2789 18.9452 14.6667 15.9997 14.6667C13.0542 14.6667 10.6663 12.2789 10.6663 9.33333C10.6663 6.38781 13.0542 4 15.9997 4C18.9452 4 21.333 6.38781 21.333 9.33333Z"
-                            stroke="#F7F9FC" stroke-width="3" />
-                    </svg>
-                    <div>
-                        <h5 class="nomeUser">Nome Colaborador</h5>
-                        <h5 class="cargoUser">Cargo</h5>
-                    </div>
+                    <h1 id="tituloVisaoEspecifica">Visão Específica</h1>
                 </div>
             </header>
 
             <div>
-                <select id="selectNotebook">
-                    <option value="0">Selecione uma Máquina</option>
+                <select id="selectNotebook" onchange="trazerInfoUsuario(); obterDadosGraficos()">
+                    <option value="0" disabled selected>Visualize outra máquina</option>
                 </select>
             </div>
 
             <div class="containerKPIs">
                 <div class="kpi">
-                    <h5>Usuário da Máquina</h5>
-                    <p class="variavelKPI"><br>gabriela@tech.com</p>
+                    <h5 class="txtMaquinas" style="color: #59d9bb;">Usuário da Máquina</h5>
+                    <p class="variavelKPI" id="divKpiUsuario"></p>
                 </div>
 
                 <div class="kpi">
-                    <h6 class="txtMaquinas" style="color: rgb(255, 99, 190);">Condição Geral da Máquina</h6>
-                    <p class="variavelKPI"><br>Normal</p>
+                    <h6 class="txtMaquinas">Condição Geral da Máquina</h6>
+                    <p class="variavelKPI" id="condicao_maquina"></p>
                 </div>
 
                 <div class="kpi">
-                    <h5 style="color: rgb(0, 184, 0);">Paramêtro Normal</h5>
-                    <p class="variavelKPI"><br>Uso CPU: +27%</p>
-                    <p class="variavelKPI">Uso Disco: até 70%</p>
-                    <p class="variavelKPI">Uso Memória RAM: +65%</p>
-                </div>
-
-                <div class="kpi">
-                    <h6 class="txtMaquinas">Tempo de Atividade do Disco</h6>
-                    <p class="variavelKPI"><br>13d:20h:06m:42s</p>
+                    <h6 class="txtMaquinas" style="color: #6963d2">Tempo de Atividade do Disco</h6>
+                    <p id="tempo_disco" class="variavelKPINumber"></p>
                 </div>
 
                 <div class="kpi" style="width: 13vw;">
-                    <h6 class="txtMaquinas">Disco: <span style="color: white;">Em uso</span> <span style="color: aqua;">
-                            VS </span><span style="color: white;">Disponível</span></h6>
-                    <p class="variavelKPI"><br>Em uso: 20%</p>
-                    <p class="variavelKPI"><br>Disponível: 80%</p>
+                    <h6 class="txtMaquinas" style="width: 13vw; color: #ff7edf;">Disco em Uso</h6>
+                    <p id="uso_disco" class="variavelKPINumber"></p>
                 </div>
-                <!-- <div class="kpi" style="width: 13vw;">
-                    <h6 class="txtMaquinas">Disco: <span style="color: white;">Em uso</span> <span style="color: aqua;"> VS </span><span style="color: white;">Disponível</span></h6>
-                    <p class="variavelKPI"><span><span style="color: aqua;"><br>Em uso: </span>20%</span></p>
-                    <p class="variavelKPI"><span><span style="color: aqua;"><br>Disponível:</span> 80%</span></p>
-                </div> -->
             </div>
 
             <div class="containerGraficos">
-                <div class="graficosColuna">
+                <div id="primeira_coluna" class="graficosColuna">
                     <div class="graficos">
                         <canvas id="ram"></canvas>
                     </div>
@@ -156,8 +127,8 @@
                     </div>
                 </div>
 
-                <div class="graficosColuna">
-                    <div>
+                <div >
+                    <div id="segunda_coluna" class="graficosColuna">
                         <div class="graficos">
                             <canvas id="cpu"></canvas>
                         </div>
@@ -177,48 +148,212 @@
         window.location.href = `${tela}.html`;
     }
 
-    window.onload = listarNotebooks();
+    window.onload = function () {
+    trazerInfoNotebooks();
+    const params = new URLSearchParams(window.location.search);
+    const numeroSerie = params.get('serie');
+    const emailUsuario = params.get('email');
+    if (numeroSerie && emailUsuario) {
+        console.log('ESTOU NO ONLOWD ' + numeroSerie)
+        obterDadosGraficos(numeroSerie);
+        mostrarDetalhes(numeroSerie, emailUsuario);
+        atualizarTitulo(numeroSerie);
+        obterDadosDisco(numeroSerie);
+    }
+};
 
-    function listarNotebooks() {
-        console.log("Ta dando certo!!!!!!!!!!!");
-        fetch("/notebook/listarNotebooks", {
+    function obterDadosDisco(numeroSerie) {
+        console.log('TESTE DA SASA ESTPOU NO OBTER GRAFICOS 165')
+
+
+    fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    const usoDisco = resposta[1].usoDisco;
+                    const tempoDisco = resposta[2].tempoAtividadeDisco;
+
+
+                    document.getElementById("uso_disco").innerHTML = usoDisco;
+                    document.getElementById("tempo_disco").innerHTML = tempoDisco;
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API ' + response);
+            }
+        })
+        .catch(function (error) {
+            console.error('Erro ao buscar dados do disco:', error);
+        });
+
+fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    const usoCpu = resposta[0].usoCpu;
+                    const estadoCpuElement = document.getElementById("estado_cpu");
+
+                    if (usoCpu < 50) {
+                        estadoCpuElement.textContent = "Normal";
+                        estadoCpuElement.style.color = "green";
+                    } else if (usoCpu >= 50 && usoCpu < 80) {
+                        estadoCpuElement.textContent = "Alarmante";
+                        estadoCpuElement.style.color = "yellow";
+                    } else {
+                        estadoCpuElement.textContent = "Crítico";
+                        estadoCpuElement.style.color = "red";
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API ' + response);
+            }
+        })
+        .catch(function (error) {
+            console.error('Erro ao buscar dados da CPU:', error);
+        });
+    }
+
+// Chame essa função onde for necessário, por exemplo, quando uma máquina é selecionada
+document.getElementById('selectNotebook').addEventListener('change', function () {
+    const numeroSerie = this.value;
+    obterDadosDisco(numeroSerie);
+});
+
+
+
+    function atualizarTitulo(numeroSerie) {
+        const titulo = document.getElementById('tituloVisaoEspecifica');
+        titulo.innerHTML = `Visão da Máquina: <span style="font-size: 22px; color:white;">${numeroSerie}</span>`;
+    }
+
+
+    function trazerInfoNotebooks() {
+        fetch("/notebook/trazerInfoNotebooks", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                fkEmpresaServer: sessionStorage.IDEMPRESA,
+                fkEmpresaServer: sessionStorage.ID_EMPRESA,
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO LISTAR NOTEBOOKS()!!!!!!!!!")
-
             if (resposta.status == 200) {
-
-                resposta.json().then(json => {
-                    // console.log(json[0].nomeFantasia); //vetor, pegando o nomeFantasia do primeiro item
-                    console.log(JSON.stringify(json));
-                    listarNotebooks(JSON);
-                    console.log("Passoou!!!!!!!!!!!!!!!!!!!");
+                resposta.json().then(jsonNotebooks => {
+                    listarNotebooks(jsonNotebooks);
                 });
-
             } else {
-                console.log("Houve um erro ao tentar listar os Notebooks!");
-                resposta.text().then(texto => {
-                    console.error(texto);
-                });
+                console.error("Houve um erro ao tentar listar os Notebooks!");
             }
-
         }).catch(function (erro) {
-            console.log(erro);
+            console.error(erro);
         })
     }
 
-    //GRAFICOS
-    document.addEventListener('DOMContentLoaded', function () {
+    function listarNotebooks(jsonNotebooks) {
+        var select = document.getElementById("selectNotebook");
+        jsonNotebooks.forEach(notebook => {
+            var novaOpcao = document.createElement("option");
+            novaOpcao.value = notebook.numeroSerie;
+            novaOpcao.text = notebook.numeroSerie;
+            select.appendChild(novaOpcao);
+        });
+    }
+
+    function mostrarDetalhes(numeroSerie, emailUsuario) {
+    document.getElementById("divKpiUsuario").innerHTML = decodeURIComponent(emailUsuario);
+
+}
+
+// 
+
+function trazerInfoUsuario(numeroSerie) {
+    if (numeroSerie == null || numeroSerie == '') {
+        var numeroSerie = selectNotebook.value;
+    }
+
+    fetch(`/notebook/trazerInfoUsuario/${numeroSerie}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    divKpiUsuario.innerHTML = resposta[0].emailUsuario;
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API ' + response);
+            }
+        });
+
+    atualizarTitulo(numeroSerie);
+    obterDadosDisco(numeroSerie);
+
+}
+
+function obterDadosGraficos(numeroSerie) {
+    if (numeroSerie == null || numeroSerie == '') {
+        numeroSerie = selectNotebook.value;
+    }
+
+    fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    // Verifique se a resposta está correta no console
+                    console.log(resposta);
+
+                    primeira_coluna.innerHTML =
+                        `<div  id="primeira_coluna" class="graficosColuna">
+                            <div class="graficos">
+                                <canvas id="ram${numeroSerie}"></canvas>
+                            </div>
+                            <div class="graficos">
+                                <canvas id="armazenamento${numeroSerie}"></canvas>
+                            </div>
+                        </div>`;
+
+                    segunda_coluna.innerHTML =
+                        `<div  id="segunda_coluna" class="graficosColuna">
+                            <div class="graficos">
+                                <canvas id="cpu${numeroSerie}"></canvas>
+                            </div>
+                            <div class="graficos">
+                                <canvas id="janelaAtiva${numeroSerie}"></canvas>
+                            </div>
+                        </div>`;
+
+                    plotarGrafico(numeroSerie, resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API ' + response);
+            }
+        })
+        .catch(function (error) {
+            console.error('Erro ao buscar dados do gráfico:', error);
+        });
+}
+
+
+
+    function plotarGrafico(numeroSerie, resposta) {
+        let labelsData = [];
+        let cpuData = [];
+        let ramData = [];
+        let discoData = [];
+        let janelasData = [];
+
+        for (let i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            cpuData.push(registro.usoCpu);
+            ramData.push(registro.usoMemoriaRam);
+            discoData.push(registro.usoDisco);
+            janelasData.push(registro.qtdJanelasEmUso);
+            labelsData.push(registro.dataHora + 'h');
+        }
+
+        //GRAFICOS
         const data = {
-            cpu: [29, 46, 31, 34, 95, 54, 89, 62, 51, 38, 25],
-            ram: [24, 47, 55, 49, 99, 65, 79, 75, 67, 58, 25],
-            storageUsage: [144, 187, 155, 347, 489, 102, 199, 100, 499, 399, 345, 120],
+            cpu: cpuData,
+            ram: ramData,
+            storageUsage: discoData,
+            janelas: janelasData,
+            labels: labelsData
         };
 
         const options = {
@@ -227,31 +362,22 @@
         };
 
         // CPU
-        new Chart(document.getElementById('cpu').getContext('2d'), {
+        new Chart(document.getElementById(`cpu${numeroSerie}`), {
             type: 'line',
             data: {
-                labels: [
-                    '08:00h',
-                    '09:00h',
-                    '10:00h',
-                    '11:00h',
-                    '12:00h',
-                    '13:00h',
-                    '14:00h',
-                    '15:00h',
-                    '16:00h',
-                    '17:00h',
-                    '18:00h',
-                ],
-                datasets: [
-                    {
-                        label: 'CPU em Uso (%)',
-                        data: data.cpu,
-                        borderColor: 'rgb(0,206,209)',
-                        backgroundColor: 'rgba(0,206,209, 0.25)',
-                        // fill: true
-                    },
-                ],
+                labels: data.labels,
+                datasets:
+                    [
+                        {
+                            label: 'CPU em Uso',
+                            data: data.cpu,
+                            backgroundColor: 'rgb(36,153,199,0.25)',
+                            borderColor: 'rgb(36,153,199)',
+                            // borderColor: 'rgb(0,206,209)',
+                            // backgroundColor: 'rgba(0,206,209, 0.25)',
+                            fill: true
+                        },
+                    ],
             },
             options: {
                 ...options,
@@ -262,33 +388,31 @@
                         stepSize: 10,
                     },
                 },
+                plugins: {
+                    title: {
+                        display: true,
+                        
+                        text: 'CPU em Uso ',
+                        font: {
+                            size: 13,
+                        },
+                    },
+                },
             },
         });
 
         //RAM
-        new Chart(document.getElementById('ram').getContext('2d'), {
+        new Chart(document.getElementById(`ram${numeroSerie}`), {
             type: 'line',
             data: {
-                labels: [
-                    '08:00h',
-                    '09:00h',
-                    '10:00h',
-                    '11:00h',
-                    '12:00h',
-                    '13:00h',
-                    '14:00h',
-                    '15:00h',
-                    '16:00h',
-                    '17:00h',
-                    '18:00h',
-                ],
+                labels: data.labels,
                 datasets: [
                     {
-                        label: 'RAM em Uso (%)',
+                        label: 'RAM em Uso (GB)',
                         data: data.ram,
-                        borderColor: 'rgb(255, 105, 180)',
-                        backgroundColor: 'rgba(255, 105, 180, 0.25)',
-                        // fill: true
+                        borderColor: 'rgb(189,35,181)',
+                        backgroundColor: 'rgba(189,35,181, 0.25)',
+                        fill: true
                     },
                     // {
                     //   label: ' • Modelo de Memória: RAM DDR4',
@@ -302,42 +426,36 @@
                 scales: {
                     y: {
                         min: 0,
-                        max: 100,
-                        stepSize: 10,
+                        max: 128,
+                        stepSize: 4,
+                    },
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Memória Ram em Uso',
+                        font: {
+                            size: 13,
+                        },
                     },
                 },
             },
         });
 
         // ARMAZENAMENTO
-        new Chart(document.getElementById("armazenamento").getContext("2d"), {
+        new Chart(document.getElementById(`armazenamento${numeroSerie}`), {
             type: "line",
             data: {
-                labels: ['08:00h',
-                    '09:00h',
-                    '10:00h',
-                    '11:00h',
-                    '12:00h',
-                    '13:00h',
-                    '14:00h',
-                    '15:00h',
-                    '16:00h',
-                    '17:00h',
-                    '18:00h',],
+                labels: data.labels,
                 datasets: [
                     {
                         label: "Disco em Uso (GB)",
                         data: data.storageUsage,
-                        borderColor: "rgb(0,191,255)",
-                        backgroundColor: "rgba(0,191,255, 0.25)",
-                        // fill: true
+                        borderColor: "#ff7edf",
+                        backgroundColor: "rgb(255,126,223, 0.25)",
+                        fill: true
 
                     },
-                    // {
-                    //   label: ' • Capacidade Total do Disco: 500GB',
-                    //   borderColor: '#1d203a',
-                    //   backgroundColor: '#1d203a',
-                    // }
                 ],
             },
             options: {
@@ -345,31 +463,31 @@
                 scales: {
                     y: {
                         min: 0,
-                        max: 500,
-                        stepSize: 50,
+                        max: 1000,
+                        stepSize: 10,
+                    },
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Disco em Uso',
+                        font: {
+                            size: 13,
+                        },
                     },
                 },
             },
         });
-        const ctx = document.getElementById('janelaAtiva').getContext('2d');
+
+        const ctx = document.getElementById(`janelaAtiva${numeroSerie}`).getContext('2d');
         const data2 = {
-            labels: ['08:00h',
-                '09:00h',
-                '10:00h',
-                '11:00h',
-                '12:00h',
-                '13:00h',
-                '14:00h',
-                '15:00h',
-                '16:00h',
-                '17:00h',
-                '18:00h',],
+            labels: data.labels,
             datasets: [
                 {
                     label: 'Qtd. de Janelas Visíveis',
-                    data: [10, 7, 12, 8, 5, 3, 4, 3, 7, 5, 1],
-                    backgroundColor: 'rgb(186,85,211,0.25)',
-                    borderColor: 'rgb(186,85,211)',
+                    data: data.janelas,
+                    backgroundColor: 'rgb(0,255,255,0.25)',
+                    borderColor: 'rgb(0,255,255)',
                     fill: true
                 },
             ],
@@ -382,7 +500,6 @@
                 y: {
                     beginAtZero: true,
                     min: 0,
-                    max: 45,
                     stepSize: 1,
                     // title: {
                     //     display: true,
@@ -390,15 +507,15 @@
                     // },
                 },
             },
-            // plugins: {
-            //     title: {
-            //         display: true,
-            //         text: 'tituluzin vai aqui',
-            //         font: {
-            //             size: 16,
-            //         },
-            //     },
-            // },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Quantidade de Janelas Visíveis',
+                    font: {
+                        size: 13,
+                    },
+                },
+            },
         };
 
         const janelaAtivaChart = new Chart(ctx, {
@@ -407,5 +524,55 @@
             options: options2,
         });
 
-    });
+        atualizarGrafico(numeroSerie, data, janelaAtivaChart);
+    }
+
+    function atualizarGrafico(numeroSerie, data, janelaChart) {
+
+        fetch(`/notebook/tempo-real/${numeroSerie}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    let novoHorario = novoRegistro[0].dataHora;
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(data);
+
+                    if (novoRegistro[0].momento_grafico == data.labels[data.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(data.labels[data.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        const janelaLabels = [...janelaChart.data.labels];
+                        janelaLabels.shift();
+                        janelaLabels.push(novoHorario);
+                        janelaChart.data.labels = janelaLabels;
+                        const janelaData = [...janelaChart.data.datasets[0].data];
+                        janelaData.shift();
+                        janelaData.push(novoRegistro[0].qtdJanelasEmUso);
+                        console.log(novoRegistro[0].qtdJanelasEmUso);
+                        janelaChart.data.datasets[0].data = janelaData;
+                        janelaChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+
+    }
 </script>

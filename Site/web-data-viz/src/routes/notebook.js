@@ -3,9 +3,26 @@ var router = express.Router();
 
 var notebookController = require("../controllers/notebookController");
 
-router.post("/listarNotebooks", function (req, res) {
-    notebookController.listarNotebooks(req, res);
+router.post("/trazerInfoNotebooks", function (req, res) {
+    console.log("Estou na ROTAAAA");
+    notebookController.trazerInfoNotebooks(req, res);
 });
+
+router.get("/trazerInfoKpis/:numeroSerie", function (req, res) {
+    notebookController.trazerInfoKpis(req, res);
+});
+
+router.get("/obterDadosGrafico/:numeroSerie", function (req, res) {
+    notebookController.obterDadosGrafico(req, res);
+});
+
+router.get("/trazerInfoUsuario/:numeroSerie", function (req, res) {
+    notebookController.trazerInfoUsuario(req, res);
+});
+
+router.get("/tempo-real/:numeroSerie", function (req, res) {
+    notebookController.buscarMedidasEmTempoReal(req, res);
+})
 
 module.exports = router;
 

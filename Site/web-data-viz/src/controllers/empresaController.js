@@ -58,6 +58,29 @@ function cadastrar(req, res) {
   });
 }
 
+function trazerParametros(req, res) {
+  var fkEmpresa = req.body.fkEmpresaServer;
+
+  empresaModel.trazerParametros(fkEmpresa)
+      .then(
+          function (resposta) {
+              if (resposta.length == 0) {
+                  res.status(403).send("Nenhum Paramêtro Cadastrado!");
+              } else {
+                  console.log("ENTREI NO TRAZER PARAMÊTROS")
+                  res.status(200).json(resposta);
+              }
+
+          }
+      ).catch(
+          function (erro) {
+              console.log(erro);
+              console.log("\nHouve um erro na requisição dos Parâmetros. Erro: ", erro.sqlMessage);
+              res.status(500).json(erro.sqlMessage);
+          }
+      );
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
@@ -65,5 +88,6 @@ module.exports = {
   listarCargos,
   listarFuncionarios,
   listarMaquinas,
-  listarAlocadas
+  listarAlocadas,
+  trazerParametros
 };

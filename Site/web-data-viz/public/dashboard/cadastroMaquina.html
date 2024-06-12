@@ -16,42 +16,27 @@
     <div id="tituloDash" style="display: none; ">
       <h1 style="font-weight: 700;">Cadastrar funcionario</h1>
     </div>
-
-    <div id="div_User" class="User" style="font-size: 13px;">
-      <svg width="32" height="32" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M26.6663 24.6667C26.6663 27.244 21.8907 28 15.9997 28C10.1086 28 5.33301 27.244 5.33301 24.6667C5.33301 22.0893 10.1086 18.6667 15.9997 18.6667C21.8907 18.6667 26.6663 22.0893 26.6663 24.6667Z"
-          stroke="#F7F9FC" stroke-width="3" />
-        <path
-          d="M21.333 9.33333C21.333 12.2789 18.9452 14.6667 15.9997 14.6667C13.0542 14.6667 10.6663 12.2789 10.6663 9.33333C10.6663 6.38781 13.0542 4 15.9997 4C18.9452 4 21.333 6.38781 21.333 9.33333Z"
-          stroke="#F7F9FC" stroke-width="3" />
-      </svg>
-
-      <p>
-        Fernanda Caramico<br />
-        <span style="color: rgb(18, 201, 18)">Administrador</span>
-      </p>
-    </div>
   </header>
   <nav class="navbar">
     <img class="img_navbar" src="../assets/icons_img/Logo Verde água escuro.png" alt="" />
 
     <ul class="icons_navbar">
-      <li onclick="trocarTela('DashboardGeral')">
+      <li onclick="trocarTela('dashGeral')">
         <svg class="icons_azul" width="24" height="24" viewBox="0 0 30 25" fill="white"
           xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M3.4737 0.0560913C1.7378 0.0560913 0.330566 1.46993 0.330566 3.21399V20.8982C0.330566 22.6423 1.63302 24.0561 3.36893 24.0561H26.5233C28.2592 24.0561 29.6665 22.6423 29.6665 20.8982V3.21399C29.6665 1.46993 28.2592 0.0560913 26.5233 0.0560913H3.4737ZM3.26416 3.21399C3.26416 3.09772 3.35797 3.00346 3.4737 3.00346H9.13134V21.1087H3.4737C3.35797 21.1087 3.26416 21.0145 3.26416 20.8982V3.21399ZM12.0649 21.1087H17.9321V13.5298H12.0649V21.1087ZM12.0649 10.5824V3.00346H26.5233C26.6391 3.00346 26.7329 3.09772 26.7329 3.21399V10.5824L12.0649 10.5824ZM26.7329 13.5298H20.8657V21.1087H26.5233C26.6391 21.1087 26.7329 21.0145 26.7329 20.8982V13.5298Z" />
         </svg>
-        <a href="./DashboardGeral.html"></a>
+        <a href="./dashGeral.html"></a>
       </li>
 
-      <li>
+      <!-- <li onclick="trocarTela('dashEspecifico')">
         <svg width="24" height="26" viewBox="0 0 30 25" fill="aqua" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 27.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
         </svg>
-      </li>
+        <a href="./dashEspecifico.html"></a>
+      </li> -->
 
       <li onclick="trocarTela('cadastroFuncionario')">
         <svg class="icons_azul" width="24" height="28" viewBox="0 0 30 25" fill="white"
@@ -249,6 +234,8 @@
         .then(response => response.json())
         .then(data => {
           console.log('Success:', data);
+          listarMaquinas();
+          renderizarNotebooks();
         })
         .catch((error) => {
           console.error('Error:', error);

@@ -35,7 +35,6 @@ function listarAlocadas() {
 }
 
 
-
 function buscarPorCnpj(cnpj) {
   var instrucaoSql = `SELECT * FROM empresa WHERE cnpj = '${cnpj}'`;
 
@@ -68,5 +67,14 @@ FROM
   return database.executar(instrucaoSql);
 }
 
+function trazerParametros(fkEmpresa) {
+  var instrucaoSql = `
+  SELECT UsoNormalCpu, UsoNormalDisco, UsoNormalMemoriaRam, 
+  UsoAlarmanteCpu, UsoAlarmanteDisco, UsoAlarmanteMemoriaRam, 
+  UsoCriticoCpu, UsoCriticoDisco, UsoCriticoMemoriaRam FROM Parametros WHERE fkEmpresa = ${fkEmpresa};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas };
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas, trazerParametros};

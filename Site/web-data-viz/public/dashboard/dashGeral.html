@@ -24,14 +24,14 @@
                 </svg>
             </li>
 
-            <li onclick="trocarTela('dashEspecifico')">
+            <!-- <li onclick="trocarTela('dashEspecifico')">
                 <svg class="icons_azul" width="24" height="26" viewBox="0 0 30 25" fill="white"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 27.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
                 </svg>
                 <a href="./dashEspecifico.html"></a>
-            </li>
+            </li> -->
 
             <li onclick="trocarTela('cadastroFuncionario')">
                 <svg class="icons_azul" width="24" height="28" viewBox="0 0 30 25" fill="white"
@@ -86,74 +86,38 @@
                 <div class="tituloDash">
                     <h1>Visão Geral</h1>
                 </div>
-
-                <div class="user">
-                    <svg width="32" height="32" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M26.6663 24.6667C26.6663 27.244 21.8907 28 15.9997 28C10.1086 28 5.33301 27.244 5.33301 24.6667C5.33301 22.0893 10.1086 18.6667 15.9997 18.6667C21.8907 18.6667 26.6663 22.0893 26.6663 24.6667Z"
-                            stroke="#F7F9FC" stroke-width="3" />
-                        <path
-                            d="M21.333 9.33333C21.333 12.2789 18.9452 14.6667 15.9997 14.6667C13.0542 14.6667 10.6663 12.2789 10.6663 9.33333C10.6663 6.38781 13.0542 4 15.9997 4C18.9452 4 21.333 6.38781 21.333 9.33333Z"
-                            stroke="#F7F9FC" stroke-width="3" />
-                    </svg>
-
-
-
-                    <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
-                    <div>
-                        <h5 class="nomeUser">Nome Colaborador</h5>
-                        <h5 class="cargoUser">Cargo</h5>
-                    </div>
-
-
-
-                </div>
             </header>
-
 
             <div class="containerKPIs">
 
-
-                <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
                 <div class="kpi">
-                    <h5>Qtd. Total de Notebooks</h5>
-                    <h5 class="variavelKPINumber"><br>8</h5>
+                    <h5>Total de Notebooks</h5>
+                    <h5 class="variavelKPINumber" id="qtdTotalNotebooks"></h5>
                 </div>
 
-
-
-                <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
                 <div class="kpi">
                     <h5 style="color: rgb(0, 184, 0);">Paramêtro Normal</h5>
-                    <p class="variavelKPI"><br>Uso CPU: +27%</p>
-                    <p class="variavelKPI">Uso Disco: até 70%</p>
-                    <p class="variavelKPI">Uso Memória RAM: +65%</p>
+                    <p class="variavelKPI" id="parametroNormalCpu"></p>
+                    <p class="variavelKPI" id="parametroNormalDisco"></p>
+                    <p class="variavelKPI" id="parametroNormalMemoriaRam"></p>
                 </div>
 
-
-
-                <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
                 <div class="kpi">
-                    <h5 style="color: rgb(234, 255, 0);">Paramêtro de Atenção</h5>
-                    <p class="variavelKPI"><br>Uso CPU: +27%</p>
-                    <p class="variavelKPI">Uso Disco: até 70%</p>
-                    <p class="variavelKPI">Uso Memória RAM: +65%</p>
+                    <h5 style="color: rgb(234, 255, 0);">Paramêtro Alarmante</h5>
+                    <p class="variavelKPI" id="parametroAlarmanteCpu"></p>
+                    <p class="variavelKPI" id="parametroAlarmanteDisco"></p>
+                    <p class="variavelKPI" id="parametroAlarmanteMemoriaRam"></p>
                 </div>
 
-
-
-                <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
                 <div class="kpi">
                     <h5 style="color: red;">Paramêtro Crítico</h5>
-                    <p class="variavelKPI"><br>Uso CPU: +27%</p>
-                    <p class="variavelKPI">Uso Disco: até 70%</p>
-                    <p class="variavelKPI">Uso Memória RAM: +65%</p>
+                    <p class="variavelKPI" id="parametroCriticoCpu"></p>
+                    <p class="variavelKPI" id="parametroCriticoDisco"></p>
+                    <p class="variavelKPI" id="parametroCriticoMemoriaRam"></p>
                 </div>
             </div>
 
 
-
-            <!-- ESTRUTURA AQUI E FUNCTION NO SCRIPT -->
             <div class="containerMaquinas" id="containerMaquinas">
                 <!-- Aqui vai aparecer as divzinhas com os notebooks que cadastrarmos, podendo ter até no máx 8 rsrs -->
             </div>
@@ -167,27 +131,34 @@
         window.location.href = `${tela}.html`;
     }
 
-    window.onload = listarNotebooks();
 
-    function listarNotebooks() {
+    window.onload = function () {
+        trazerInfoNotebooks();
+        trazerParametros();
+        renderizarNotebooks();
+        obterDadosCpu();
+    };
+
+
+    function trazerInfoNotebooks() {
         console.log("Ta dando certo!!!!!!!!!!!");
-        fetch("/notebook/listarNotebooks", {
+        fetch("/notebook/trazerInfoNotebooks", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                fkEmpresaServer: sessionStorage.IDEMPRESA,
+                fkEmpresaServer: sessionStorage.ID_EMPRESA,
             })
         }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO LISTAR NOTEBOOKS()!!!!!!!!!")
 
             if (resposta.status == 200) {
 
-                resposta.json().then(json => {
-                    // console.log(json[0].nomeFantasia); //vetor, pegando o nomeFantasia do primeiro item
-                    console.log(JSON.stringify(json));
-                    listarNotebooks(JSON);
+                resposta.json().then(jsonNotebooks => {
+                    console.log("ESTOU NO THEN DO TRAZER INFO NOTEBOOKS()!!!!!!!!!")
+                    console.log(jsonNotebooks);
+                    console.log(JSON.stringify(jsonNotebooks));
+                    contarNotebooks(jsonNotebooks);
                     console.log("Passoou!!!!!!!!!!!!!!!!!!!");
                 });
 
@@ -204,47 +175,207 @@
     }
 
 
-
-
-
-
-
-    // FUNCTIONS DOS DADOS MOCKADOS
-
-    let maquinas = [];
-
-    function adicionarMaquinas(numeroSerie, responsavel) {
-        maquinas.push({ numeroSerie, responsavel });
-        renderizarMaquinas();
+    function contarNotebooks(jsonNotebooks) {
+        console.log("Estou no contar Notebooks!");
+        console.log(jsonNotebooks.length);
+        var totalNotebooks = jsonNotebooks.length;
+        qtdTotalNotebooks.innerHTML = totalNotebooks;
     }
 
-    function renderizarMaquinas() {
-        const container = document.getElementById('containerMaquinas');
-        container.innerHTML = '';
 
-        for (let i = 0; i < maquinas.length; i++) {
-            const maquina = maquinas[i];
-            const maquinaDiv = document.createElement('div');
-            maquinaDiv.classList.add('maquina');
-            maquinaDiv.innerHTML = `
-            <p class="txtMaquinasCondicao">Normal<br></p>
-            <img class="imgMaquina" src="../assets/imagens/Laptop2.png" alt=""/>
-            <p class="txtMaquinas" style="color: #e18dff;">Número de Série: <span class="txtMaquinas2">${maquina.numeroSerie}</span></p>
-            <p class="txtMaquinas">Usuário: <span class="txtMaquinas2">${maquina.responsavel}</span></p>`;
+    function trazerParametros() {
+        console.log("Entrou no trazerParametros");
 
-            const button = document.createElement('button');
-            button.textContent = 'Ver detalhes';
-            button.classList.add('botaoDetalhes');
-            button.onclick = function () {
-                window.location.href = 'dashEspecifico.html';
-            };
-            maquinaDiv.appendChild(button);
-            container.appendChild(maquinaDiv);
+        fetch("/empresas/trazerParametros", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: sessionStorage.ID_EMPRESA,
+            })
+        }).then(function (resposta) {
+            if (resposta.status === 200) {
+                resposta.json().then(function (jsonParametros) {
+                    console.log("Dados recebidos com sucesso:", jsonParametros);
+                    preencherParametros(jsonParametros);
+                });
+            } else {
+                console.log("Erro ao tentar trazer os parâmetros:", resposta.statusText);
+            }
+        }).catch(function (erro) {
+            console.error("Erro na requisição:", erro);
+        });
+    }
+
+
+    function preencherParametros(jsonParametros) {
+        console.log("Entrou no preencherParametros");
+
+
+        if (Array.isArray(jsonParametros)) {
+            jsonParametros = jsonParametros[0];
         }
+
+        var parametroNormalCpu = document.getElementById("parametroNormalCpu");
+        var parametroNormalDisco = document.getElementById("parametroNormalDisco");
+        var parametroNormalMemoriaRam = document.getElementById("parametroNormalMemoriaRam");
+        var parametroAlarmanteCpu = document.getElementById("parametroAlarmanteCpu");
+        var parametroAlarmanteDisco = document.getElementById("parametroAlarmanteDisco");
+        var parametroAlarmanteMemoriaRam = document.getElementById("parametroAlarmanteMemoriaRam");
+        var parametroCriticoCpu = document.getElementById("parametroCriticoCpu");
+        var parametroCriticoDisco = document.getElementById("parametroCriticoDisco");
+        var parametroCriticoMemoriaRam = document.getElementById("parametroCriticoMemoriaRam");
+
+        console.log("Cheguei no meio do preencherParametros");
+
+        parametroNormalCpu.innerHTML = `Uso da CPU até: ${jsonParametros.UsoNormalCpu}%`;
+        parametroNormalDisco.innerHTML = `Uso do Disco até: ${jsonParametros.UsoNormalDisco}%`;
+        parametroNormalMemoriaRam.innerHTML = `Uso da Memória até: ${jsonParametros.UsoNormalMemoriaRam}%`;
+
+        parametroAlarmanteCpu.innerHTML = `Uso da CPU: +${jsonParametros.UsoAlarmanteCpu}%`;
+        parametroAlarmanteDisco.innerHTML = `Uso do Disco: +${jsonParametros.UsoAlarmanteDisco}%`;
+        parametroAlarmanteMemoriaRam.innerHTML = `Uso da Memória: +${jsonParametros.UsoAlarmanteMemoriaRam}%`;
+
+        parametroCriticoCpu.innerHTML = `Uso da CPU: +${jsonParametros.UsoCriticoCpu}%`;
+        parametroCriticoDisco.innerHTML = `Uso do Disco: +${jsonParametros.UsoCriticoDisco}%`;
+        parametroCriticoMemoriaRam.innerHTML = `Uso da Memória: +${jsonParametros.UsoCriticoMemoriaRam}%`;
+
+        console.log("Encerrei o preencherParametros");
     }
 
-    adicionarMaquinas('NS20240506123', 'gabriela@tech.com');
-    adicionarMaquinas('NS20240506128', 'Nathalia@tech.com');
-    adicionarMaquinas('NS20240506134', 'Yuri@tech.com');
 
+    function listarFuncionarios() {
+        return fetch("/empresas/listarFuncionarios", {
+            method: "GET"
+        })
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .catch(function (erro) {
+                console.log(`ERRO: ${erro}`);
+                return [];
+            });
+    }
+
+
+    function listarAlocadas() {
+        return Promise.all([
+            fetch("/empresas/listarAlocadas", { method: "GET" }).then(res => res.json()),
+            listarFuncionarios()
+        ])
+            .then(function ([alocada, funcionarios]) {
+                // Mapear os funcionários por ID para acesso rápido
+                const funcionariosMap = {};
+                funcionarios.forEach(funcionario => {
+                    funcionariosMap[funcionario.idUsuario] = funcionario;
+                });
+
+                return alocada.map((alocacao, index) => {
+                    const funcionario = funcionariosMap[alocacao.fkUsuario] || {};
+                    return {
+                        index: index + 1,
+                        emailUsuario: funcionario.emailUsuario || 'Email não encontrado',
+                        nomeCargo: alocacao.nomeCargo,
+                        numeroSerie: alocacao.numeroSerie,
+                        modelo: alocacao.modelo,
+                        fkNotebook: alocacao.fkNotebook,
+                        fkEmpresaNotebook: alocacao.fkEmpresaNotebook,
+                        fkUsuario: alocacao.fkUsuario,
+                        fkEmpresaUsuario: alocacao.fkEmpresaUsuario
+                    };
+                });
+            })
+            .catch(function (erro) {
+                console.log(`ERRO: ${erro}`);
+                return [];
+            });
+    }
+
+    function renderizarNotebooks() {
+        fetch("/notebook/trazerInfoNotebooks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: sessionStorage.ID_EMPRESA,
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar os notebooks.');
+                }
+                return response.json();
+            })
+            .then(async jsonNotebooks => {
+                const containerMaquinas = document.getElementById("containerMaquinas");
+                containerMaquinas.innerHTML = "";
+
+                const alocadas = await listarAlocadas();
+
+                // Função para obter os dados da CPU
+            
+
+                // Loop pelos notebooks
+                for (let i = 0; i < jsonNotebooks.length; i++) {
+                    const notebook = jsonNotebooks[i];
+                    const { numeroSerie } = notebook;
+
+                    // Encontrar a alocação correspondente ao numeroSerie
+                    const alocacao = alocadas.find(aloc => aloc.numeroSerie === numeroSerie);
+
+                    // Obter os dados da CPU
+                    const usoCpu = await obterDadosCpu(numeroSerie);
+
+                    // Determinar o estado da CPU
+                    let estadoCpuText, estadoCpuColor;
+                    if (usoCpu < 50) {
+                        estadoCpuText = "Normal";
+                        estadoCpuColor = "green";
+                    } else if (usoCpu >= 50 && usoCpu < 80) {
+                        estadoCpuText = "Alarmante";
+                        estadoCpuColor = "orange";
+                    } else {
+                        estadoCpuText = "Crítico";
+                        estadoCpuColor = "red";
+                    }
+
+                    // Criar o elemento da máquina
+                    const notebookDiv = document.createElement("div");
+                    notebookDiv.classList.add("maquina");
+
+                    // Criar o HTML da máquina com os dados atualizados
+                    notebookDiv.innerHTML = `
+                <p class="txtMaquinasCondicao" style="color: ${estadoCpuColor}">${estadoCpuText}</p>
+                <img class="imgMaquina" src="../assets/imagens/Laptop2.png" alt=""/>
+                <p class="txtMaquinas">Número de Série: <span class="txtMaquinas2">${numeroSerie}</span></p>
+                <p class="txtMaquinas" style="color: #59d9bb;">Usuário: <span class="txtMaquinas2">${alocacao ? alocacao.emailUsuario : 'Máquina não alocada!'}</span></p>
+                <button class="botaoDetalhes" onclick="verDetalhes('${numeroSerie}', '${alocacao ? alocacao.emailUsuario : 'Máquina não alocada!'}')">Ver detalhes</button>
+            `;
+                    containerMaquinas.appendChild(notebookDiv);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar os notebooks: ', error);
+            });
+    }
+
+    async function obterDadosCpu(numeroSerie) {
+                    try {
+                        const response = await fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' });
+                        if (!response.ok) {
+                            throw new Error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}.`);
+                        }
+                        const data = await response.json();
+                        return data.usoCpu;
+                    } catch (error) {
+                        console.error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}: `, error);
+                        return null;
+                    }
+                }
+
+    function verDetalhes(numeroSerie, emailUsuario) {
+        window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
+    }
 </script>

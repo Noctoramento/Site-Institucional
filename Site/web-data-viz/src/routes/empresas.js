@@ -33,4 +33,9 @@ router.get("/listarAlocadas", function (req, res) {
   empresaController.listarAlocadas(req, res);
 });
 
+router.post("/trazerParametros", function (req, res) {
+  console.log("Estou na rota trazer parametros");
+  empresaController.trazerParametros(req, res);
+});
+
 module.exports = router;
