@@ -133,10 +133,10 @@
 
 
     window.onload = function () {
+        obterDadosCpu();
         trazerInfoNotebooks();
         trazerParametros();
         renderizarNotebooks();
-        obterDadosCpu();
     };
 
 
@@ -394,4 +394,5 @@
     function verDetalhes(numeroSerie, emailUsuario) {
         window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
     }
+
 </script>
