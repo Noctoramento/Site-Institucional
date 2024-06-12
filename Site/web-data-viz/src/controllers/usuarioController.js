@@ -70,6 +70,7 @@ function cadastrar(req, res) {
 function cadastrarFuncionario(req, res) {
     var nomeVar = req.body.nomeServer;
     var emailFuncVar = req.body.emailFuncServer;
+    var senhaVar = req.body.senhaServer
     var cargoVar = req.body.cargoServer;
     var idEmpresa = req.body.empresaServer
 
@@ -77,13 +78,15 @@ function cadastrarFuncionario(req, res) {
         res.status(400).send("Seu nome está undefined!");
     } else if (emailFuncVar == undefined) {
         res.status(400).send("Seu email está undefined!");
+    } else if (senhaVar == undefined) {
+        res.status(400).send("Sua senha está undefined!");
     } else if (cargoVar == undefined) {
         res.status(400).send("Seu cargo está undefined!");
     } else if (idEmpresa == undefined) {
         res.status(400).send("Seu idEmpresa está undefined!");
     }
     else {
-        usuarioModel.cadastrarFuncionario(nomeVar, emailFuncVar, idEmpresa, cargoVar)
+        usuarioModel.cadastrarFuncionario(nomeVar, emailFuncVar,senhaVar, idEmpresa, cargoVar)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -139,6 +142,7 @@ function cadastrarMaquina(req, res) {
 function atualizarFuncionario(req, res) {
     var nomeVar = req.body.novoNomeServer;
     var emailVar = req.body.novoEmailFuncServer;
+    var senhaVar = req.body.novaSenhaServer
     var cargoVar = req.body.novoCargoServer
     var idVar = req.body.idServer
 
@@ -146,6 +150,8 @@ function atualizarFuncionario(req, res) {
         res.status(400).send("Seu nome está undefined!");
     } else if (emailVar == undefined) {
         res.status(400).send("Seu email está undefined!");
+    } else if (senhaVar == undefined) {
+        res.status(400).send("Sua senha está undefined!");
     } else if (cargoVar == undefined) {
         res.status(400).send("Seu cargo está undefined!");
     } else if (idVar == undefined) {
@@ -153,7 +159,7 @@ function atualizarFuncionario(req, res) {
     }
     else {
 
-        usuarioModel.atualizarFuncionario(nomeVar, emailVar, cargoVar, idVar)
+        usuarioModel.atualizarFuncionario(nomeVar, emailVar, senhaVar, cargoVar, idVar)
             .then(
                 function (resultado) {
                     res.json(resultado);

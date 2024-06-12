@@ -9,6 +9,9 @@
   <link rel="icon" href="../assets/Imagens/Logo Verde água neon.png">
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'
     type='text/css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -121,6 +124,9 @@
             <input type="text" id="input_nome">
             <label for="">Email:</label>
             <input type="text" id="input_email">
+            <label for="">Senha:</label>
+            <input type="password" class="senha" id="input_senha" placeholder="@Senha1234">
+            <img src="../assets/icons_img/olhoAberto.png" class="btn">
             <label for="">Cargo:</label>
             <select name="cargos" id="select_cargos" selected>
             </select>
@@ -139,6 +145,9 @@
           <input type="text" id="novo_nome">
           <label for="">Email:</label>
           <input type="text" id="novo_email">
+          <label for="">Senha:</label>
+            <input type="password" class="novaSenha" id="nova_senha" placeholder="@Senha1234">
+            <img src="../assets/icons_img/olhoAberto.png" class="novoBtn">
           <label for="">Cargo:</label>
           <select name="cargos" id="novo_cargos" selected>
           </select>
@@ -157,8 +166,42 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', (event) => {
-    listarFuncionarios();
+    init();
   });
+
+  function init() {
+    listarCargos().then(() => {
+      listarFuncionarios();
+    });
+  }
+
+  const senha = document.querySelector('.senha');
+  const btn = document.querySelector('.btn');
+
+  btn.onclick = () => {
+    if (senha.type === 'password') {
+      senha.type = 'text'
+      btn.src = '../assets/icons_img/olhoFechado.png'
+    }
+    else {
+      senha.type = 'password'
+      btn.src = '../assets/icons_img/olhoAberto.png'
+    }
+  }
+
+  const novaSenha = document.querySelector('.novaSenha');
+  const novoBtn = document.querySelector('.novoBtn');
+
+  novoBtn.onclick = () => {
+    if (novaSenha.type === 'password') {
+      novaSenha.type = 'text'
+      novoBtn.src = '../assets/icons_img/olhoFechado.png'
+    }
+    else {
+      novaSenha.type = 'password'
+      novoBtn.src = '../assets/icons_img/olhoAberto.png'
+    }
+  }
 
   function pesquisar() {
 
@@ -214,7 +257,14 @@
   }
 
   function listarFuncionarios() {
-    fetch("/empresas/listarFuncionarios", {
+    const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
+    fetch(`/empresas/listarFuncionarios/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {
@@ -233,7 +283,6 @@
                     <td>${funcionario.emailUsuario}</td>
                     <td><button onclick="editar(${funcionario.idUsuario})"><img class="img-btn" src="../assets/icons_img/botao-editar.png" alt=""></button></td>
                 </tr>`;
-
         });
       })
       .catch(function (erro) {
@@ -241,20 +290,18 @@
       });
   }
 
-  // Função para inicializar a página
-  function init() {
-    listarCargos().then(() => {
-      listarFuncionarios();
-    });
-  }
-
   function cadastrar() {
 
+    
     var nome = input_nome.value
     var email = input_email.value
+    var senha = input_senha.value
     var cargo = select_cargos.value
+    
+    var validacaoSenha = senha.length >= 8 && (senha.indexOf('#') >= 0 || senha.indexOf('!') >= 0 || senha.indexOf('@') >= 0 || senha.indexOf('$') >= 0 || senha.indexOf('%') >= 0 || senha.indexOf('&') >= 0 || senha.indexOf('*') >= 0);
 
-    if (nome != "" && email != "") {
+
+    if (nome != "" && email != "" && validacaoSenha == true) {
       fetch("/usuarios/cadastrarFuncionario", {
         method: "POST",
         headers: {
@@ -263,6 +310,7 @@
         body: JSON.stringify({
           nomeServer: nome,
           emailFuncServer: email,
+          senhaServer: senha,
           empresaServer: sessionStorage.ID_EMPRESA,
           cargoServer: cargo
         }),
@@ -273,11 +321,13 @@
           console.log('Success:', data);
         })
         .catch((error) => {
-          alert("Erro ao cadastrar o funcionário")
+          swal ( "Opa" ,  "Cadastrado com sucesso!" ,  "success");
+         // alert("Erro ao cadastrar o funcionário")
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      swal ( "Opa" ,  "Insira todos os campos corretamente!" ,  "error");
+      //alert("Insira todos os campos corretamente")
     }
     cancelar()
   }
@@ -288,13 +338,16 @@
 
     var novoNome = novo_nome.value
     var novoEmail = novo_email.value
+    var novaSenha = nova_senha.value
     var novoCargo = novo_cargos.value
     var id = idFuncionarioSelecionado
+    
+    var validacaoSenha = novaSenha.length >= 8 && (novaSenha.indexOf('#') >= 0 || novaSenha.indexOf('!') >= 0 || novaSenha.indexOf('@') >= 0 || novaSenha.indexOf('$') >= 0 || novaSenha.indexOf('%') >= 0 || novaSenha.indexOf('&') >= 0 || novaSenha.indexOf('*') >= 0);
 
     console.log(id);
 
 
-    if (novoNome != "" && novoEmail != "") {
+    if (novoNome != "" && novoEmail != "" && validacaoSenha == true) {
       fetch("/usuarios/atualizarFuncionario", {
         method: "POST",
         headers: {
@@ -303,6 +356,7 @@
         body: JSON.stringify({
           idServer: id,
           novoNomeServer: novoNome,
+          novaSenhaServer: novaSenha,
           novoEmailFuncServer: novoEmail,
           novoCargoServer: novoCargo
         }),
@@ -313,11 +367,13 @@
           console.log('Success:', data);
         })
         .catch((error) => {
-          alert("Erro ao atualizar o funcionário")
+          swal ( "Opa" ,  "Atualziado com sucesso!" ,  "success");
+          //alert("Erro ao atualizar o funcionário")
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      swal ( "Opa" ,  "Insira todos os campos corretamente!" ,  "error");
+      //alert("Insira todos os campos corretamente")
     }
     fechar()
   }
@@ -343,7 +399,8 @@
         console.log('Success:', data);
       })
       .catch((error) => {
-        alert("Erro ao excluir o funcionário")
+        swal ( "Opa" ,  "erro ao excluir funcionário!" ,  "error");
+        //alert("Erro ao excluir o funcionário")
         console.error('Error:', error);
       });
     fechar()
@@ -361,7 +418,6 @@
   function editar(idUsuario) {
     document.getElementById("form-editar").style.display = "flex";
     idFuncionarioSelecionado = idUsuario;
-    console.log(idFuncionarioSelecionado.nomeUsuario)
   }
 
   function fechar() {
@@ -372,6 +428,5 @@
     window.location.href = `${tela}.html`;
   }
 
-  window.onload = init;
 
 </script>

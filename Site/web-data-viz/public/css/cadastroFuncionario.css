@@ -41,7 +41,10 @@ header {
 }
 
 .icons_navbar {
-    margin: 18vh;
+    margin: 10vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .img_navbar {
@@ -151,6 +154,7 @@ li {
     content: "\f002"
 }
 
+
 .table-wrapper {
     max-height: 700px;
     width: 80%;
@@ -249,11 +253,11 @@ li {
 }
 
 .cadastro-input {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 70px;
     width: 100%;
-
 }
 
 .cadastro-input input {
@@ -263,10 +267,9 @@ li {
     border: 2px solid #f5f0f0;
     border-radius: 10px;
     color: black;
-    padding: 10px 20px;
+    padding: 10px 40px 10px 20px;
     font-size: 16px;
     transition: background-color 0.3s, border-color 0.3s;
-
 }
 
 .cadastro-input label {
@@ -283,11 +286,24 @@ li {
     border-radius: 10px;
 }
 
-.cadastro-btn {
-    display: flex;
-    width: 100%;
-    padding: 30px;
-    justify-content: space-between;
+.cadastro-input img.btn {
+    position: absolute;
+    top: 65.2%;
+    right: 85px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 30px; 
+    height: 30px; 
+}
+
+.cadastro-input img.novoBtn {
+    position: absolute;
+    top: 65.2%;
+    right: 85px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 30px; 
+    height: 30px; 
 }
 
 .funcionario-btn {

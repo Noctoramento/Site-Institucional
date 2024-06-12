@@ -31,7 +31,7 @@ function acessar() {
         });
        
     } else {
-  
+      swal ( "Opa" ,  "Algo deu errado!" ,  "error");
         console.log("Houve um erro ao tentar realizar o login!");
         resposta.text().then(texto => {
             console.error(texto);

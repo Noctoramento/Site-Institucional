@@ -9,6 +9,8 @@
   <link rel="icon" href="../assets/Imagens/Logo Verde água neon.png">
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -93,7 +95,7 @@
           <button id="cadastrarMaquina" onclick="cadastrarMaquina()">Cadastrar Máquinas</button>
           <div class="pesquisar">
             <input type="text" placeholder="Pesquisar..." id="pesquisar" onkeyup="pesquisar()">
-            <div id="lupa" ></div>
+            <div id="lupa"></div>
           </div>
         </div>
         <div class="table-wrapper">
@@ -186,7 +188,15 @@
 
 
   function listarMaquinas() {
-    fetch("/empresas/listarMaquinas", {
+
+    const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+    if (!idEmpresa) {
+      console.log('ID da empresa não encontrado no sessionStorage');
+      return;
+    }
+
+    fetch(`/empresas/listarMaquinas/${idEmpresa}`, {
       method: "GET"
     })
       .then(function (resposta) {
@@ -231,13 +241,14 @@
           empresaServer: sessionStorage.ID_EMPRESA
         }),
       })
-        .then(response => response.json())
         .then(data => {
+          swal ( "Opa" ,  "Cadastrado com sucesso!" ,  "success");
           console.log('Success:', data);
           listarMaquinas();
           renderizarNotebooks();
         })
         .catch((error) => {
+          swal ( "Opa" ,  "Erro ao cadastrar!" ,  "success");
           console.error('Error:', error);
         });
     }
@@ -271,15 +282,18 @@
       })
         .then(response => response.json())
         .then(data => {
-          alert("Máquina atualizado com sucesso")
+          swal ( "Opa" ,  "Máquina atualizada com sucesso!" ,  "success");
+          //alert("Máquina atualizado com sucesso")
           console.log('Success:', data);
         })
         .catch((error) => {
-          alert("Erro ao atualizar o máquina")
+          swal ( "Opa" ,  "Atualizado com sucesso!" ,  "success");
+          //alert("Erro ao atualizar o máquina")
           console.error('Error:', error);
         });
     } else {
-      alert("Insira todos os campos")
+      swal ( "Opa" ,  "Insira todos os campos!" ,  "error");
+     // alert("Insira todos os campos")
     }
     fechar()
   }
@@ -300,11 +314,12 @@
     })
       .then(response => response.json())
       .then(data => {
-        alert("Máaquina excluida com sucesso");
+        swal ( "Opa" ,  "Máquina excluida com sucesso!" ,  "success");
         console.log('Success:', data);
       })
       .catch((error) => {
-        alert("Erro ao excluir o máquina")
+        swal ( "Opa" ,  "Erro ao excluir a máquina!" ,  "error");
+        //alert("Erro ao excluir o máquina")
         console.error('Error:', error);
       });
     fechar()
@@ -335,230 +350,5 @@
   }
 
 </script>
-
-<!-- <script>
-
-  function add() {
-    const NumeroSerieInput = document.getElementById('numeroSerie');
-    const FabricanteInput = document.getElementById("fabricante");
-    const ModeloInput = document.getElementById("modelo");
-    const DtAquisicaoInput = document.getElementById('dtAquisicao');
-    const SistemaOperacionalInput = document.getElementById('sistemaOperacional')
-    const numeroSerie = NumeroSerieInput.value.trim();
-    const fabricante = FabricanteInput.value.trim();
-    const modelo = ModeloInput.value.trim();
-    const sistemaOperacional = SistemaOperacionalInput.value.trim();
-
-    const [ano, mes, dia] = DtAquisicaoInput.value.split('-');
-
-    const dtAquisicao = `${dia}/${mes}/${ano}`;
-
-    const hoje = new Date().setHours(0, 0, 0, 0);
-
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    const valido = MaquinasCadastradas.find(item => item.numeroSerie === numeroSerie && item.dtAquisicao === dtAquisicao)
-
-    if (numeroSerie != "" && fabricante != "" && modelo != "" && sistemaOperacional != "" & new Date(ano, mes - 1, dia) >= hoje) {
-
-      let listaMaquinas = document.getElementById('lista-maquinas');
-      var MaquinasAdicionadas = document.createElement('li')
-
-      MaquinasAdicionadas.innerHTML = `
-      <span><b>Número série:</b> ${numeroSerie} <span><br>
-    <span><b>Fabricante:</b> ${fabricante} <span><br>
-    <span><b>Modelo:</b> ${modelo} <span><br>
-    <span><b>Sistema Operacional:</b> ${sistemaOperacional} <span><br>
-    <span><b>Data de aquisição:</b> ${dtAquisicao} <span> <br>
-
-      <div class="botoesAlterar">
-    <button class="botaoEditar" onclick="editar(this)">editar</button>
-    <button class="botaoRemover" onclick="excluir(this)">excluir</button>
-    </div>
-    `
-
-      salvarCadastros(numeroSerie, fabricante, modelo, sistemaOperacional, dtAquisicao)
-      selecionarOpcao()
-
-      listaMaquinas.appendChild(MaquinasAdicionadas)
-
-      numeroSerie.value = '';
-      fabricante.value = '';
-      modelo.value = '';
-      sistemaOperacional.value = '';
-      dtAquisicao.value = '';
-
-      carrregarMaquinas();
-
-    } else {
-      alert("Insira todos os campos ou uma data atual")
-    }
-  }
-
-
-  function salvarCadastros(numeroSerie, fabricante, modelo, sistemaOperacional, dtAquisicao) {
-
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    MaquinasCadastradas.push({ numeroSerie: numeroSerie, fabricante: fabricante, modelo: modelo, sistemaOperacional: sistemaOperacional, dtAquisicao: dtAquisicao, funcionarioResponsavel: '' });
-    localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-
-  }
-
-  function carrregarMaquinas() {
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    const listaMaquinas = document.getElementById('lista-maquinas');
-
-    listaMaquinas.innerHTML = ''
-
-    MaquinasCadastradas.forEach(function (Maquinas, index) {
-      let MaquinasAdicionadas = document.createElement('li')
-      MaquinasAdicionadas.innerHTML = `
-    <div class="card-info" >
-     <div class="imgButton">
-      <img id="imagemLogo" class="imgMaquina" src="../assets/icons_img/laptop.png" alt="">
-      <button class="botaoEditar" onclick="editar(${index})">editar</button>
-      <button class="botaoRemover" onclick="excluir(${index})">excluir</button>
-       </div>
-    <span><b>Número série:</b> ${Maquinas.numeroSerie} <span><br>
-    <span><b>Fabricante:</b> ${Maquinas.fabricante} <span><br>
-    <span><b>Modelo:</b> ${Maquinas.modelo} <span><br>
-    <span><b>Sistema Operacional:</b> ${Maquinas.sistemaOperacional} <span><br>
-    <span><b>Data de aquisição:</b> ${Maquinas.dtAquisicao} <span> <br>
-    <div class="botoesAlterar" >
-    
-    </div>
-    </div>`
-
-
-
-      listaMaquinas.appendChild(MaquinasAdicionadas)
-
-    });
-  }
-
-
-
-  carrregarMaquinas();
-
-  function excluir(index) {
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    MaquinasCadastradas.splice(index, 1)
-    localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-    carrregarMaquinas();
-  };
-
-
-  var edicoes = -1
-
-  function editar(index) {
-
-    edicoes = index;
-
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    let Maquina = MaquinasCadastradas[index];
-
-
-    document.getElementById('numeroSerie').value = Maquina.numeroSerie;
-    document.getElementById('fabricante').value = Maquina.fabricante;
-    document.getElementById('modelo').value = Maquina.modelo;
-    document.getElementById('sistemaOperacional').value = Maquina.sistemaOperacional;
-    document.getElementById('dtAquisicao').value = Maquina.dtAquisicao;
-
-    console.log(Maquina.sistemaOperacional);
-
-    abrirEdicao()
-
-  }
-
-
-  function abrirEdicao() {
-    document.getElementById("myForm").style.display = "block";
-
-  }
-
-  function cancelarEdicao() {
-    document.getElementById("myForm").style.display = "none";
-  }
-
-
-
-  function salvarEdicao() {
-
-    const novoSistemaOPInput = document.getElementById('novo-sistema');
-
-    novoSistemaOP = novoSistemaOPInput.value.trim();
-
-    console.log(novoSistemaOP)
-
-    if (novoSistemaOP && edicoes !== -1) { 
-
-      let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-
-      MaquinasCadastradas[edicoes].sistemaOperacional = novoSistemaOP;
-
-      localStorage.setItem('MaquinasCadastradas', JSON.stringify(MaquinasCadastradas));
-
-      carrregarMaquinas();
-      cancelarEdicao();
-    }
-  }
-
-
-
-  function show() {
-    const selecionarSO = document.getElementById('filtrar-maquina').value;
-    const selecionarMaquina = JSON.parse(localStorage.getItem('MaquinasCadastradas')).filter(maquina => maquina.sistemaOperacional === selecionarSO);
-
-    const listaMaquinas = document.getElementById('lista-maquinas');
-    listaMaquinas.innerHTML = '';
-
-    selecionarMaquina.forEach(function (Maquinas, index) {
-      let lista = document.createElement('li')
-      lista.innerHTML += `
-      <div class="card-info">
-     <div class="imgButton">
-      <img id="imagemLogo" class="imgMaquina" src="../assets/icons_img/laptop.png" alt="">
-      <button class="botaoEditar" onclick="editar(${index})">editar</button>
-      <button class="botaoRemover" onclick="excluir(${index})">excluir</button>
-       </div>
-    <span><b>Número série:</b> ${Maquinas.numeroSerie} <span><br>
-    <span><b>Fabricante:</b> ${Maquinas.fabricante} <span><br>
-    <span><b>Modelo:</b> ${Maquinas.modelo} <span><br>
-    <span><b>Sistema Operacional:</b> ${Maquinas.sistemaOperacional} <span><br>
-    <span><b>Data de aquisição:</b> ${Maquinas.dtAquisicao} <span> <br>
-    <div class="botoesAlterar" >
-    
-    </div>
-    </div>`
-
-      listaMaquinas.appendChild(lista)
-    })
-  }
-
-  function selecionarOpcao() {
-    let MaquinasCadastradas = JSON.parse(localStorage.getItem('MaquinasCadastradas')) || [];
-    let dateSet = new Set();
-    MaquinasCadastradas.forEach(maquina => dateSet.add(maquina.sistemaOperacional))
-
-    const listaMaquinas = document.getElementById('filtrar-maquina')
-    listaMaquinas.innerHTML = '';
-
-    let dateArray = Array.from(dateSet).sort();
-
-    dateArray.forEach(sistemaOperacional => {
-      let opcao = document.createElement('option');
-      opcao.value = sistemaOperacional;
-      opcao.textContent = sistemaOperacional;
-      listaMaquinas.appendChild(opcao);
-    });
-  }
-
-  selecionarOpcao()
-
-  function trocarTela(tela) {
-    window.location.href = `${tela}.html`;
-  }
-
-
-</script> -->
 
 </html>

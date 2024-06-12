@@ -21,15 +21,24 @@ router.get("/listarCargos", function (req, res) {
   empresaController.listarCargos(req, res);
 });
 
-router.get("/listarFuncionarios", function (req, res) {
+router.get("/listarFuncionarios/:idEmpresa", function (req, res) {
   empresaController.listarFuncionarios(req, res);
 });
 
-router.get("/listarMaquinas", function (req, res) {
+router.get("/listarFuncionariosNaoAlocados/:idEmpresa", function (req, res) {
+  empresaController.listarFuncionariosNaoAlocados(req, res);
+});
+
+
+router.get("/listarMaquinas/:idEmpresa", function (req, res) {
   empresaController.listarMaquinas(req, res);
 });
 
-router.get("/listarAlocadas", function (req, res) {
+router.get("/listarMaquinasNaoAlocadas/:idEmpresa", function (req, res) {
+  empresaController.listarMaquinasNaoAlocadas(req, res);
+});
+
+router.get("/listarAlocadas/:idEmpresa", function (req, res) {
   empresaController.listarAlocadas(req, res);
 });
 

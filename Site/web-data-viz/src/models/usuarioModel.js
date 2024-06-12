@@ -18,10 +18,10 @@ function cadastrar(cnpjVar, razaoSocialVar, emailVar, senhaVar) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrarFuncionario(nomeVar, emailFuncVar, idEmpresa, cargoVar) {
+function cadastrarFuncionario(nomeVar, emailFuncVar, senhaVar, idEmpresa, cargoVar) {
 
     var instrucaoSql = `
-    INSERT INTO USUARIO (NOMEUSUARIO, EMAILUSUARIO, fkEmpresa, fkCargo) VALUES ('${nomeVar}', '${emailFuncVar}', '${idEmpresa}' , '${cargoVar}');
+    INSERT INTO USUARIO (NOMEUSUARIO, EMAILUSUARIO, senhaUsuario, fkEmpresa, fkCargo) VALUES ('${nomeVar}', '${emailFuncVar}', '${senhaVar}', '${idEmpresa}' , '${cargoVar}');
 `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -41,11 +41,11 @@ function cadastrarMaquina(numeroVar, fabricanteVar, modeloVar, idEmpresa) {
 
 }
 
-function atualizarFuncionario(nomeVar, emailVar, cargoVar, idVar) {
+function atualizarFuncionario(nomeVar, emailVar, senhaVar, cargoVar, idVar) {
 
     var instrucaoSql = `
 
-    UPDATE Usuario SET nomeUsuario = '${nomeVar}', emailUsuario = '${emailVar}', fkCargo = '${cargoVar}'
+    UPDATE Usuario SET nomeUsuario = '${nomeVar}', emailUsuario = '${emailVar}', senhaUsuario = '${senhaVar}', fkCargo = '${cargoVar}'
      WHERE idUsuario = ${idVar};
 
     `;

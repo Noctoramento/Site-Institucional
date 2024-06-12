@@ -13,23 +13,49 @@ function listarCargos() {
 }
 
 
-function listarFuncionarios() {
-  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkCargo
-  FROM Usuario;`;
+function listarFuncionarios(idEmpresa) {
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkEmpresa , fkCargo FROM Usuario WHERE fkEmpresa = ${idEmpresa}`;
 
   return database.executar(instrucaoSql);
 }
 
-function listarMaquinas() {
+function listarFuncionariosNaoAlocados(idEmpresa) {
+  var instrucaoSql = `SELECT idUsuario, nomeUsuario, emailUsuario, fkEmpresa, fkCargo 
+  FROM Usuario
+  WHERE fkEmpresa = ${idEmpresa}
+  AND idUsuario NOT IN (
+  SELECT fkUsuario
+  FROM Alocacao
+  WHERE fkEmpresaUsuario = ${idEmpresa}
+);`;
+
+  return database.executar(instrucaoSql);
+}
+
+
+function listarMaquinas(idEmpresa) {
   var instrucaoSql = `SELECT idNotebook, numeroSerie, fabricante, modelo
-  FROM Notebook;`;
+  FROM Notebook WHERE fkEmpresa = ${idEmpresa};`;
 
   return database.executar(instrucaoSql);
 }
 
-function listarAlocadas() {
+function listarMaquinasNaoAlocadas(idEmpresa) {
+  var instrucaoSql = `SELECT idNotebook, numeroSerie, fabricante, modelo
+  FROM Notebook
+   WHERE fkEmpresa = ${idEmpresa}
+   AND idNotebook NOT IN (
+   SELECT fkNotebook
+   FROM Alocacao
+   WHERE fkEmpresaNotebook = ${idEmpresa}
+);`;
+
+  return database.executar(instrucaoSql);
+}
+
+function listarAlocadas(idEmpresa) {
   var instrucaoSql = `SELECT dataUsoInicio, fkNotebook, fkUsuario, fkEmpresaUsuario
-  FROM Alocacao;`;
+  FROM Alocacao WHERE fkEmpresaUsuario = ${idEmpresa};`;
 
   return database.executar(instrucaoSql);
 }
@@ -77,4 +103,8 @@ function trazerParametros(fkEmpresa) {
   return database.executar(instrucaoSql);
 }
 
+<<<<<<< HEAD
 module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas, trazerParametros};
+=======
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados, listarMaquinas, listarMaquinasNaoAlocadas, listarAlocadas };
+>>>>>>> 21494f7e26de09c70a26e782b40da6016baa4784
