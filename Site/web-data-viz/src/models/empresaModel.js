@@ -103,8 +103,4 @@ function trazerParametros(fkEmpresa) {
   return database.executar(instrucaoSql);
 }
 
-<<<<<<< HEAD
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarMaquinas, listarAlocadas, trazerParametros};
-=======
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados, listarMaquinas, listarMaquinasNaoAlocadas, listarAlocadas };
->>>>>>> 21494f7e26de09c70a26e782b40da6016baa4784
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados , listarMaquinas,listarMaquinasNaoAlocadas , listarAlocadas, trazerParametros};

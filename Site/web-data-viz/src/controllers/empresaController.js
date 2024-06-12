@@ -129,11 +129,7 @@ module.exports = {
   listarFuncionarios,
   listarFuncionariosNaoAlocados,
   listarMaquinas,
-<<<<<<< HEAD
+  listarMaquinasNaoAlocadas,
   listarAlocadas,
   trazerParametros
-=======
-  listarMaquinasNaoAlocadas,
-  listarAlocadas
->>>>>>> 21494f7e26de09c70a26e782b40da6016baa4784
 };

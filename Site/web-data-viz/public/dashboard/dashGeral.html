@@ -246,7 +246,15 @@
 
 
     function listarFuncionarios() {
-        return fetch("/empresas/listarFuncionarios", {
+
+        const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+        if (!idEmpresa) {
+            console.log('ID da empresa não encontrado no sessionStorage');
+            return;
+        }
+
+        return fetch(`/empresas/listarFuncionarios/${idEmpresa}`, {
             method: "GET"
         })
             .then(function (resposta) {
@@ -260,8 +268,16 @@
 
 
     function listarAlocadas() {
+
+        const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+        if (!idEmpresa) {
+            console.log('ID da empresa não encontrado no sessionStorage');
+            return;
+        }
+
         return Promise.all([
-            fetch("/empresas/listarAlocadas", { method: "GET" }).then(res => res.json()),
+            fetch(`/empresas/listarAlocadas/${idEmpresa}`, { method: "GET" }).then(res => res.json()),
             listarFuncionarios()
         ])
             .then(function ([alocada, funcionarios]) {
@@ -315,7 +331,7 @@
                 const alocadas = await listarAlocadas();
 
                 // Função para obter os dados da CPU
-            
+
 
                 // Loop pelos notebooks
                 for (let i = 0; i < jsonNotebooks.length; i++) {
@@ -362,18 +378,18 @@
     }
 
     async function obterDadosCpu(numeroSerie) {
-                    try {
-                        const response = await fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' });
-                        if (!response.ok) {
-                            throw new Error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}.`);
-                        }
-                        const data = await response.json();
-                        return data.usoCpu;
-                    } catch (error) {
-                        console.error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}: `, error);
-                        return null;
-                    }
-                }
+        try {
+            const response = await fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}.`);
+            }
+            const data = await response.json();
+            return data.usoCpu;
+        } catch (error) {
+            console.error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}: `, error);
+            return null;
+        }
+    }
 
     function verDetalhes(numeroSerie, emailUsuario) {
         window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
