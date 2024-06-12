@@ -294,11 +294,12 @@
       })
         .then(response => response.json())
         .then(data => {
-          alert("Máquina atualizado com sucesso")
+          swal ( "Opa" ,  "Máquina atualizada com sucesso!" ,  "success");
+          //alert("Máquina atualizado com sucesso")
           console.log('Success:', data);
         })
         .catch((error) => {
-          swal ( "Opa" ,  "Erro ao atualizar a máquina!" ,  "error");
+          swal ( "Opa" ,  "Atualizado com sucesso!" ,  "success");
           //alert("Erro ao atualizar o máquina")
           console.error('Error:', error);
         });
@@ -325,7 +326,7 @@
     })
       .then(response => response.json())
       .then(data => {
-        alert("Máaquina excluida com sucesso");
+        swal ( "Opa" ,  "Máquina excluida com sucesso!" ,  "success");
         console.log('Success:', data);
       })
       .catch((error) => {
