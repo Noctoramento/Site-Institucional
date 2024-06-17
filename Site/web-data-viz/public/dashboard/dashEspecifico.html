@@ -22,8 +22,7 @@
                 <svg class="icons_azul" width="27" height="32" viewBox="0 0 24 24" fill="white"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
-                        d="M4 8L3.29289 8.70711L2.58579 8L3.29289 7.29289L4 8ZM9 20C8.44772 20 8 19.5523 8 19C8 18.4477 8.44772 18 9 18L9 20ZM8.29289 13.7071L3.29289 8.70711L4.70711 7.29289L9.70711 12.2929L8.29289 13.7071ZM3.29289 7.29289L8.29289 2.29289L9.70711 3.70711L4.70711 8.70711L3.29289 7.29289ZM4 7L14.5 7L14.5 9L4 9L4 7ZM14.5 20L9 20L9 18L14.5 18L14.5 20ZM21 13.5C21 17.0898 18.0898 20 14.5 20L14.5 18C16.9853 18 19 15.9853 19 13.5L21 13.5ZM14.5 7C18.0898 7 21 9.91015 21 13.5L19 13.5C19 11.0147 16.9853 9 14.5 9L14.5 7Z"
-                        />
+                        d="M4 8L3.29289 8.70711L2.58579 8L3.29289 7.29289L4 8ZM9 20C8.44772 20 8 19.5523 8 19C8 18.4477 8.44772 18 9 18L9 20ZM8.29289 13.7071L3.29289 8.70711L4.70711 7.29289L9.70711 12.2929L8.29289 13.7071ZM3.29289 7.29289L8.29289 2.29289L9.70711 3.70711L4.70711 8.70711L3.29289 7.29289ZM4 7L14.5 7L14.5 9L4 9L4 7ZM14.5 20L9 20L9 18L14.5 18L14.5 20ZM21 13.5C21 17.0898 18.0898 20 14.5 20L14.5 18C16.9853 18 19 15.9853 19 13.5L21 13.5ZM14.5 7C18.0898 7 21 9.91015 21 13.5L19 13.5C19 11.0147 16.9853 9 14.5 9L14.5 7Z" />
                 </svg>
                 <a href="./dashGeral.html"></a>
             </li>
@@ -103,10 +102,10 @@
                     <p class="variavelKPI" id="divKpiUsuario"></p>
                 </div>
 
-                <div class="kpi">
+                <!-- <div class="kpi">
                     <h6 class="txtMaquinas">Condição Geral da Máquina</h6>
                     <p class="variavelKPI" id="condicao_maquina"></p>
-                </div>
+                </div> -->
 
                 <div class="kpi">
                     <h6 class="txtMaquinas" style="color: #6963d2">Tempo de Atividade do Disco</h6>
@@ -147,132 +146,81 @@
     </div>
 </body>
 <script>
+
     function trocarTela(tela) {
         window.location.href = `${tela}.html`;
     }
 
     window.onload = function () {
-        trazerInfoNotebooks();
+        listarNotebooks();
         const params = new URLSearchParams(window.location.search);
         const numeroSerie = params.get('serie');
         const emailUsuario = params.get('email');
         if (numeroSerie && emailUsuario) {
-            console.log('ESTOU NO ONLOWD ' + numeroSerie)
+            console.log('ENTROU NO IF DO ONLOAD ' + numeroSerie);
             obterDadosGraficos(numeroSerie);
-            mostrarDetalhes(numeroSerie, emailUsuario);
             atualizarTitulo(numeroSerie);
-            obterDadosDisco(numeroSerie);
+            mostrarDetalhes(numeroSerie, emailUsuario);
+            obterDadosEspecificosKpis(numeroSerie);
         }
-    };
-
-    function obterDadosDisco(numeroSerie) {
-        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
-            .then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (resposta) {
-                        const usoDisco = resposta[1].usoDisco;
-                        const tempoDisco = resposta[2].tempoAtividadeDisco;
-
-
-                        document.getElementById("uso_disco").innerHTML = usoDisco;
-                        document.getElementById("tempo_disco").innerHTML = tempoDisco;
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API ' + response);
-                }
-            })
-            .catch(function (error) {
-                console.error('Erro ao buscar dados do disco:', error);
-            });
-
-        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
-            .then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (resposta) {
-                        const usoCpu = resposta[0].usoCpu;
-                        const estadoCpuElement = document.getElementById("estado_cpu");
-
-                        if (usoCpu < 50) {
-                            estadoCpuElement.textContent = "Normal";
-                            estadoCpuElement.style.color = "green";
-                        } else if (usoCpu >= 50 && usoCpu < 80) {
-                            estadoCpuElement.textContent = "Alarmante";
-                            estadoCpuElement.style.color = "yellow";
-                        } else {
-                            estadoCpuElement.textContent = "Crítico";
-                            estadoCpuElement.style.color = "red";
-                        }
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API ' + response);
-                }
-            })
-            .catch(function (error) {
-                console.error('Erro ao buscar dados da CPU:', error);
-            });
     }
 
-    // Chame essa função onde for necessário, por exemplo, quando uma máquina é selecionada
-    document.getElementById('selectNotebook').addEventListener('change', function () {
-        const numeroSerie = this.value;
-        obterDadosDisco(numeroSerie);
-    });
-
-
-
-    function atualizarTitulo(numeroSerie) {
+    function atualizarTitulo(numeroSerie) { //atualiza o numero de serie do titulo conforme o note selecionado no select
         const titulo = document.getElementById('tituloVisaoEspecifica');
         titulo.innerHTML = `Visão da Máquina: <span style="font-size: 22px; color:white;">${numeroSerie}</span>`;
     }
 
-
-    // function trazerInfoNotebooks() {
-    //     fetch("/notebook/trazerInfoNotebooks", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             fkEmpresaServer: sessionStorage.ID_EMPRESA,
-    //         })
-    //     }).then(function (resposta) {
-    //         if (resposta.status == 200) {
-    //             resposta.json().then(jsonNotebooks => {
-    //                 listarNotebooks(jsonNotebooks);
-    //             });
-    //         } else {
-    //             console.error("Houve um erro ao tentar listar os Notebooks!");
-    //         }
-    //     }).catch(function (erro) {
-    //         console.error(erro);
-    //     })
-    // }
-
-    // function listarNotebooks(jsonNotebooks) {
-    //     var select = document.getElementById("selectNotebook");
-    //     jsonNotebooks.forEach(notebook => {
-    //         var novaOpcao = document.createElement("option");
-    //         novaOpcao.value = notebook.numeroSerie;
-    //         novaOpcao.text = notebook.numeroSerie;
-    //         select.appendChild(novaOpcao);
-    //     });
-    // }
-
-    function mostrarDetalhes(numeroSerie, emailUsuario) {
+    function mostrarDetalhes(numeroSerie, emailUsuario) { //Quando clicar no ver detalhes na page geral, já carrega a especifica c os dados
         document.getElementById("divKpiUsuario").innerHTML = decodeURIComponent(emailUsuario);
-
     }
 
-    // 
+    document.getElementById('selectNotebook').addEventListener('change', function () {
+        const numeroSerie = this.value;
+        obterDadosEspecificosKpis(numeroSerie);  // Atualiza os dados específicos quando um novo notebook é selecionado
+    });
 
-    function trazerInfoUsuario(numeroSerie) {
+    function listarNotebooks() { //traz a lista dos notes pelo numero de serie
+        console.log("Estou no listar Notebooks!")
+        const fkEmpresa = sessionStorage.getItem('ID_EMPRESA');
+
+        fetch(`/notebook/listarNotebooks/${fkEmpresa}`, {
+            method: "GET",
+        }).then(function (resposta) {
+            if (resposta.status == 200) {
+                resposta.json().then(function (jsonNotebooks) {
+                    console.log("O que ta vindo do BD: ", jsonNotebooks);
+                    listarNotebooksNoSelect(jsonNotebooks);
+                    // contarNotebooks(jsonNotebooks);
+                    // obterParametros();
+                    // listarAlocadas(jsonNotebooks);
+                });
+            } else {
+                console.log("Deu ruim ao listar os Notes");
+                resposta.text().then(function (texto) {
+                    console.error("Erro: ", texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.error("Erro na requisição da função do listar notebooks: ", erro);
+        });
+    }
+
+    function listarNotebooksNoSelect(jsonNotebooks) { //lista no select os notes pelo SN 
+        var select = document.getElementById("selectNotebook");
+        jsonNotebooks.forEach(notebook => {
+            var novaOpcao = document.createElement("option");
+            novaOpcao.value = notebook.numeroSerie;
+            novaOpcao.text = notebook.numeroSerie;
+            select.appendChild(novaOpcao);
+        });
+    }
+
+    function obterUsuarioNotebook(numeroSerie) { //Mostra o email do usuario que esta usando a maquina
         if (numeroSerie == null || numeroSerie == '') {
             var numeroSerie = selectNotebook.value;
         }
-        const emailUsuario = params.get('email');
 
-
-        fetch(`/notebook/trazerInfoUsuario/${numeroSerie}`, { cache: 'no-store' })
+        fetch(`/notebook/obterUsuarioNotebook/${numeroSerie}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
@@ -282,10 +230,31 @@
                     console.error('Nenhum dado encontrado ou erro na API ' + response);
                 }
             });
+        atualizarTitulo(numeroSerie); // revisar essa chamada da function...
 
-        atualizarTitulo(numeroSerie);
-        obterDadosDisco(numeroSerie);
+    }
 
+    function obterDadosEspecificosKpis(numeroSerie) { // tempo de atv do disco e disco em uso q aparece nas kpi de cima
+        fetch(`/notebook/obterDadosEspecificosKpis/${numeroSerie}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        if (resposta.length > 0) {
+                            const usoDisco = resposta[0].usoDisco;
+                            const tempoDisco = resposta[0].tempoAtividadeDisco;
+                            document.getElementById("uso_disco").innerHTML = `${usoDisco} GB`;
+                            document.getElementById("tempo_disco").innerHTML = `${tempoDisco}`;
+                        } else {
+                            console.log('Nenhum dado encontrado');
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                }
+            })
+            .catch(function (error) {
+                console.error('Erro ao buscar as informações para as KPIs específicas:', error);
+            });
     }
 
     function obterDadosGraficos(numeroSerie) {
@@ -293,32 +262,31 @@
             numeroSerie = selectNotebook.value;
         }
 
-        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+        fetch(`/notebook/obterDadosGraficos/${numeroSerie}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        // Verifique se a resposta está correta no console
                         console.log(resposta);
 
                         primeira_coluna.innerHTML =
                             `<div  id="primeira_coluna" class="graficosColuna">
-                            <div class="graficos">
-                                <canvas id="ram${numeroSerie}"></canvas>
-                            </div>
-                            <div class="graficos">
-                                <canvas id="armazenamento${numeroSerie}"></canvas>
-                            </div>
-                        </div>`;
+                        <div class="graficos">
+                            <canvas id="ram${numeroSerie}"></canvas>
+                        </div>
+                        <div class="graficos">
+                            <canvas id="armazenamento${numeroSerie}"></canvas>
+                        </div>
+                    </div>`;
 
                         segunda_coluna.innerHTML =
                             `<div  id="segunda_coluna" class="graficosColuna">
-                            <div class="graficos">
-                                <canvas id="cpu${numeroSerie}"></canvas>
-                            </div>
-                            <div class="graficos">
-                                <canvas id="janelaAtiva${numeroSerie}"></canvas>
-                            </div>
-                        </div>`;
+                        <div class="graficos">
+                            <canvas id="cpu${numeroSerie}"></canvas>
+                        </div>
+                        <div class="graficos">
+                            <canvas id="janelaAtiva${numeroSerie}"></canvas>
+                        </div>
+                    </div>`;
 
                         plotarGrafico(numeroSerie, resposta);
                     });
@@ -330,8 +298,6 @@
                 console.error('Erro ao buscar dados do gráfico:', error);
             });
     }
-
-
 
     function plotarGrafico(numeroSerie, resposta) {
         let labelsData = [];
@@ -526,12 +492,11 @@
             options: options2,
         });
 
-        atualizarGrafico(numeroSerie, data, janelaAtivaChart);
     }
 
-    function atualizarGrafico(numeroSerie, data, janelaChart) {
+    function atualizarGrafico(numeroSerie, data, janelaChart) { //ajusta a direção que o grafico ta att
 
-        fetch(`/notebook/tempo-real/${numeroSerie}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/notebook/buscarMedidasEmTempoReal/${numeroSerie}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
                     let novoHorario = novoRegistro[0].dataHora;
@@ -562,12 +527,12 @@
                         janelaChart.update();
                     }
 
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+
                 proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
             }
         })
@@ -577,4 +542,5 @@
 
 
     }
+
 </script>

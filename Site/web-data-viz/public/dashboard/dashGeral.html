@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noctoramento | Dashboard</title>
+    <title>Noctoramento | Dashboard Geral</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap" rel="stylesheet">
@@ -23,15 +23,6 @@
                         d="M3.4737 0.0560913C1.7378 0.0560913 0.330566 1.46993 0.330566 3.21399V20.8982C0.330566 22.6423 1.63302 24.0561 3.36893 24.0561H26.5233C28.2592 24.0561 29.6665 22.6423 29.6665 20.8982V3.21399C29.6665 1.46993 28.2592 0.0560913 26.5233 0.0560913H3.4737ZM3.26416 3.21399C3.26416 3.09772 3.35797 3.00346 3.4737 3.00346H9.13134V21.1087H3.4737C3.35797 21.1087 3.26416 21.0145 3.26416 20.8982V3.21399ZM12.0649 21.1087H17.9321V13.5298H12.0649V21.1087ZM12.0649 10.5824V3.00346H26.5233C26.6391 3.00346 26.7329 3.09772 26.7329 3.21399V10.5824L12.0649 10.5824ZM26.7329 13.5298H20.8657V21.1087H26.5233C26.6391 21.1087 26.7329 21.0145 26.7329 20.8982V13.5298Z" />
                 </svg>
             </li>
-
-            <!-- <li onclick="trocarTela('dashEspecifico')">
-                <svg class="icons_azul" width="24" height="26" viewBox="0 0 30 25" fill="white"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 27.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
-                </svg>
-                <a href="./dashEspecifico.html"></a>
-            </li> -->
 
             <li onclick="trocarTela('cadastroFuncionario')">
                 <svg class="icons_azul" width="24" height="28" viewBox="0 0 30 25" fill="white"
@@ -89,7 +80,6 @@
             </header>
 
             <div class="containerKPIs">
-
                 <div class="kpi">
                     <h5>Total de Notebooks</h5>
                     <h5 class="variavelKPINumber" id="qtdTotalNotebooks"></h5>
@@ -117,11 +107,9 @@
                 </div>
             </div>
 
-
             <div class="containerMaquinas" id="containerMaquinas">
-                <!-- Aqui vai aparecer as divzinhas com os notebooks que cadastrarmos, podendo ter até no máx 8 rsrs -->
+                <!-- Aqui vai aparecer as divzinhas com os notebooks que cadastrarmos-->
             </div>
-
 
         </div>
     </div>
@@ -131,90 +119,63 @@
         window.location.href = `${tela}.html`;
     }
 
-    var idEmpresa = sessionStorage.ID_EMPRESA
-
-
     window.onload = function () {
-        trazerInfoNotebooks();
-        trazerParametros();
-        obterDadosCpu();
-        renderizarNotebooks();
+        listarNotebooks();
     };
 
+    function listarNotebooks() {
+        console.log("Estou no listar Notebooks!")
+        const fkEmpresa = sessionStorage.getItem('ID_EMPRESA');
 
-    function trazerInfoNotebooks() {
-        console.log("Ta dando certo!!!!!!!!!!!");
-        
-        fetch(`usuarios/trazerInfosNotebooks/${idEmpresa}`, {
+        fetch(`/notebook/listarNotebooks/${fkEmpresa}`, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-    
-            
         }).then(function (resposta) {
-
             if (resposta.status == 200) {
-
-                resposta.json().then(jsonNotebooks => {
-                    console.log("ESTOU NO THEN DO TRAZER INFO NOTEBOOKS()!!!!!!!!!")
-                    console.log(jsonNotebooks);
-                    console.log(JSON.stringify(jsonNotebooks));
+                resposta.json().then(function (jsonNotebooks) {
+                    console.log("O que ta vindo do BD: ", jsonNotebooks);
                     contarNotebooks(jsonNotebooks);
-                    console.log("Passoou!!!!!!!!!!!!!!!!!!!");
+                    obterParametros();
+                    listarAlocadas(jsonNotebooks);
                 });
-
             } else {
-                console.log("Houve um erro ao tentar listar os Notebooks!");
-                resposta.text().then(texto => {
-                    console.error(texto);
+                console.log("Deu ruim ao listar os Notes");
+                resposta.text().then(function (texto) {
+                    console.error("Erro: ", texto);
                 });
             }
-
         }).catch(function (erro) {
-            console.log(erro);
-        })
+            console.error("Erro na requisição da função do listar notebooks: ", erro);
+        });
     }
 
-
-    function contarNotebooks(jsonNotebooks) {
+    function contarNotebooks(jsonNotebooks) { //Usei para a kpi do total de notebook 
         console.log("Estou no contar Notebooks!");
         console.log(jsonNotebooks.length);
         var totalNotebooks = jsonNotebooks.length;
         qtdTotalNotebooks.innerHTML = totalNotebooks;
     }
 
+    function obterParametros() { // Pega do banco, os parâmetros conforme a fkempresa
+        const fkEmpresa = sessionStorage.getItem('ID_EMPRESA');
+        console.log("fkEmpresa do sessionStorage: " + fkEmpresa);
 
-    function trazerParametros() {
-        console.log("Entrou no trazerParametros");
-
-        fetch("/empresas/trazerParametros", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fkEmpresaServer: sessionStorage.ID_EMPRESA,
-            })
+        fetch(`/empresas/obterParametros/${fkEmpresa}`, {
+            method: "GET",
         }).then(function (resposta) {
             if (resposta.status === 200) {
                 resposta.json().then(function (jsonParametros) {
-                    console.log("Dados recebidos com sucesso:", jsonParametros);
+                    console.log("Parâmetros que estão vindo: ", jsonParametros);
                     preencherParametros(jsonParametros);
                 });
             } else {
-                console.log("Erro ao tentar trazer os parâmetros:", resposta.statusText);
+                console.log("Erro ao tentar trazer os Parâmetros: ", resposta.statusText);
             }
         }).catch(function (erro) {
-            console.error("Erro na requisição:", erro);
+            console.error("Erro na requisição dos Parâmetros: ", erro);
         });
     }
 
-
-    function preencherParametros(jsonParametros) {
-        console.log("Entrou no preencherParametros");
-
-
+    function preencherParametros(jsonParametros) { // Popula as kpis dos parâmetros
         if (Array.isArray(jsonParametros)) {
             jsonParametros = jsonParametros[0];
         }
@@ -229,8 +190,6 @@
         var parametroCriticoDisco = document.getElementById("parametroCriticoDisco");
         var parametroCriticoMemoriaRam = document.getElementById("parametroCriticoMemoriaRam");
 
-        console.log("Cheguei no meio do preencherParametros");
-
         parametroNormalCpu.innerHTML = `Uso da CPU até: ${jsonParametros.UsoNormalCpu}%`;
         parametroNormalDisco.innerHTML = `Uso do Disco até: ${jsonParametros.UsoNormalDisco}%`;
         parametroNormalMemoriaRam.innerHTML = `Uso da Memória até: ${jsonParametros.UsoNormalMemoriaRam}%`;
@@ -242,171 +201,90 @@
         parametroCriticoCpu.innerHTML = `Uso da CPU: +${jsonParametros.UsoCriticoCpu}%`;
         parametroCriticoDisco.innerHTML = `Uso do Disco: +${jsonParametros.UsoCriticoDisco}%`;
         parametroCriticoMemoriaRam.innerHTML = `Uso da Memória: +${jsonParametros.UsoCriticoMemoriaRam}%`;
-
-        console.log("Encerrei o preencherParametros");
     }
 
-
-    function listarFuncionarios() {
-
+    function listarAlocadas(jsonNotebooks) {
         const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
 
-        if (!idEmpresa) {
-            console.log('ID da empresa não encontrado no sessionStorage');
-            return;
-        }
-
-        return fetch(`/empresas/listarFuncionarios/${idEmpresa}`, {
+        fetch(`/empresas/listarAlocadas/${idEmpresa}`, {
             method: "GET"
-        })
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .catch(function (erro) {
-                console.log(`ERRO: ${erro}`);
-                return [];
-            });
-    }
-
-
-    function listarAlocadas() {
-
-        const idEmpresa = sessionStorage.getItem('ID_EMPRESA');
-
-        if (!idEmpresa) {
-            console.log('ID da empresa não encontrado no sessionStorage');
-            return;
-        }
-
-        return Promise.all([
-            fetch(`/empresas/listarAlocadas/${idEmpresa}`, { method: "GET" }).then(res => res.json()),
-            listarFuncionarios()
-        ])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            .then(function ([alocada, funcionarios]) {
-                // Mapear os funcionários por ID para acesso rápido
-                const funcionariosMap = {};
-                funcionarios.forEach(funcionario => {
-                    funcionariosMap[funcionario.idUsuario] = funcionario;
+        }).then(function (resposta) {
+            if (resposta.status == 200) {
+                resposta.json().then(function (alocadas) {
+                    console.log("Alocações existentes: ", alocadas);
+                    obterNumeroESerieEmail(jsonNotebooks, alocadas);
                 });
-
-                return alocada.map((alocacao, index) => {
-                    const funcionario = funcionariosMap[alocacao.fkUsuario] || {};
-                    return {
-                        index: index + 1,
-                        emailUsuario: funcionario.emailUsuario || 'Email não encontrado',
-                        nomeCargo: alocacao.nomeCargo,
-                        numeroSerie: alocacao.numeroSerie,
-                        modelo: alocacao.modelo,
-                        fkNotebook: alocacao.fkNotebook,
-                        fkEmpresaNotebook: alocacao.fkEmpresaNotebook,
-                        fkUsuario: alocacao.fkUsuario,
-                        fkEmpresaUsuario: alocacao.fkEmpresaUsuario
-                    };
+            } else {
+                console.log("Não deu para listar as alocações");
+                resposta.text().then(function (texto) {
+                    console.error("Erro: ", texto);
                 });
-            })
-            .catch(function (erro) {
-                console.log(`ERRO: ${erro}`);
-                return [];
-            });
-    }
-
-    function renderizarNotebooks() {
-
-        fetch(`notebook/trazerInfoNotebooks/${idEmpresa}`, {
-            method: "GET"
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar os notebooks.');
-                }
-                return response.json();
-            })
-            .then(async jsonNotebooks => {
-                const containerMaquinas = document.getElementById("containerMaquinas");
-                containerMaquinas.innerHTML = "";
-
-                const alocadas = await listarAlocadas();
-
-                // Função para obter os dados da CPU
-
-
-                // Loop pelos notebooks
-                for (let i = 0; i < jsonNotebooks.length; i++) {
-                    const notebook = jsonNotebooks[i];
-                    const { numeroSerie } = notebook;
-            
-                    // Encontrar a alocação correspondente ao numeroSerie
-                    const alocacao = alocadas.find(aloc => aloc.numeroSerie == numeroSerie);
-
-                    // Obter os dados da CPU
-                    const usoCpu = await obterDadosCpu(numeroSerie);
-
-                    // Determinar o estado da CPU
-                    let estadoCpuText, estadoCpuColor;
-                    if (usoCpu < 50) {
-                        estadoCpuText = "Normal";
-                        estadoCpuColor = "green";
-                    } else if (usoCpu >= 50 && usoCpu < 80) {
-                        estadoCpuText = "Alarmante";
-                        estadoCpuColor = "orange";
-                    } else {
-                        estadoCpuText = "Crítico";
-                        estadoCpuColor = "red";
-                    }
-
-                    // Criar o elemento da máquina
-                    const notebookDiv = document.createElement("div");
-                    notebookDiv.classList.add("maquina");
-
-                    // Criar o HTML da máquina com os dados atualizados
-                    notebookDiv.innerHTML = `
-                <p class="txtMaquinasCondicao" style="color: ${estadoCpuColor}">${estadoCpuText}</p>
-                <img class="imgMaquina" src="../assets/imagens/Laptop2.png" alt=""/>
-                <p class="txtMaquinas">Número de Série: <span class="txtMaquinas2">${numeroSerie}</span></p>
-                <p class="txtMaquinas" style="color: #59d9bb;">Usuário: <span class="txtMaquinas2">${alocacao ? alocacao.emailUsuario : 'Máquina não alocada!'}</span></p>
-                <button class="botaoDetalhes" onclick="verDetalhes('${numeroSerie}', '${alocacao ? alocacao.emailUsuario : 'Máquina não alocada!'}')">Ver detalhes</button>
-            `;
-                    containerMaquinas.appendChild(notebookDiv);
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao carregar os notebooks: ', error);
-            });
-    }
-
-    async function obterDadosCpu(numeroSerie) {
-    console.log("Numero de serie recebido na func" + numeroSerie)
-        try {
-            const response = await fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' });
-            if (!response.ok) {
-                throw new Error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}.`);
             }
-            const data = await response.json();
-            return data.usoCpu;
-        } catch (error) {
-            console.error(`Erro ao obter os dados da CPU para o notebook ${numeroSerie}: `, error);
-            return null;
-        }
+        }).catch(function (erro) {
+            console.error("Erro na requisição: ", erro);
+        });
+    }
+
+    function obterNumeroESerieEmail(jsonNotebooks, alocadas) { // Pega o numero do email do usuario que ta utilizando a maquina de acordo com o numero de serie do notebook
+        const resultados = [];
+
+        jsonNotebooks.forEach(notebook => {
+            const { numeroSerie } = notebook;
+
+            const alocacao = alocadas.find(aloc => aloc.numeroSerie === numeroSerie);
+
+            if (alocacao) {
+                fetch(`/notebook/obterUsuarioNotebook/${numeroSerie}`, {
+                    cache: 'no-store'
+                }).then(resposta => {
+                    if (resposta.status == 200) {
+                        return resposta.json();
+                    } else {
+                        console.log(`Erro ao puxar o user do note ${numeroSerie}`);
+                        return { emailUsuario: 'Email não encontrado' };
+                    }
+                }).then(jsonUsuario => {
+                    const emailUsuario = jsonUsuario[0] ? jsonUsuario[0].emailUsuario : 'email não encontrado';
+                    resultados.push({ numeroSerie, emailUsuario });
+                    if (resultados.length === jsonNotebooks.length) {
+                        renderizarNotebooks(resultados);
+                    }
+                }).catch(erro => {
+                    console.error(`Erro na requisição de trazer o user do note ${numeroSerie}: ${erro}`);
+                    resultados.push({ numeroSerie, emailUsuario: 'Erro ao trazer o email' });
+                    if (resultados.length === jsonNotebooks.length) {
+                        renderizarNotebooks(resultados);
+                    }
+                });
+            } else {
+                resultados.push({ numeroSerie, emailUsuario: 'Máquina não alocada!' });
+                if (resultados.length === jsonNotebooks.length) {
+                    renderizarNotebooks(resultados);
+                }
+            }
+        });
+    }
+
+    function renderizarNotebooks(resultados) { //Plota as divs com as maquinas e os dados relacionados a ela quando cadastramos novas maquinas 
+        const containerMaquinas = document.getElementById("containerMaquinas");
+        containerMaquinas.innerHTML = "";
+
+        resultados.forEach(({ numeroSerie, emailUsuario }) => {
+            const notebookDiv = document.createElement("div");
+            notebookDiv.classList.add("maquina");
+
+            notebookDiv.innerHTML = `
+            <p id="condicaoNotebook" class="condicaoPadraoNotebook">Normal</p>
+            <img class="imgMaquina" src="../assets/imagens/Laptop2.png" alt=""/>
+            <p class="txtMaquinas">Número de Série: <span class="txtMaquinas2">${numeroSerie}</span></p>
+            <p class="txtMaquinas" style="color: #59d9bb;">Usuário: <span class="txtMaquinas2">${emailUsuario}</span></p>
+            <button class="botaoDetalhes" onclick="verDetalhes('${numeroSerie}', '${emailUsuario}')">Ver detalhes</button>
+        `;
+            containerMaquinas.appendChild(notebookDiv);
+        });
     }
 
     function verDetalhes(numeroSerie, emailUsuario) {
         window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
     }
-
 </script>

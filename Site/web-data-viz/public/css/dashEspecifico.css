@@ -64,6 +64,7 @@ li {
     flex-direction: column;
     width: 87.5vw;
     padding: 2rem;
+    padding-top: 1rem;
     padding-left: 2.5rem;
     gap: 1.2rem;
 }
