@@ -335,6 +335,31 @@ function apagarAlocacao(req, res) {
     }
 }
 
+function trazerInfoNotebooks(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+    console.log(idEmpresa + "id da empresa no controller de notebook")
+
+    
+    usuarioModel.trazerInfoNotebooks(idEmpresa)
+        .then(
+            function (resposta) {
+                if (resposta.length == 0) {
+                    res.status(403).send("Nenhuma Máquina Cadastrada!");
+                } else {
+                    console.log("ENTREI NO TRAZER")
+                    res.status(200).json(resposta);
+                }
+
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro na requisição de máquinas cadastradas. Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -345,5 +370,6 @@ module.exports = {
     atualizarMaquina,
     apagarMaquina,
     alocarFuncionario,
-    apagarAlocacao
+    apagarAlocacao,
+    trazerInfoNotebooks,
 }

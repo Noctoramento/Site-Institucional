@@ -3,34 +3,30 @@ var router = express.Router();
 
 var notebookController = require("../controllers/notebookController");
 
-router.get("/listarNotebooks/:fkEmpresa", function (req, res) {
-    console.log("Rota acessada: /listarNotebooks");
-    notebookController.listarNotebooks(req, res);
+// router.get("/trazerInfoNotebooks/:idEmpresa", function (req, res) {
+//     console.log("Estou na ROTAAAA");
+//     notebookController.trazerInfoNotebooks(req, res);
+// });
+
+router.get("/trazerInfoKpis/:numeroSerie", function (req, res) {
+    notebookController.trazerInfoKpis(req, res);
 });
 
-router.get("/obterUsuarioNotebook/:fkUsuario", function (req, res) { //obter o usuario de cada notebook: usuario da maquina 
-    console.log("Estou na Rota /obterUsuarioNotebook");
-    notebookController.obterUsuarioNotebook(req, res);
+router.get("/obterDadosGrafico/:numeroSerie", function (req, res) {
+    notebookController.obterDadosGrafico(req, res);
 });
 
-router.get("/obterDadosEspecificosKpis/:numeroSerie", function (req, res) { //obter para as kpis de cada notebook: o disco em uso e o tempo de atividade do disco
-    console.log("Estou na Rota /obterDadosEspecificosKpis");
-    notebookController.obterDadosEspecificosKpis(req, res);
-})
-
-router.get("/obterDadosFixosEspecificos/:numeroSerie", function (req, res) { //obter de cada notebook para validações dos parametros: a capacidade do disco e a capacidade da memória ram
-    console.log("Estou na Rota /obterDadosFixosEspecificos");
-    notebookController.obterDadosFixosEspecificos(req, res);
-})
-
-router.get("/obterDadosGraficos/:numeroSerie", function (req, res) { //obter de cada notebook para usar nos graficos: memoria em uso, cpu em uso, janelas ativas, capacidade da ram
-    console.log("Estou na Rota /obterDadosGraficos");
-    notebookController.obterDadosGraficos(req, res);
+router.get("/trazerInfoUsuario/:numeroSerie", function (req, res) {
+    notebookController.trazerInfoUsuario(req, res);
 });
 
-router.get("/buscarMedidasEmTempoReal/:numeroSerie", function (req, res) {
-    console.log("Estou na Rota /buscarMedidasEmTempoReal");
+router.get("/tempo-real/:numeroSerie", function (req, res) {
     notebookController.buscarMedidasEmTempoReal(req, res);
-});
+})
 
 module.exports = router;
+
+// {rota direciona pro controller, ontroler controla o que vei do sql e o que vai pra aplicacao,
+//  sql trouze isso eu vou retornar isso. 
+//  O model e onde vou conectar com o banco, onde vai meu select}
+// O post envia informação pro banco e o get puxa de lá

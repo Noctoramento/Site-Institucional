@@ -1,34 +1,40 @@
 var notebookModel = require("../models/notebookModel");
 
-function listarNotebooks(req, res) {
-    console.log("Controller acessado: listarNotebooks");
-    var fkEmpresa = req.params.fkEmpresa;
-    console.log("fkEmpresa recebida: " + fkEmpresa);
+// function trazerInfoNotebooks(req, res) {
+//     var idEmpresa = req.params.idEmpresa;
+//     console.log(idEmpresa + "id da empresa no controller de notebook")
 
-    notebookModel.listarNotebooks(fkEmpresa)
-        .then(function (resposta) {
-            console.log("Resposta do model: ", resposta);
-            if (resposta.length == 0) {
-                res.status(403).send("Nenhum notebook cadastrado");
-            } else {
-                res.status(200).json(resposta);
-            }
-        })
-        .catch(function (erro) {
-            console.log("Erro no controller: ", erro);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
+    
+//     notebookModel.trazerInfoNotebooks(idEmpresa)
+//         .then(
+//             function (resposta) {
+//                 if (resposta.length == 0) {
+//                     res.status(403).send("Nenhuma Máquina Cadastrada!");
+//                 } else {
+//                     console.log("ENTREI NO TRAZER")
+//                     res.status(200).json(resposta);
+//                 }
 
-function obterUsuarioNotebook(req, res) {
-    var fkUsuario = req.params.fkUsuario;
+//             }
+//         ).catch(
+//             function (erro) {
+//                 console.log(erro);
+//                 console.log("\nHouve um erro na requisição de máquinas cadastradas. Erro: ", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             }
+//         );
+// }
 
-    notebookModel.obterUsuarioNotebook(fkUsuario)
+function trazerInfoKpis(req, res) {
+    var numeroSerie = req.params.numeroSerie;
+
+    notebookModel.trazerInfoKpis(numeroSerie)
         .then(
             function (resposta) {
                 if (resposta.length == 0) {
-                    res.status(403).send("Deu ruim na function obterUsuarioNotebook() no controller!");
+                    res.status(403).send("Nenhuma Máquina Cadastrada!");
                 } else {
+                    console.log("ENTREI NO TRAZER")
                     res.status(200).json(resposta);
                 }
 
@@ -36,21 +42,24 @@ function obterUsuarioNotebook(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("\nHouve um erro na requisição dos usuarios de cada notebook. Erro: ", erro.sqlMessage);
+                console.log("\nHouve um erro na requisição de máquinas cadastradas. Erro: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
 }
 
-function obterDadosEspecificosKpis(req, res) {
-    var numeroSerie = req.params.numeroSerie;
 
-    notebookModel.obterDadosEspecificosKpis(numeroSerie)
+function trazerInfoUsoEspecifico(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var fkNotebook = req.body.fkNotebookServer; 
+
+    notebookModel.trazerInfoUsoEspecifico(fkEmpresa, fkNotebook)
         .then(
             function (resposta) {
                 if (resposta.length == 0) {
-                    res.status(403).send("Deu ruim na function obterDadosEspecificosKpis() no controller!");
+                    res.status(403).send("Nenhuma Máquina Cadastrada!");
                 } else {
+                    console.log("ENTREI NO TRAZER USO ESPECIFICO")
                     res.status(200).json(resposta);
                 }
 
@@ -58,21 +67,22 @@ function obterDadosEspecificosKpis(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("\nHouve um erro na requisição dos dados das máquinas cadastradas. Erro: ", erro.sqlMessage);
+                console.log("\nHouve um erro na requisição de dos registros de uso de notebooks específicos. Erro: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
 }
 
-function obterDadosFixosEspecificos(req, res) {
+function obterDadosGrafico(req, res) {
     var numeroSerie = req.params.numeroSerie;
 
-    notebookModel.obterDadosFixosEspecificos(numeroSerie)
+    notebookModel.obterDadosGrafico(numeroSerie)
         .then(
             function (resposta) {
                 if (resposta.length == 0) {
-                    res.status(403).send("Deu ruim na function obterDadosFixosEspecificos() no controller!");
+                    res.status(403).send("Nenhuma Máquina Cadastrada!");
                 } else {
+                    console.log("ENTREI NO TRAZER USO ESPECIFICO")
                     res.status(200).json(resposta);
                 }
 
@@ -80,21 +90,22 @@ function obterDadosFixosEspecificos(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("\nHouve um erro na requisição dos dados fixos das máquinas cadastradas. Erro: ", erro.sqlMessage);
+                console.log("\nHouve um erro na requisição de dos registros de uso de notebooks específicos. Erro: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
 }
 
-function obterDadosGraficos(req, res) {
+function trazerInfoUsuario(req, res) {
     var numeroSerie = req.params.numeroSerie;
 
-    notebookModel.obterDadosGraficos(numeroSerie)
+    notebookModel.trazerInfoUsuario(numeroSerie)
         .then(
             function (resposta) {
                 if (resposta.length == 0) {
-                    res.status(403).send("Deu ruim na function obterDadosGraficos() no controller!!");
+                    res.status(403).send("Nenhuma Máquina Cadastrada!");
                 } else {
+                    console.log("ENTREI NO TRAZER USO ESPECIFICO")
                     res.status(200).json(resposta);
                 }
 
@@ -102,13 +113,14 @@ function obterDadosGraficos(req, res) {
         ).catch(
             function (erro) {
                 console.log(erro);
-                console.log("\nHouve um erro na requisição dos registros de uso de notebooks específicos. Erro: ", erro.sqlMessage);
+                console.log("\nHouve um erro na requisição de dos registros de uso de notebooks específicos. Erro: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
 }
 
 function buscarMedidasEmTempoReal(req, res) {
+
     var numeroSerie = req.params.numeroSerie;
 
     console.log(`Recuperando medidas em tempo real`);
@@ -126,11 +138,12 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+
 module.exports = {
-    listarNotebooks,
-    obterUsuarioNotebook,
-    // obterDadosEspecificosKpis,
-    obterDadosFixosEspecificos,
-    obterDadosGraficos,
-    // buscarMedidasEmTempoReal
-};
+    // trazerInfoNotebooks,
+    trazerInfoUsoEspecifico,
+    trazerInfoKpis,
+    obterDadosGrafico,
+    trazerInfoUsuario,
+    buscarMedidasEmTempoReal
+}

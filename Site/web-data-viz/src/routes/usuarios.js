@@ -45,4 +45,9 @@ router.post("/apagarAlocacao", function (req, res) {
     usuarioController.apagarAlocacao(req, res);
 });
 
+router.get("/trazerInfosNotebooks/:idEmpresa", function (req, res) {
+    console.log("Estou na ROTAAAA");
+    usuarioController.trazerInfoNotebooks(req, res);
+});
+
 module.exports = router;

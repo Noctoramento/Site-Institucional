@@ -120,6 +120,17 @@ function apagarAlocacao(fkNotebook, fkEmpresaNotebook, fkUsuario, fkEmpresaUsuar
     return database.executar(instrucaoSql)
 }
 
+function trazerInfoNotebooks(idEmpresa) {
+    console.log(` Id da empresa recebido na model
+     ${idEmpresa};
+    `)
+    var instrucaoSql = `
+    SELECT * FROM Notebook WHERE fkEmpresa = ${idEmpresa};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -130,5 +141,6 @@ module.exports = {
     atualizarMaquina,
     apagarMaquina,
     alocarFuncionario,
-    apagarAlocacao
+    apagarAlocacao,
+    trazerInfoNotebooks,
 }
