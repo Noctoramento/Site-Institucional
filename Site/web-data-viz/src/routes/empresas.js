@@ -29,7 +29,6 @@ router.get("/listarFuncionariosNaoAlocados/:idEmpresa", function (req, res) {
   empresaController.listarFuncionariosNaoAlocados(req, res);
 });
 
-
 router.get("/listarMaquinas/:idEmpresa", function (req, res) {
   empresaController.listarMaquinas(req, res);
 });
@@ -42,9 +41,9 @@ router.get("/listarAlocadas/:idEmpresa", function (req, res) {
   empresaController.listarAlocadas(req, res);
 });
 
-router.post("/trazerParametros", function (req, res) {
-  console.log("Estou na rota trazer parametros");
-  empresaController.trazerParametros(req, res);
+router.get("/obterParametros/:fkEmpresa", function (req, res) { // Para pegar do banco os parâmetros cadastrados por empresa: normal, alarmante e crítico.
+  console.log("Estou na Rota /obterParametros");
+  empresaController.obterParametros(req, res);
 });
 
 module.exports = router;

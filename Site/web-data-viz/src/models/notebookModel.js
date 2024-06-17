@@ -1,14 +1,7 @@
 var database = require("../database/config")
 
-function trazerInfoNotebooks(fkEmpresa) {
-    var instrucaoSql = `
-    SELECT * FROM Notebook WHERE fkEmpresa = ${fkEmpresa};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 function listarNotebooks(fkEmpresa) {
+    console.log("OLHA EU AQUI NO MODEL")
     var instrucaoSql = `
     SELECT numeroSerie FROM Notebook WHERE fkEmpresa = ${fkEmpresa};
     `;
@@ -16,72 +9,61 @@ function listarNotebooks(fkEmpresa) {
     return database.executar(instrucaoSql);
 }
 
-function trazerInfoUsoEspecifico(fkEmpresa, fkNotebook) {
+function obterUsuarioNotebook(numeroSerie) {
     var instrucaoSql = `
-    SELECT * FROM RegistroUsoNotebook
-    JOIN Notebook ON RegistroUsoNotebook.fkNotebook = Notebook.idNotebook
-    WHERE RegistroUsoNotebook.fkEmpresa = ${fkEmpresa} AND RegistroUsoNotebook.fkNotebook = ${fkNotebook};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function InfoUsoEspecifico(fkEmpresa, fkNotebook) {
-    var instrucaoSql = `
-    SELECT tempoAtividadeDisco FROM RegistroUsoNotebook
-    JOIN Notebook ON RegistroUsoNotebook.fkNotebook = Notebook.idNotebook
-    WHERE RegistroUsoNotebook.fkEmpresa = ${fkEmpresa} AND RegistroUsoNotebook.fkNotebook = ${fkNotebook};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-function trazerInfoKpis(numeroSerie) {
-    var instrucaoSql = `
-    SELECT tempoAtividadeDisco, usoDisco FROM RegistroUsoNotebook r
-	JOIN notebook
-    ON fkNotebook = idNotebook
+    SELECT emailUsuario FROM Notebook 
+    JOIN Alocacao ON fkNotebook = idNotebook
+    JOIN Usuario ON fkUsuario = idUsuario
     WHERE numeroSerie = ${numeroSerie};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function obterDadosGrafico(numeroSerie) {
+function obterDadosEspecificosKpis(fkEmpresa, fkNotebook) {
     var instrucaoSql = `
-    SELECT usoCpu, usoDisco, usoMemoriaRam, tempoAtividadeDisco, qtdJanelasEmUso, DATE_FORMAT(dtHoraCaptura, '%H:%i') as dataHora FROM RegistroUsoNotebook r
-	JOIN notebook
-    ON fkNotebook = idNotebook
+    SELECT usoDisco, tempoAtividadeDisco FROM RegistroUsoNotebook
+    JOIN Notebook ON RegistroUsoNotebook.fkNotebook = Notebook.idNotebook
+    WHERE RegistroUsoNotebook.fkEmpresa = ${fkEmpresa} AND RegistroUsoNotebook.fkNotebook = ${fkNotebook};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterDadosFixosEspecificos(fkEmpresa, fkNotebook) {
+    var instrucaoSql = `
+    SELECT maxDisco, maxMemoriaRam FROM InfoNotebook
+    JOIN Notebook ON InfoNotebook.fkNotebook = Notebook.idNotebook
+    WHERE InfoNotebook.fkEmpresaNotebook = ${fkEmpresa} AND InfoNotebook.fkNotebook = ${fkNotebook};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function obterDadosGraficos(numeroSerie) {
+    var instrucaoSql = `
+    SELECT usoCpu, usoDisco, usoMemoriaRam, qtdJanelasEmUso, DATE_FORMAT(dtHoraCaptura, '%H:%i') as dataHora FROM RegistroUsoNotebook
+	JOIN Notebook ON fkNotebook = idNotebook
     WHERE numeroSerie = ${numeroSerie} ORDER BY idRegistroUsoNotebook;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function trazerInfoUsuario(numeroSerie) {
-    var instrucaoSql = `
-        select emailUsuario from notebook join alocacao ON fkNotebook = idNotebook JOIN usuario on fkUsuario = idUsuario WHERE numeroSerie = ${numeroSerie};
+function buscarMedidasEmTempoReal(numeroSerie) {
+    var instrucaoSql = `SELECT usoCpu, usoDisco, tempoAtividadeDisco, usoMemoriaRam, qtdJanelasEmUso, DATE_FORMAT(dtHoraCaptura, '%H:%I') as momento_grafico FROM RegistroUsoNotebook
+    JOIN notebook ON fkNotebook = idNotebook WHERE numeroSerie = ${numeroSerie} ORDER BY idRegistroUsoNotebook DESC LIMIT 1;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(numeroSerie) {
-
-    var instrucaoSql = `SELECT usoCpu, usoDisco, tempoAtividadeDisco, usoMemoriaRam, qtdJanelasEmUso, DATE_FORMAT(dtHoraCaptura, '%H:%I') as momento_grafico FROM RegistroUsoNotebook
-    JOIN notebook ON fkNotebook = idNotebook WHERE numeroSerie = ${numeroSerie} ORDER BY idRegistroUsoNotebook DESC LIMIT 1`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 module.exports = {
-    trazerInfoNotebooks,
     listarNotebooks,
-    trazerInfoUsoEspecifico,
-    InfoUsoEspecifico,
-    trazerInfoKpis,
-    obterDadosGrafico,
-    trazerInfoUsuario,
+    obterUsuarioNotebook,
+    obterDadosEspecificosKpis,
+    obterDadosFixosEspecificos,
+    obterDadosGraficos,
     buscarMedidasEmTempoReal
-}
+};
+

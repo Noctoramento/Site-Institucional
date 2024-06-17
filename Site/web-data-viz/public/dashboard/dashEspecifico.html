@@ -17,21 +17,24 @@
     <nav class="navbar">
         <img class="imgNavbar" src="../assets/icons_img/Logo Verde água escuro.png" alt="" />
         <ul class="iconsNavbar">
+
             <li onclick="trocarTela('dashGeral')">
-                <svg class="icons_azul" width="24" height="24" viewBox="0 0 30 25" fill="#00ffff"
+                <svg class="icons_azul" width="27" height="32" viewBox="0 0 24 24" fill="white"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M4 8L3.29289 8.70711L2.58579 8L3.29289 7.29289L4 8ZM9 20C8.44772 20 8 19.5523 8 19C8 18.4477 8.44772 18 9 18L9 20ZM8.29289 13.7071L3.29289 8.70711L4.70711 7.29289L9.70711 12.2929L8.29289 13.7071ZM3.29289 7.29289L8.29289 2.29289L9.70711 3.70711L4.70711 8.70711L3.29289 7.29289ZM4 7L14.5 7L14.5 9L4 9L4 7ZM14.5 20L9 20L9 18L14.5 18L14.5 20ZM21 13.5C21 17.0898 18.0898 20 14.5 20L14.5 18C16.9853 18 19 15.9853 19 13.5L21 13.5ZM14.5 7C18.0898 7 21 9.91015 21 13.5L19 13.5C19 11.0147 16.9853 9 14.5 9L14.5 7Z"
+                        />
+                </svg>
+                <a href="./dashGeral.html"></a>
+            </li>
+
+            <li>
+                <svg class="icons_azul" width="24" height="24" viewBox="0 0 30 25" fill="white"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M3.4737 0.0560913C1.7378 0.0560913 0.330566 1.46993 0.330566 3.21399V20.8982C0.330566 22.6423 1.63302 24.0561 3.36893 24.0561H26.5233C28.2592 24.0561 29.6665 22.6423 29.6665 20.8982V3.21399C29.6665 1.46993 28.2592 0.0560913 26.5233 0.0560913H3.4737ZM3.26416 3.21399C3.26416 3.09772 3.35797 3.00346 3.4737 3.00346H9.13134V21.1087H3.4737C3.35797 21.1087 3.26416 21.0145 3.26416 20.8982V3.21399ZM12.0649 21.1087H17.9321V13.5298H12.0649V21.1087ZM12.0649 10.5824V3.00346H26.5233C26.6391 3.00346 26.7329 3.09772 26.7329 3.21399V10.5824L12.0649 10.5824ZM26.7329 13.5298H20.8657V21.1087H26.5233C26.6391 21.1087 26.7329 21.0145 26.7329 20.8982V13.5298Z" />
                 </svg>
-                <a href="./dashGeral.html"></a>
             </li>
-<!-- 
-            <li>
-                <svg width="24" height="26" viewBox="0 0 30 25" fill="#00ffff" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M10.6665 5.33335C10.6665 3.8606 11.8604 2.66669 13.3332 2.66669H18.6665C20.1393 2.66669 21.3332 3.86059 21.3332 5.33335V10.6667H26.6665C28.1393 10.6667 27.3332 11.8606 29.3332 13.3334V26.6667C29.3332 28.1394 28.1393 29.3334 26.6665 29.3334H5.33317C3.86041 29.3334 2.6665 28.1394 2.6665 26.6667V18.6667C2.6665 17.1939 3.86041 16 5.33317 16H10.6665V5.33335ZM18.6665 26.6667V5.33335L13.3332 5.33335V26.6667H18.6665ZM21.3332 13.3334V26.6667H26.6665V13.3334H21.3332ZM5.33317 18.6667H10.6665V26.6667H5.33317V18.6667Z" />
-                </svg>
-            </li> -->
 
             <li onclick="trocarTela('cadastroFuncionario')">
                 <svg class="icons_azul" width="24" height="28" viewBox="0 0 30 25" fill="white"
@@ -89,7 +92,7 @@
             </header>
 
             <div>
-                <select id="selectNotebook" onchange="trazerInfoUsuario(); obterDadosGraficos()">
+                <select id="selectNotebook" onchange="obterUsuarioNotebook(); obterDadosGraficos()">
                     <option value="0" disabled selected>Visualize outra máquina</option>
                 </select>
             </div>
@@ -127,7 +130,7 @@
                     </div>
                 </div>
 
-                <div >
+                <div>
                     <div id="segunda_coluna" class="graficosColuna">
                         <div class="graficos">
                             <canvas id="cpu"></canvas>
@@ -149,74 +152,71 @@
     }
 
     window.onload = function () {
-    trazerInfoNotebooks();
-    const params = new URLSearchParams(window.location.search);
-    const numeroSerie = params.get('serie');
-    const emailUsuario = params.get('email');
-    if (numeroSerie && emailUsuario) {
-        console.log('ESTOU NO ONLOWD ' + numeroSerie)
-        obterDadosGraficos(numeroSerie);
-        mostrarDetalhes(numeroSerie, emailUsuario);
-        atualizarTitulo(numeroSerie);
-        obterDadosDisco(numeroSerie);
-    }
-};
+        trazerInfoNotebooks();
+        const params = new URLSearchParams(window.location.search);
+        const numeroSerie = params.get('serie');
+        const emailUsuario = params.get('email');
+        if (numeroSerie && emailUsuario) {
+            console.log('ESTOU NO ONLOWD ' + numeroSerie)
+            obterDadosGraficos(numeroSerie);
+            mostrarDetalhes(numeroSerie, emailUsuario);
+            atualizarTitulo(numeroSerie);
+            obterDadosDisco(numeroSerie);
+        }
+    };
 
     function obterDadosDisco(numeroSerie) {
-        console.log('TESTE DA SASA ESTPOU NO OBTER GRAFICOS 165')
+        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        const usoDisco = resposta[1].usoDisco;
+                        const tempoDisco = resposta[2].tempoAtividadeDisco;
 
 
-    fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    const usoDisco = resposta[1].usoDisco;
-                    const tempoDisco = resposta[2].tempoAtividadeDisco;
+                        document.getElementById("uso_disco").innerHTML = usoDisco;
+                        document.getElementById("tempo_disco").innerHTML = tempoDisco;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                }
+            })
+            .catch(function (error) {
+                console.error('Erro ao buscar dados do disco:', error);
+            });
 
+        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        const usoCpu = resposta[0].usoCpu;
+                        const estadoCpuElement = document.getElementById("estado_cpu");
 
-                    document.getElementById("uso_disco").innerHTML = usoDisco;
-                    document.getElementById("tempo_disco").innerHTML = tempoDisco;
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API ' + response);
-            }
-        })
-        .catch(function (error) {
-            console.error('Erro ao buscar dados do disco:', error);
-        });
-
-fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    const usoCpu = resposta[0].usoCpu;
-                    const estadoCpuElement = document.getElementById("estado_cpu");
-
-                    if (usoCpu < 50) {
-                        estadoCpuElement.textContent = "Normal";
-                        estadoCpuElement.style.color = "green";
-                    } else if (usoCpu >= 50 && usoCpu < 80) {
-                        estadoCpuElement.textContent = "Alarmante";
-                        estadoCpuElement.style.color = "yellow";
-                    } else {
-                        estadoCpuElement.textContent = "Crítico";
-                        estadoCpuElement.style.color = "red";
-                    }
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API ' + response);
-            }
-        })
-        .catch(function (error) {
-            console.error('Erro ao buscar dados da CPU:', error);
-        });
+                        if (usoCpu < 50) {
+                            estadoCpuElement.textContent = "Normal";
+                            estadoCpuElement.style.color = "green";
+                        } else if (usoCpu >= 50 && usoCpu < 80) {
+                            estadoCpuElement.textContent = "Alarmante";
+                            estadoCpuElement.style.color = "yellow";
+                        } else {
+                            estadoCpuElement.textContent = "Crítico";
+                            estadoCpuElement.style.color = "red";
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                }
+            })
+            .catch(function (error) {
+                console.error('Erro ao buscar dados da CPU:', error);
+            });
     }
 
-// Chame essa função onde for necessário, por exemplo, quando uma máquina é selecionada
-document.getElementById('selectNotebook').addEventListener('change', function () {
-    const numeroSerie = this.value;
-    obterDadosDisco(numeroSerie);
-});
+    // Chame essa função onde for necessário, por exemplo, quando uma máquina é selecionada
+    document.getElementById('selectNotebook').addEventListener('change', function () {
+        const numeroSerie = this.value;
+        obterDadosDisco(numeroSerie);
+    });
 
 
 
@@ -226,80 +226,82 @@ document.getElementById('selectNotebook').addEventListener('change', function ()
     }
 
 
-    function trazerInfoNotebooks() {
-        fetch("/notebook/trazerInfoNotebooks", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fkEmpresaServer: sessionStorage.ID_EMPRESA,
-            })
-        }).then(function (resposta) {
-            if (resposta.status == 200) {
-                resposta.json().then(jsonNotebooks => {
-                    listarNotebooks(jsonNotebooks);
-                });
-            } else {
-                console.error("Houve um erro ao tentar listar os Notebooks!");
-            }
-        }).catch(function (erro) {
-            console.error(erro);
-        })
-    }
+    // function trazerInfoNotebooks() {
+    //     fetch("/notebook/trazerInfoNotebooks", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             fkEmpresaServer: sessionStorage.ID_EMPRESA,
+    //         })
+    //     }).then(function (resposta) {
+    //         if (resposta.status == 200) {
+    //             resposta.json().then(jsonNotebooks => {
+    //                 listarNotebooks(jsonNotebooks);
+    //             });
+    //         } else {
+    //             console.error("Houve um erro ao tentar listar os Notebooks!");
+    //         }
+    //     }).catch(function (erro) {
+    //         console.error(erro);
+    //     })
+    // }
 
-    function listarNotebooks(jsonNotebooks) {
-        var select = document.getElementById("selectNotebook");
-        jsonNotebooks.forEach(notebook => {
-            var novaOpcao = document.createElement("option");
-            novaOpcao.value = notebook.numeroSerie;
-            novaOpcao.text = notebook.numeroSerie;
-            select.appendChild(novaOpcao);
-        });
-    }
+    // function listarNotebooks(jsonNotebooks) {
+    //     var select = document.getElementById("selectNotebook");
+    //     jsonNotebooks.forEach(notebook => {
+    //         var novaOpcao = document.createElement("option");
+    //         novaOpcao.value = notebook.numeroSerie;
+    //         novaOpcao.text = notebook.numeroSerie;
+    //         select.appendChild(novaOpcao);
+    //     });
+    // }
 
     function mostrarDetalhes(numeroSerie, emailUsuario) {
-    document.getElementById("divKpiUsuario").innerHTML = decodeURIComponent(emailUsuario);
+        document.getElementById("divKpiUsuario").innerHTML = decodeURIComponent(emailUsuario);
 
-}
-
-// 
-
-function trazerInfoUsuario(numeroSerie) {
-    if (numeroSerie == null || numeroSerie == '') {
-        var numeroSerie = selectNotebook.value;
     }
 
-    fetch(`/notebook/trazerInfoUsuario/${numeroSerie}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    divKpiUsuario.innerHTML = resposta[0].emailUsuario;
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API ' + response);
-            }
-        });
+    // 
 
-    atualizarTitulo(numeroSerie);
-    obterDadosDisco(numeroSerie);
+    function trazerInfoUsuario(numeroSerie) {
+        if (numeroSerie == null || numeroSerie == '') {
+            var numeroSerie = selectNotebook.value;
+        }
+        const emailUsuario = params.get('email');
 
-}
 
-function obterDadosGraficos(numeroSerie) {
-    if (numeroSerie == null || numeroSerie == '') {
-        numeroSerie = selectNotebook.value;
+        fetch(`/notebook/trazerInfoUsuario/${numeroSerie}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        divKpiUsuario.innerHTML = resposta[0].emailUsuario;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                }
+            });
+
+        atualizarTitulo(numeroSerie);
+        obterDadosDisco(numeroSerie);
+
     }
 
-    fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    // Verifique se a resposta está correta no console
-                    console.log(resposta);
+    function obterDadosGraficos(numeroSerie) {
+        if (numeroSerie == null || numeroSerie == '') {
+            numeroSerie = selectNotebook.value;
+        }
 
-                    primeira_coluna.innerHTML =
-                        `<div  id="primeira_coluna" class="graficosColuna">
+        fetch(`/notebook/obterDadosGrafico/${numeroSerie}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        // Verifique se a resposta está correta no console
+                        console.log(resposta);
+
+                        primeira_coluna.innerHTML =
+                            `<div  id="primeira_coluna" class="graficosColuna">
                             <div class="graficos">
                                 <canvas id="ram${numeroSerie}"></canvas>
                             </div>
@@ -308,8 +310,8 @@ function obterDadosGraficos(numeroSerie) {
                             </div>
                         </div>`;
 
-                    segunda_coluna.innerHTML =
-                        `<div  id="segunda_coluna" class="graficosColuna">
+                        segunda_coluna.innerHTML =
+                            `<div  id="segunda_coluna" class="graficosColuna">
                             <div class="graficos">
                                 <canvas id="cpu${numeroSerie}"></canvas>
                             </div>
@@ -318,16 +320,16 @@ function obterDadosGraficos(numeroSerie) {
                             </div>
                         </div>`;
 
-                    plotarGrafico(numeroSerie, resposta);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API ' + response);
-            }
-        })
-        .catch(function (error) {
-            console.error('Erro ao buscar dados do gráfico:', error);
-        });
-}
+                        plotarGrafico(numeroSerie, resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                }
+            })
+            .catch(function (error) {
+                console.error('Erro ao buscar dados do gráfico:', error);
+            });
+    }
 
 
 
@@ -391,7 +393,7 @@ function obterDadosGraficos(numeroSerie) {
                 plugins: {
                     title: {
                         display: true,
-                        
+
                         text: 'CPU em Uso ',
                         font: {
                             size: 13,

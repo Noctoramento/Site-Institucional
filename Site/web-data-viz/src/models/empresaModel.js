@@ -93,14 +93,15 @@ FROM
   return database.executar(instrucaoSql);
 }
 
-function trazerParametros(fkEmpresa) {
+function obterParametros(fkEmpresa) {
   var instrucaoSql = `
   SELECT UsoNormalCpu, UsoNormalDisco, UsoNormalMemoriaRam, 
   UsoAlarmanteCpu, UsoAlarmanteDisco, UsoAlarmanteMemoriaRam, 
-  UsoCriticoCpu, UsoCriticoDisco, UsoCriticoMemoriaRam FROM Parametros WHERE fkEmpresa = ${fkEmpresa};
+  UsoCriticoCpu, UsoCriticoDisco, UsoCriticoMemoriaRam FROM Parametros 
+  WHERE fkEmpresa = ${fkEmpresa};
   `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados , listarMaquinas,listarMaquinasNaoAlocadas , listarAlocadas, trazerParametros};
+module.exports = { buscarPorCnpj, buscarPorId, cadastrar, listarCargos, listarFuncionarios, listarFuncionariosNaoAlocados , listarMaquinas,listarMaquinasNaoAlocadas , listarAlocadas, obterParametros};
