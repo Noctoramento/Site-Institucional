@@ -18,10 +18,10 @@ router.get("/obterDadosEspecificosKpis/:numeroSerie", function (req, res) { //ob
     notebookController.obterDadosEspecificosKpis(req, res);
 })
 
-router.get("/obterDadosFixosEspecificos/:numeroSerie", function (req, res) { //obter de cada notebook para validações dos parametros: a capacidade do disco e a capacidade da memória ram
-    console.log("Estou na Rota /obterDadosFixosEspecificos");
-    notebookController.obterDadosFixosEspecificos(req, res);
-})
+// router.get("/obterDadosFixosEspecificos/:numeroSerie", function (req, res) { //obter de cada notebook para validações dos parametros: a capacidade do disco e a capacidade da memória ram
+//     console.log("Estou na Rota /obterDadosFixosEspecificos");
+//     notebookController.obterDadosFixosEspecificos(req, res);
+// })
 
 router.get("/obterDadosGraficos/:numeroSerie", function (req, res) { //obter de cada notebook para usar nos graficos: memoria em uso, cpu em uso, janelas ativas, capacidade da ram
     console.log("Estou na Rota /obterDadosGraficos");

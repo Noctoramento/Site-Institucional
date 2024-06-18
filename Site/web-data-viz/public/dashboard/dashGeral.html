@@ -240,7 +240,7 @@
                     if (resposta.status == 200) {
                         return resposta.json();
                     } else {
-                        console.log(`Erro ao puxar o user do note ${numeroSerie}`);
+                        console.log(`Erro no OBTER NUMERO E SERIE E EMAIL ${numeroSerie}`);
                         return { emailUsuario: 'Email não encontrado' };
                     }
                 }).then(jsonUsuario => {
@@ -268,7 +268,6 @@
     function renderizarNotebooks(resultados) { //Plota as divs com as maquinas e os dados relacionados a ela quando cadastramos novas maquinas 
         const containerMaquinas = document.getElementById("containerMaquinas");
         containerMaquinas.innerHTML = "";
-
         resultados.forEach(({ numeroSerie, emailUsuario }) => {
             const notebookDiv = document.createElement("div");
             notebookDiv.classList.add("maquina");

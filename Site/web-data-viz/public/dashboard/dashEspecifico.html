@@ -91,7 +91,7 @@
             </header>
 
             <div>
-                <select id="selectNotebook" onchange="obterUsuarioNotebook(); obterDadosGraficos()">
+                <select id="selectNotebook" onchange="obterUsuarioNotebook(); obterDadosGraficos();">
                     <option value="0" disabled selected>Visualize outra máquina</option>
                 </select>
             </div>
@@ -177,6 +177,7 @@
     document.getElementById('selectNotebook').addEventListener('change', function () {
         const numeroSerie = this.value;
         obterDadosEspecificosKpis(numeroSerie);  // Atualiza os dados específicos quando um novo notebook é selecionado
+        // obterDadosGraficos(numeroSerie);
     });
 
     function listarNotebooks() { //traz a lista dos notes pelo numero de serie
@@ -227,21 +228,24 @@
                         divKpiUsuario.innerHTML = resposta[0].emailUsuario;
                     });
                 } else {
-                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                    console.error('ERRO DO OBTER USUARIO ' + response);
                 }
             });
         atualizarTitulo(numeroSerie); // revisar essa chamada da function...
-
     }
 
     function obterDadosEspecificosKpis(numeroSerie) { // tempo de atv do disco e disco em uso q aparece nas kpi de cima
-        fetch(`/notebook/obterDadosEspecificosKpis/${numeroSerie}`, { cache: 'no-store' })
+        console.log("DEBUGA Q DEBUGA");
+        fetch(`/notebook/obterDadosGraficos/${numeroSerie}`, { cache: 'no-store' })
             .then(function (response) {
+                console.log("to dentro do obter dados especificos kpis")
+                console.log(response + "deus socorro")
+
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         if (resposta.length > 0) {
-                            const usoDisco = resposta[0].usoDisco;
-                            const tempoDisco = resposta[0].tempoAtividadeDisco;
+                            const usoDisco = resposta[1].usoDisco;
+                            const tempoDisco = resposta[4].tempoAtividadeDisco;
                             document.getElementById("uso_disco").innerHTML = `${usoDisco} GB`;
                             document.getElementById("tempo_disco").innerHTML = `${tempoDisco}`;
                         } else {
@@ -249,7 +253,7 @@
                         }
                     });
                 } else {
-                    console.error('Nenhum dado encontrado ou erro na API ' + response);
+                    console.error('ERRO DO  ' + response);
                 }
             })
             .catch(function (error) {
@@ -262,8 +266,10 @@
             numeroSerie = selectNotebook.value;
         }
 
+
         fetch(`/notebook/obterDadosGraficos/${numeroSerie}`, { cache: 'no-store' })
             .then(function (response) {
+                console.log(response.json);
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(resposta);
@@ -316,185 +322,236 @@
             ramData.push(registro.usoMemoriaRam);
             discoData.push(registro.usoDisco);
             janelasData.push(registro.qtdJanelasEmUso);
-            labelsData.push(registro.dataHora + 'h');
+            labelsData.push(registro.dtHoraCaptura + 'h');
         }
 
         const data = {
-        cpu: cpuData,
-        ram: ramData,
-        storageUsage: discoData,
-        janelas: janelasData,
-        labels: labelsData
-    };
+            cpu: cpuData,
+            ram: ramData,
+            storageUsage: discoData,
+            janelas: janelasData,
+            labels: labelsData
+        };
 
-    const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-    };
+        const options = {
+            responsive: true,
+            maintainAspectRatio: false,
+        };
 
-    // Gráficos
+        // Gráficos
 
-    if (cpuChart) { // verifica se já existe o gráfico, se não existir ele cria, se já existir ele só sobrescreve 
-        cpuChart.data.labels = data.labels;
-        cpuChart.data.datasets[0].data = data.cpu;
-        cpuChart.update();
-    } else {
-        cpuChart = new Chart(document.getElementById(`cpu${numeroSerie}`), {
-            type: 'line',
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: 'CPU em Uso',
-                    data: data.cpu,
-                    backgroundColor: 'rgb(36,153,199,0.25)',
-                    borderColor: 'rgb(36,153,199)',
-                    fill: true
-                }],
-            },
-            options: {
-                ...options,
-                scales: {
-                    y: {
-                        min: 0,
-                        max: 100,
-                        stepSize: 10,
-                    },
+        if (cpuChart) { // verifica se já existe o gráfico, se não existir ele cria, se já existir ele só sobrescreve 
+            cpuChart.data.labels = data.labels;
+            cpuChart.data.datasets[0].data = data.cpu;
+            cpuChart.update();
+        } else {
+            cpuChart = new Chart(document.getElementById(`cpu${numeroSerie}`), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'CPU em Uso',
+                        data: data.cpu,
+                        backgroundColor: 'rgb(36,153,199,0.25)',
+                        borderColor: 'rgb(36,153,199)',
+                        fill: true
+                    }],
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'CPU em Uso ',
-                        font: {
-                            size: 13,
+                options: {
+                    ...options,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            stepSize: 10,
+                        },
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'CPU em Uso ',
+                            font: {
+                                size: 13,
+                            },
                         },
                     },
                 },
-            },
-        });
-    }
+            });
+        }
 
-    if (ramChart) { // verifica se já existe o gráfico, se não existir ele cria, se já existir ele só sobrescreve 
-        ramChart.data.labels = data.labels;
-        ramChart.data.datasets[0].data = data.ram;
-        ramChart.update();
-    } else {
-        ramChart = new Chart(document.getElementById(`ram${numeroSerie}`), {
-            type: 'line',
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: 'RAM em Uso (GB)',
-                    data: data.ram,
-                    borderColor: 'rgb(189,35,181)',
-                    backgroundColor: 'rgba(189,35,181, 0.25)',
-                    fill: true
-                }],
-            },
-            options: {
-                ...options,
-                scales: {
-                    y: {
-                        min: 0,
-                        max: 128,
-                        stepSize: 4,
-                    },
+        if (ramChart) { // verifica se já existe o gráfico, se não existir ele cria, se já existir ele só sobrescreve 
+            ramChart.data.labels = data.labels;
+            ramChart.data.datasets[0].data = data.ram;
+            ramChart.update();
+        } else {
+            ramChart = new Chart(document.getElementById(`ram${numeroSerie}`), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'RAM em Uso (GB)',
+                        data: data.ram,
+                        borderColor: 'rgb(189,35,181)',
+                        backgroundColor: 'rgba(189,35,181, 0.25)',
+                        fill: true
+                    }],
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Memória Ram em Uso',
-                        font: {
-                            size: 13,
+                options: {
+                    ...options,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 128,
+                            stepSize: 4,
+                        },
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Memória Ram em Uso',
+                            font: {
+                                size: 13,
+                            },
                         },
                     },
                 },
-            },
-        });
-    }
+            });
+        }
 
-    if (armazenamentoChart) { // mesma coisa q os de cima
-        armazenamentoChart.data.labels = data.labels;
-        armazenamentoChart.data.datasets[0].data = data.storageUsage;
-        armazenamentoChart.update();
-    } else {
-        armazenamentoChart = new Chart(document.getElementById(`armazenamento${numeroSerie}`), {
-            type: 'line',
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: 'Disco em Uso (GB)',
-                    data: data.storageUsage,
-                    borderColor: '#ff7edf',
-                    backgroundColor: 'rgb(255,126,223, 0.25)',
-                    fill: true
-                }],
-            },
-            options: {
-                ...options,
-                scales: {
-                    y: {
-                        min: 0,
-                        max: 1000,
-                        stepSize: 10,
-                    },
+        if (armazenamentoChart) { // mesma coisa q os de cima
+            armazenamentoChart.data.labels = data.labels;
+            armazenamentoChart.data.datasets[0].data = data.storageUsage;
+            armazenamentoChart.update();
+        } else {
+            armazenamentoChart = new Chart(document.getElementById(`armazenamento${numeroSerie}`), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Disco em Uso (GB)',
+                        data: data.storageUsage,
+                        borderColor: '#ff7edf',
+                        backgroundColor: 'rgb(255,126,223, 0.25)',
+                        fill: true
+                    }],
                 },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Disco em Uso',
-                        font: {
-                            size: 13,
+                options: {
+                    ...options,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 1000,
+                            stepSize: 10,
+                        },
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Disco em Uso',
+                            font: {
+                                size: 13,
+                            },
                         },
                     },
                 },
-            },
-        });
-    }
+            });
+        }
 
-    const ctx = document.getElementById(`janelaAtiva${numeroSerie}`).getContext('2d');
-    const data2 = {
-        labels: data.labels,
-        datasets: [{
-            label: 'Qtd. de Janelas Visíveis',
-            data: data.janelas,
-            backgroundColor: 'rgb(0,255,255,0.25)',
-            borderColor: 'rgb(0,255,255)',
-            fill: true
-        }],
-    };
+        const ctx = document.getElementById(`janelaAtiva${numeroSerie}`).getContext('2d');
+        const data2 = {
+            labels: data.labels,
+            datasets: [{
+                label: 'Qtd. de Janelas Visíveis',
+                data: data.janelas,
+                backgroundColor: 'rgb(0,255,255,0.25)',
+                borderColor: 'rgb(0,255,255)',
+                fill: true
+            }],
+        };
 
-    const options2 = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                min: 0,
-                stepSize: 1,
-            },
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: 'Quantidade de Janelas Visíveis',
-                font: {
-                    size: 13,
+        const options2 = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    stepSize: 1,
                 },
             },
-        },
-    };
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Quantidade de Janelas Visíveis',
+                    font: {
+                        size: 13,
+                    },
+                },
+            },
+        };
 
-    if (janelaAtivaChart) { // msm coisa, so inverteu 
-        janelaAtivaChart.data.labels = data2.labels;
-        janelaAtivaChart.data.datasets[0].data = data2.datasets[0].data;
-        janelaAtivaChart.update();
-    } else {
-        janelaAtivaChart = new Chart(ctx, {
-            type: 'line',
-            data: data2,
-            options: options2,
-        });
+        if (janelaAtivaChart) { // msm coisa, so inverteu 
+            janelaAtivaChart.data.labels = data2.labels;
+            janelaAtivaChart.data.datasets[0].data = data2.datasets[0].data;
+            janelaAtivaChart.update();
+        } else {
+            janelaAtivaChart = new Chart(ctx, {
+                type: 'line',
+                data: data2,
+                options: options2,
+            });
+        }
+
+        // atualizarGrafico(numeroSerie, data,janelaChart); 
+
     }
-}
 
+    function atualizarGrafico(numeroSerie, data, janelaChart) { // function do web data viz q arruma o sentido da att do grafico
+
+        fetch(`/notebook/buscarMedidasEmTempoReal/${numeroSerie}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    let novoHorario = novoRegistro[0].dataHora;
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(data);
+
+                    if (novoRegistro[0].momento_grafico == data.labels[data.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(data.labels[data.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        const janelaLabels = [...janelaChart.data.labels];
+                        janelaLabels.shift();
+                        janelaLabels.push(novoHorario);
+                        janelaChart.data.labels = janelaLabels;
+                        const janelaData = [...janelaChart.data.datasets[0].data];
+                        janelaData.shift();
+                        janelaData.push(novoRegistro[0].qtdJanelasEmUso);
+                        console.log(novoRegistro[0].qtdJanelasEmUso);
+                        janelaChart.data.datasets[0].data = janelaData;
+                        janelaChart.update();
+                    }
+
+                    
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+           
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+
+    }
 </script>
