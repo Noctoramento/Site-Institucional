@@ -265,25 +265,78 @@
         });
     }
 
-    function renderizarNotebooks(resultados) { //Plota as divs com as maquinas e os dados relacionados a ela quando cadastramos novas maquinas 
-        const containerMaquinas = document.getElementById("containerMaquinas");
-        containerMaquinas.innerHTML = "";
-        resultados.forEach(({ numeroSerie, emailUsuario }) => {
-            const notebookDiv = document.createElement("div");
-            notebookDiv.classList.add("maquina");
+    function obterDados(numeroSerie) { //puxa os dados igual no dashespecifico mas aqui so usamos o primeiro valor que é o do uso da cpu
+    return fetch(`/notebook/obterDadosGraficos/${numeroSerie}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json().then(function (resposta) {
+                    console.log("Dados gráficos: ", resposta);
+                    return resposta[0].usoCPU; // Certifique-se de que 'usoCPU' é a chave correta
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API ' + response);
+                return null;
+            }
+        })
+        .catch(function (error) {
+            console.error('Erro ao buscar dados do gráfico:', error);
+            return null;
+        });
+}
 
-            notebookDiv.innerHTML = `
-            <p id="condicaoNotebook" class="condicaoPadraoNotebook">Normal</p>
+function validarUsoCPU(numeroSerie, usoCPU) { // pegamos o valor do uso da cpu e faz uma validacao para geraruma sinalizaçao de acordo com o parametro
+    const condicaoNotebook = document.getElementById(`condicaoNotebook_${numeroSerie}`);
+    if (!condicaoNotebook) {
+        console.error(`Elemento condicaoNotebook_${numeroSerie} não encontrado.`);
+        return;
+    }
+
+    let textoCondicao = '';
+    let corCondicao = '';
+
+    if (usoCPU === null) {
+        textoCondicao = 'Sem Dados';
+        corCondicao = '#8979ab';
+    } else if (usoCPU >= 85) {
+        textoCondicao = 'Crítico';
+        corCondicao = 'red';
+    } else if (usoCPU >= 50) {
+        textoCondicao = 'Alarmante';
+        corCondicao = 'yellow';
+    } else {
+        textoCondicao = 'Normal';
+        corCondicao = 'green';
+    }
+
+    // Atualizar o conteúdo e o estilo do elemento condicaoNotebook
+    condicaoNotebook.textContent = textoCondicao;
+    condicaoNotebook.style.color = corCondicao;
+}
+
+function renderizarNotebooks(resultados) { //renderiza os notebooks igual antes mas aqui ele chama a funcao obter dados e de validar o uso da cpu, fica maisi dinamico
+    const containerMaquinas = document.getElementById("containerMaquinas");
+    containerMaquinas.innerHTML = "";
+    resultados.forEach(({ numeroSerie, emailUsuario }) => {
+        const notebookDiv = document.createElement("div");
+        notebookDiv.classList.add("maquina");
+
+        notebookDiv.innerHTML = `
+            <p id="condicaoNotebook_${numeroSerie}" class="condicaoPadraoNotebook"></p>
             <img class="imgMaquina" src="../assets/imagens/Laptop2.png" alt=""/>
             <p class="txtMaquinas">Número de Série: <span class="txtMaquinas2">${numeroSerie}</span></p>
             <p class="txtMaquinas" style="color: #59d9bb;">Usuário: <span class="txtMaquinas2">${emailUsuario}</span></p>
             <button class="botaoDetalhes" onclick="verDetalhes('${numeroSerie}', '${emailUsuario}')">Ver detalhes</button>
         `;
-            containerMaquinas.appendChild(notebookDiv);
-        });
-    }
 
-    function verDetalhes(numeroSerie, emailUsuario) {
-        window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
-    }
+        containerMaquinas.appendChild(notebookDiv);
+
+        obterDados(numeroSerie).then(usoCPU => {
+            validarUsoCPU(numeroSerie, usoCPU);
+        });
+    });
+}
+
+function verDetalhes(numeroSerie, emailUsuario) {
+    window.location.href = `dashEspecifico.html?serie=${numeroSerie}&email=${encodeURIComponent(emailUsuario)}`;
+}
 </script>

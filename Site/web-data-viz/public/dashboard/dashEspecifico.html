@@ -234,20 +234,23 @@
         atualizarTitulo(numeroSerie); // revisar essa chamada da function...
     }
 
-    function obterDadosEspecificosKpis(numeroSerie) { // tempo de atv do disco e disco em uso q aparece nas kpi de cima
+    function obterDadosEspecificosKpis(numeroSerie) { //pega da mesma rota dos graficos mas so pega os dados do uso do disco e do tempo de atividade para joga nas kpi
         console.log("DEBUGA Q DEBUGA");
         fetch(`/notebook/obterDadosGraficos/${numeroSerie}`, { cache: 'no-store' })
             .then(function (response) {
-                console.log("to dentro do obter dados especificos kpis")
-                console.log(response + "deus socorro")
+                console.log("to dentro do obter dados especificos kpis");
+                console.log(response + "deus socorro");
 
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         if (resposta.length > 0) {
                             const usoDisco = resposta[1].usoDisco;
                             const tempoDisco = resposta[4].tempoAtividadeDisco;
+
+                            const tempoFormatado = formatarTempoAtividadeDisco(tempoDisco); //função cheia de calculo para transformar a string que vem em tempoStividadeDisco em horas e minutos para ficar mais bonitinho 
+
                             document.getElementById("uso_disco").innerHTML = `${usoDisco} GB`;
-                            document.getElementById("tempo_disco").innerHTML = `${tempoDisco}`;
+                            document.getElementById("tempo_disco").innerHTML = `${tempoFormatado}`;
                         } else {
                             console.log('Nenhum dado encontrado');
                         }
@@ -259,6 +262,31 @@
             .catch(function (error) {
                 console.error('Erro ao buscar as informações para as KPIs específicas:', error);
             });
+    }
+
+    function formatarTempoAtividadeDisco(tempoAtividadeDisco) { // o amigo robo ajudou, ta bem explicativo:
+        // Verifica se o tempoAtividadeDisco está definido
+        if (!tempoAtividadeDisco) return "";
+
+        // Divide o tempoAtividadeDisco em dias, horas, minutos e segundos
+        const partes = tempoAtividadeDisco.split(', ');
+
+        if (partes.length < 2) return ""; // Se não tiver pelo menos 2 partes, retorna vazio
+
+        const dias = parseInt(partes[0].split(' ')[0]); // Extrai os dias e converte para número
+        const horasMinutosSegundos = partes[1]; // Extrai horas, minutos e segundos
+
+        // Divide as horas, minutos e segundos
+        const [horas, minutos, segundos] = horasMinutosSegundos.split(':').map(item => parseInt(item));
+
+        // Calcula o total de horas e minutos
+        const totalHoras = dias * 24 + horas;
+        const totalMinutos = minutos;
+
+        // Formata o resultado
+        const tempoFormatado = `${totalHoras} horas e ${totalMinutos} minutos`;
+
+        return tempoFormatado;
     }
 
     function obterDadosGraficos(numeroSerie) {
@@ -304,7 +332,6 @@
                 console.error('Erro ao buscar dados do gráfico:', error);
             });
     }
-
 
     // ** Função para ao invés de ter que deletar os gráficos, somente sobrescreve/atualiza os dados conforme o SN selecionado no select ** 
     let cpuChart, ramChart, armazenamentoChart, janelaAtivaChart; // aq vai armazenar os dados
@@ -539,19 +566,17 @@
                         janelaChart.update();
                     }
 
-                    
+
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-           
+
                 proximaAtualizacao = setTimeout(() => atualizarGrafico(numeroSerie, data, janelaChart), 5000);
             }
         })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-
-
     }
 </script>
